@@ -4,9 +4,11 @@ import "./App.css";
 import { Button } from "antd";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const [count, setCount] = useState(0);
+  const { t } = useTranslation();
 
   return (
     <div className="App">
@@ -17,6 +19,7 @@ function App() {
         <a href="https://reactjs.org" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
+        <span>{t("abcd.ef")}</span>
       </div>
       <StyledDiv>
         <span>hello</span>
