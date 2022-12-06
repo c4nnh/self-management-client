@@ -2,6 +2,8 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import { Button } from "antd";
+import styled from "styled-components";
+import tw from "twin.macro";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,6 +18,9 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
+      <StyledDiv>
+        <span>hello</span>
+      </StyledDiv>
       <h1 className="text-red-200">Vite + React</h1>
       <Button type="primary">asd</Button>
       <div className="card">
@@ -34,3 +39,7 @@ function App() {
 }
 
 export default App;
+
+const StyledDiv = styled.div`
+  ${tw`text-red-500`}
+`;
