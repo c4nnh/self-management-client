@@ -1,0 +1,29 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  // twin.macro
+  "scss.validate": false,
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": true
+  },
+  "editor.autoClosingQuotes": "always",
+  "tailwindCSS.experimental.classRegex": [
+    "tw`([^`]*)", // tw`...`
+    "tw=\"([^\"]*)", // <div tw="..." />
+    "tw={\"([^\"}]*)", // <div tw={"..."} />
+    "tw\\.\\w+`([^`]*)", // tw.xxx`...`
+    "tw\\(.*?\\)`([^`]*)", // tw(Component)`...`
+    "className:\\s*\"([^\"]*)", // className: "..."
+    "className:\\s*'([^']*)", // className: '...'
+    "className:\\s*`([^`]*)" // className: `...`
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  }
+}
