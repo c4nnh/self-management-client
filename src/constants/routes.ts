@@ -6,5 +6,7 @@ export const ROUTES = {
   },
   PRIVATE: {
     ROOT: "",
+    PROFILE: "profile",
+    FINANCE: "finance",
   },
 };

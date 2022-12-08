@@ -1,27 +1,14 @@
-import "./App.css";
-import styled from "styled-components";
-import tw from "twin.macro";
-import { useTranslation } from "react-i18next";
+import { Route, Routes } from "react-router-dom";
+import { ROUTES } from "./constants";
+import { Auth, Private } from "./pages";
 
 function App() {
-  const { t } = useTranslation();
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/logo.svg" className="logo" alt="Vite logo" />
-        </a>
-      </div>
-      <StyledDiv>
-        <span className="font-black text-3xl">hello it is me</span>
-      </StyledDiv>
-    </div>
+    <Routes>
+      <Route path={`/${ROUTES.AUTH.ROOT}/*`} element={<Auth />} />
+      <Route path="/*" element={<Private />} />
+    </Routes>
   );
 }
 
 export default App;
-
-const StyledDiv = styled.div`
-  ${tw`text-red-500`}
-`;
