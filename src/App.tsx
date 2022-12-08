@@ -14,7 +14,7 @@ function App() {
         </a>
       </div>
       <StyledDiv>
-        <span className="font-thin text-3xl">hello it is me</span>
+        <span className="font-black text-3xl">hello it is me</span>
       </StyledDiv>
     </div>
   );
