@@ -1,5 +1,13 @@
 {
-  "abcd": {
-    "ef": "hello"
+  "auth": {
+    "login": {
+      "title": "Login"
+    },
+    "register": {
+      "title": "Register"
+    }
+  },
+  "common": {
+    "requiredField": "Can not be blank"
   }
 }

@@ -1,22 +1,24 @@
-import { Form, FormItemProps } from "antd";
-import { PropsWithChildren } from "react";
+import { Form, FormItemProps } from 'antd'
+import { PropsWithChildren } from 'react'
 import {
   Controller,
   ControllerProps,
   ControllerRenderProps,
   useFormContext,
-} from "react-hook-form";
+} from 'react-hook-form'
+import styled from 'styled-components'
+import tw from 'twin.macro'
 
 type Props = PropsWithChildren<
   {
-    name: string;
-    label?: string;
-    formItemProps?: FormItemProps;
+    name: string
+    label?: string
+    formItemProps?: FormItemProps
     render: (
-      props: Pick<ControllerRenderProps, "value" | "onChange" | "onBlur">
-    ) => React.ReactNode;
-  } & Omit<ControllerProps, "render">
->;
+      props: Pick<ControllerRenderProps, 'value' | 'onChange' | 'onBlur'>
+    ) => React.ReactNode
+  } & Omit<ControllerProps, 'render'>
+>
 
 export const ControlledFormItem: React.FC<Props> = ({
   name,
@@ -25,7 +27,7 @@ export const ControlledFormItem: React.FC<Props> = ({
   render,
   ...controllerProps
 }) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
 
   return (
     <Controller
@@ -36,15 +38,21 @@ export const ControlledFormItem: React.FC<Props> = ({
         field: { value, onChange, onBlur },
         fieldState: { error },
       }) => (
-        <Form.Item
+        <StyledFormItem
           label={label}
-          validateStatus={error ? "error" : "validating"}
+          validateStatus={error ? 'error' : 'validating'}
           help={error?.message}
           {...formItemProps}
         >
           {render({ value, onChange, onBlur })}
-        </Form.Item>
+        </StyledFormItem>
       )}
     />
-  );
-};
+  )
+}
+
+const StyledFormItem = styled(Form.Item)`
+  .ant-form-item-label {
+    ${tw`pb-[2px]`}
+  }
+`

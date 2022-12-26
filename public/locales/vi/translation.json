@@ -1,5 +1,13 @@
 {
-  "abcd": {
-    "ef": "xin chafo"
+  "auth": {
+    "login": {
+      "title": ""
+    },
+    "register": {
+      "title": ""
+    }
+  },
+  "common": {
+    "requiredField": ""
   }
 }
