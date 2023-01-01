@@ -1,11 +1,10 @@
 {
-  "auth": {
-    "login": {
-      "title": ""
-    },
-    "register": {
-      "title": ""
-    }
+  "login": {
+    "title": "",
+    "doNotHaveAccount": ""
+  },
+  "register": {
+    "title": ""
   },
   "common": {
     "requiredField": ""

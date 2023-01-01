@@ -1,5 +1,6 @@
 import { Button, Form } from 'antd'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '../../apis'
 import { FormInput, FormPassword } from '../../components'
@@ -9,6 +10,7 @@ import { requiredField } from '../../utils'
 
 export const Login: React.FC = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const formMethods = useForm<LoginPayload>()
   const { login } = useAuthStore()
@@ -19,24 +21,26 @@ export const Login: React.FC = () => {
   })
 
   const handleLogin = handleSubmit(data => {
-    console.log(data)
-
     mutate(data)
   })
 
   return (
     <FormProvider {...formMethods}>
       <Form layout="vertical" size="middle" className="flex flex-col">
-        <FormInput name="email" label="Email" rules={requiredField} />
-        <FormPassword name="password" label="Password" rules={requiredField} />
+        <FormInput name="email" label="Email" rules={requiredField(t)} />
+        <FormPassword
+          name="password"
+          label="Password"
+          rules={requiredField(t)}
+        />
         <span
           className="text-blue-500 cursor-pointer text-center underline pb-1"
           onClick={() => navigate('/auth/register')}
         >
-          Doesn't have account?
+          {t('login.doNotHaveAccount')}
         </span>
         <Button type="primary" loading={isLoading} onClick={handleLogin}>
-          Login
+          {t('login.title')}
         </Button>
       </Form>
     </FormProvider>

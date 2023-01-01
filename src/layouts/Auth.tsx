@@ -11,7 +11,7 @@ export const AuthLayout: React.FC<Props> = ({ title, children }) => {
   return (
     <Container>
       <div className="w-full h-fit flex flex-col bg-white rounded-lg max-w-[500px] px-5 py-10 shadow-md mobile:shadow-none">
-        <LogoIcon className="text-6xl text-primary" />
+        <LogoIcon className="text-6xl text-primary mx-auto h-[60px]" />
         <Title>{title}</Title>
         {children}
       </div>

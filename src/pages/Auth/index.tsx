@@ -20,7 +20,7 @@ export const Auth: React.FC = () => {
       <Route
         path={ROUTES.AUTH.LOGIN}
         element={
-          <AuthLayout title={t('auth.login.title')}>
+          <AuthLayout title={t('login.title')}>
             <Login />
           </AuthLayout>
         }
@@ -28,7 +28,7 @@ export const Auth: React.FC = () => {
       <Route
         path={ROUTES.AUTH.REGISTER}
         element={
-          <AuthLayout title={t('auth.register.title')}>
+          <AuthLayout title={t('register.title')}>
             <Register />
           </AuthLayout>
         }

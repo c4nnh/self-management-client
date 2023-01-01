@@ -1,11 +1,10 @@
 {
-  "auth": {
-    "login": {
-      "title": "Login"
-    },
-    "register": {
-      "title": "Register"
-    }
+  "login": {
+    "title": "Login",
+    "doNotHaveAccount": "Don't have account?"
+  },
+  "register": {
+    "title": "Register"
   },
   "common": {
     "requiredField": "Can not be blank"
