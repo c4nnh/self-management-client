@@ -93,7 +93,7 @@ authRequest.interceptors.response.use(
     const { message, error: err } = error.response.data
     notification.error({
       message: err,
-      description: message[0],
+      description: Array.isArray(message) ? message[0] : message,
     })
 
     return Promise.reject(error.response.data)

@@ -143,12 +143,6 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
       label: t('logout.title'),
       onClick: handleLogout,
     },
-    {
-      key: 'logout',
-      icon: <LogoutOutlined />,
-      label: t('logout.title'),
-      onClick: handleLogout,
-    },
   ]
 
   useEffect(() => {
