@@ -6,9 +6,8 @@ import {
   SettingOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Button, Menu, Modal } from 'antd'
-import classNames from 'classnames'
-import { PropsWithChildren, useMemo, useState } from 'react'
+import { Menu, Modal } from 'antd'
+import { PropsWithChildren, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -18,9 +17,12 @@ import {
   EventIcon,
   ResumeIcon,
   SkillIcon,
+  UKFlagIcon,
+  VIFlagIcon,
   WorkIcon,
 } from '../assets'
 import { ROUTES } from '../constants'
+import i18n from '../i18n'
 import { useAuthStore } from '../stores'
 
 type Props = PropsWithChildren
@@ -37,7 +39,7 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
 
   const { logout } = useAuthStore()
 
-  const [menuCollapse, setMenuCollapse] = useState(false)
+  const [openKeys, setOpenKeys] = useState<string[]>([])
 
   const selectedKey = useMemo(() => pathname.split('/')[1], [pathname])
 
@@ -59,101 +61,116 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
 
   const goToPage = (path: string) => navigate(`/${path}`)
 
+  const menuItems = [
+    {
+      key: 'profile',
+      icon: <UserOutlined />,
+      label: t('profile.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.PROFILE),
+    },
+    {
+      key: 'finance',
+      icon: <DollarCircleOutlined />,
+      label: t('finance.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.FINANCE),
+    },
+    {
+      key: 'work',
+      icon: <WorkIcon />,
+      label: t('work.title'),
+      children: [
+        {
+          key: 'resume',
+          icon: <ResumeIcon />,
+          label: t('resume.title'),
+          onClick: () => goToPage(ROUTES.PRIVATE.RESUME),
+        },
+        {
+          key: 'skill',
+          icon: <SkillIcon />,
+          label: t('skill.title'),
+          onClick: () => goToPage(ROUTES.PRIVATE.SKILL),
+        },
+        {
+          key: 'project',
+          icon: <ProjectOutlined />,
+          label: t('project.title'),
+          onClick: () => goToPage(ROUTES.PRIVATE.PROJECT),
+        },
+      ],
+    },
+    {
+      key: 'event',
+      icon: <EventIcon />,
+      label: t('event.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.EVENT),
+    },
+    {
+      key: 'asset',
+      icon: <AssetIcon />,
+      label: t('asset.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.ASSET),
+    },
+    {
+      key: 'setting',
+      icon: <SettingOutlined />,
+      label: t('setting.title'),
+      children: [
+        {
+          key: 'language',
+          icon: <GlobalOutlined />,
+          label: t('language.title'),
+          children: [
+            {
+              key: 'en',
+              icon: <UKFlagIcon />,
+              label: t('language.english'),
+              onClick: () => handleChangeLanguage('en'),
+            },
+            {
+              key: 'vi',
+              icon: <VIFlagIcon />,
+              label: t('language.vietnamese'),
+              onClick: () => handleChangeLanguage('vi'),
+            },
+          ],
+        },
+      ],
+    },
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: t('logout.title'),
+      onClick: handleLogout,
+    },
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: t('logout.title'),
+      onClick: handleLogout,
+    },
+  ]
+
+  useEffect(() => {
+    const currentKey = pathname.split('/')[1]
+    const openKeys = menuItems
+      .filter(item =>
+        item.children?.map((el: any) => el.key).includes(currentKey)
+      )
+      .map(item => item.key)
+    setOpenKeys(openKeys)
+  }, [])
+
   return (
     <Container>
       <StyledMenu
         theme="dark"
         mode="inline"
-        selectedKeys={[selectedKey]}
-        inlineCollapsed={menuCollapse}
-        className={classNames({
-          collapsed: menuCollapse,
-        })}
-        items={[
-          {
-            key: 'profile',
-            icon: <UserOutlined />,
-            label: t('profile.title'),
-            onClick: () => goToPage(ROUTES.PRIVATE.PROFILE),
-          },
-          {
-            key: 'finance',
-            icon: <DollarCircleOutlined />,
-            label: t('finance.title'),
-            onClick: () => goToPage(ROUTES.PRIVATE.FINANCE),
-          },
-          {
-            key: 'work',
-            icon: <WorkIcon />,
-            label: t('work.title'),
-            children: [
-              {
-                key: 'resume',
-                icon: <ResumeIcon />,
-                label: t('resume.title'),
-                onClick: () => goToPage(ROUTES.PRIVATE.RESUME),
-              },
-              {
-                key: 'skill',
-                icon: <SkillIcon />,
-                label: t('skill.title'),
-                onClick: () => goToPage(ROUTES.PRIVATE.SKILL),
-              },
-              {
-                key: 'project',
-                icon: <ProjectOutlined />,
-                label: t('project.title'),
-                onClick: () => goToPage(ROUTES.PRIVATE.PROJECT),
-              },
-            ],
-          },
-          {
-            key: 'event',
-            icon: <EventIcon />,
-            label: t('event.title'),
-            onClick: () => goToPage(ROUTES.PRIVATE.EVENT),
-          },
-          {
-            key: 'asset',
-            icon: <AssetIcon />,
-            label: t('asset.title'),
-            onClick: () => goToPage(ROUTES.PRIVATE.ASSET),
-          },
-          {
-            key: 'setting',
-            icon: <SettingOutlined />,
-            label: t('setting.title'),
-            children: [
-              {
-                key: 'language',
-                icon: <GlobalOutlined />,
-                label: t('language.title'),
-                children: [
-                  {
-                    key: 'english',
-                    icon: <UserOutlined />,
-                    label: t('language.english'),
-                    onClick: () => handleChangeLanguage('en'),
-                  },
-                  {
-                    key: 'vietnamese',
-                    icon: <UserOutlined />,
-                    label: t('language.vietnamese'),
-                    onClick: () => handleChangeLanguage('vi'),
-                  },
-                ],
-              },
-              {
-                key: 'logout',
-                icon: <LogoutOutlined />,
-                label: t('logout.title'),
-                onClick: handleLogout,
-              },
-            ],
-          },
-        ]}
+        selectedKeys={[selectedKey, i18n.language]}
+        items={menuItems}
+        openKeys={openKeys}
+        onOpenChange={setOpenKeys}
       />
-      <Button onClick={() => setMenuCollapse(!menuCollapse)}>das</Button>
       <Body>{children}</Body>
     </Container>
   )
@@ -171,11 +188,8 @@ const StyledMenu = styled(Menu)`
     width: calc(100% - 16px);
   }
 
-  &.collapsed {
-    .ant-menu-item,
-    .ant-menu-submenu-title {
-      ${tw`!px-6`}
-    }
+  .ant-menu-sub {
+    ${tw`!bg-[#001529]`}
   }
 `
 
