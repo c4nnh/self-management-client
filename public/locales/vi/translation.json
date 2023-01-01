@@ -1,12 +1,50 @@
 {
-  "login": {
-    "title": "",
-    "doNotHaveAccount": ""
-  },
-  "register": {
-    "title": ""
+  "logout": {
+    "confirm": "Bạn có muốn đăng xuất không?",
+    "title": "Đăng xuất"
   },
   "common": {
-    "requiredField": ""
+    "yes": "Có",
+    "no": "Không",
+    "requiredField": "Không được để trống"
+  },
+  "profile": {
+    "title": "Hồ sơ"
+  },
+  "finance": {
+    "title": "Tài chính"
+  },
+  "work": {
+    "title": "Công việc"
+  },
+  "resume": {
+    "title": "Thông tin"
+  },
+  "skill": {
+    "title": "Kĩ năng"
+  },
+  "project": {
+    "title": "Dự án"
+  },
+  "event": {
+    "title": "Sự kiện"
+  },
+  "asset": {
+    "title": "Tài sản"
+  },
+  "setting": {
+    "title": "Cài đặt"
+  },
+  "language": {
+    "title": "Ngôn ngữ",
+    "english": "English",
+    "vietnamese": "Tiếng Việt"
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "doNotHaveAccount": "Chưa có tài khoản?"
+  },
+  "register": {
+    "title": "Đăng kí"
   }
 }

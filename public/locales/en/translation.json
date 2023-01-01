@@ -1,12 +1,50 @@
 {
+  "logout": {
+    "confirm": "Do you want to logout?",
+    "title": "Logout"
+  },
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "requiredField": "Can not be blank"
+  },
+  "profile": {
+    "title": "Profile"
+  },
+  "finance": {
+    "title": "Finance"
+  },
+  "work": {
+    "title": "Work"
+  },
+  "resume": {
+    "title": "Resume"
+  },
+  "skill": {
+    "title": "Skill"
+  },
+  "project": {
+    "title": "Project"
+  },
+  "event": {
+    "title": "Event"
+  },
+  "asset": {
+    "title": "Asset"
+  },
+  "setting": {
+    "title": "Setting"
+  },
+  "language": {
+    "title": "Language",
+    "english": "English",
+    "vietnamese": "Tiếng Việt"
+  },
   "login": {
     "title": "Login",
     "doNotHaveAccount": "Don't have account?"
   },
   "register": {
     "title": "Register"
-  },
-  "common": {
-    "requiredField": "Can not be blank"
   }
 }
