@@ -1,5 +1,6 @@
 import {
   DollarCircleOutlined,
+  DoubleLeftOutlined,
   GlobalOutlined,
   LogoutOutlined,
   ProjectOutlined,
@@ -7,6 +8,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import { Menu, Modal } from 'antd'
+import classNames from 'classnames'
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -15,6 +17,7 @@ import tw from 'twin.macro'
 import {
   AssetIcon,
   EventIcon,
+  LogoIcon,
   ResumeIcon,
   SkillIcon,
   UKFlagIcon,
@@ -22,7 +25,6 @@ import {
   WorkIcon,
 } from '../assets'
 import { ROUTES } from '../constants'
-import i18n from '../i18n'
 import { useAuthStore } from '../stores'
 
 type Props = PropsWithChildren
@@ -34,12 +36,13 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
   const { pathname } = useLocation()
   const {
     t,
-    i18n: { changeLanguage },
+    i18n: { changeLanguage, language },
   } = useTranslation()
 
   const { logout } = useAuthStore()
 
   const [openKeys, setOpenKeys] = useState<string[]>([])
+  const [collapseMenu, setCollapseMenu] = useState(false)
 
   const selectedKey = useMemo(() => pathname.split('/')[1], [pathname])
 
@@ -157,33 +160,73 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <Container>
-      <StyledMenu
-        theme="dark"
-        mode="inline"
-        selectedKeys={[selectedKey, i18n.language]}
-        items={menuItems}
-        openKeys={openKeys}
-        onOpenChange={setOpenKeys}
-      />
+      <Sidebar
+        className={classNames({
+          collapsed: collapseMenu,
+        })}
+      >
+        <LogoIcon className="text-4xl text-primary flex items-center justify-center pt-2" />
+        <StyledMenu
+          mode="inline"
+          selectedKeys={[selectedKey, language]}
+          items={menuItems}
+          openKeys={openKeys}
+          onOpenChange={setOpenKeys}
+          inlineCollapsed={collapseMenu}
+          className={classNames({
+            collapsed: collapseMenu,
+          })}
+        />
+        <div className="h-14 flex items-center justify-center w-full">
+          <StyledDoubleLeftOutlined
+            className={classNames({
+              collapsed: collapseMenu,
+            })}
+            onClick={() => setCollapseMenu(!collapseMenu)}
+          />
+        </div>
+      </Sidebar>
       <Body>{children}</Body>
     </Container>
   )
 }
 
 const Container = styled.div`
-  ${tw`h-full flex`}
+  ${tw`h-full flex bg-gray-300`}
+`
+
+const Sidebar = styled.div`
+  ${tw`h-full w-[225px] flex flex-col bg-white gap-2`}
+
+  &.collapsed {
+    width: 80px;
+  }
+  transition: 0.5s;
 `
 
 const StyledMenu = styled(Menu)`
-  ${tw`!border-none max-w-[225px] py-4`}
+  ${tw`!flex-1 !border-none`}
 
-  .ant-menu-item, .ant-menu-submenu-title {
+  .ant-menu-item,
+  .ant-menu-submenu-title {
     ${tw`!mx-2`};
     width: calc(100% - 16px);
   }
 
-  .ant-menu-sub {
-    ${tw`!bg-[#001529]`}
+  &.collapsed {
+    .ant-menu-item,
+    .ant-menu-submenu-title {
+      ${tw`!px-6`}
+    }
+  }
+`
+
+const StyledDoubleLeftOutlined = styled(DoubleLeftOutlined)`
+  ${tw`p-3 w-fit mx-auto hover:text-primary`};
+  transition: 0.5s;
+
+  &.collapsed {
+    transform: rotate(180deg);
   }
 `
 
