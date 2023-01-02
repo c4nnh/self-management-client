@@ -1,15 +1,18 @@
 import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
+import { useScreen } from '../../hooks'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 
 type Props = PropsWithChildren
 
 export const PrivateLayout: React.FC<Props> = ({ children }) => {
+  const { isDesktop } = useScreen()
+
   return (
     <Container>
-      <Sidebar />
+      {isDesktop && <Sidebar />}
       <Body>
         <Header />
         <div className="flex-1 p-5">{children}</div>

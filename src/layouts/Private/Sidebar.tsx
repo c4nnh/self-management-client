@@ -23,8 +23,7 @@ import {
   WorkIcon,
 } from '../../assets'
 import { ROUTES } from '../../constants'
-
-type Language = 'en' | 'vi'
+import { Language } from '../../models'
 
 export const Sidebar: React.FC = () => {
   const navigate = useNavigate()
@@ -56,6 +55,7 @@ export const Sidebar: React.FC = () => {
       key: 'work',
       icon: <WorkIcon />,
       label: t('work.title'),
+
       children: [
         {
           key: 'resume',
