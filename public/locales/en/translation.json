@@ -8,8 +8,8 @@
     "no": "No",
     "requiredField": "Can not be blank"
   },
-  "profile": {
-    "title": "Profile"
+  "account": {
+    "title": "Account"
   },
   "finance": {
     "title": "Finance"

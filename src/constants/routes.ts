@@ -6,7 +6,7 @@ export const ROUTES = {
   },
   PRIVATE: {
     ROOT: '',
-    PROFILE: 'profile',
+    ACCOUNT: 'account',
     FINANCE: 'finance',
     RESUME: 'resume',
     SKILL: 'skill',

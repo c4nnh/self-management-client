@@ -2,14 +2,12 @@ import {
   DollarCircleOutlined,
   DoubleLeftOutlined,
   GlobalOutlined,
-  LogoutOutlined,
   ProjectOutlined,
   SettingOutlined,
-  UserOutlined,
 } from '@ant-design/icons'
-import { Menu, Modal } from 'antd'
+import { Menu } from 'antd'
 import classNames from 'classnames'
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -23,23 +21,18 @@ import {
   UKFlagIcon,
   VIFlagIcon,
   WorkIcon,
-} from '../assets'
-import { ROUTES } from '../constants'
-import { useAuthStore } from '../stores'
-
-type Props = PropsWithChildren
+} from '../../assets'
+import { ROUTES } from '../../constants'
 
 type Language = 'en' | 'vi'
 
-export const PrivateLayout: React.FC<Props> = ({ children }) => {
+export const Sidebar: React.FC = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const {
     t,
     i18n: { changeLanguage, language },
   } = useTranslation()
-
-  const { logout } = useAuthStore()
 
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [collapseMenu, setCollapseMenu] = useState(false)
@@ -50,27 +43,9 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
     changeLanguage(lang)
   }
 
-  const handleLogout = () => {
-    Modal.confirm({
-      title: t('logout.confirm'),
-      okText: t('common.yes'),
-      cancelText: t('common.no'),
-      onOk: () => {
-        logout()
-        navigate(`/${ROUTES.AUTH.ROOT}`)
-      },
-    })
-  }
-
   const goToPage = (path: string) => navigate(`/${path}`)
 
   const menuItems = [
-    {
-      key: 'profile',
-      icon: <UserOutlined />,
-      label: t('profile.title'),
-      onClick: () => goToPage(ROUTES.PRIVATE.PROFILE),
-    },
     {
       key: 'finance',
       icon: <DollarCircleOutlined />,
@@ -140,12 +115,6 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
         },
       ],
     },
-    {
-      key: 'logout',
-      icon: <LogoutOutlined />,
-      label: t('logout.title'),
-      onClick: handleLogout,
-    },
   ]
 
   useEffect(() => {
@@ -159,44 +128,38 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <Container>
-      <Sidebar
+    <Container
+      className={classNames({
+        collapsed: collapseMenu,
+      })}
+    >
+      <LogoIcon className="text-4xl text-primary flex items-center justify-center pt-2" />
+      <StyledMenu
+        mode="inline"
+        theme="dark"
+        selectedKeys={[selectedKey, language]}
+        items={menuItems}
+        openKeys={openKeys}
+        onOpenChange={setOpenKeys}
+        inlineCollapsed={collapseMenu}
         className={classNames({
           collapsed: collapseMenu,
         })}
-      >
-        <LogoIcon className="text-4xl text-primary flex items-center justify-center pt-2" />
-        <StyledMenu
-          mode="inline"
-          selectedKeys={[selectedKey, language]}
-          items={menuItems}
-          openKeys={openKeys}
-          onOpenChange={setOpenKeys}
-          inlineCollapsed={collapseMenu}
+      />
+      <div className="h-14 flex items-center justify-center w-full">
+        <StyledDoubleLeftOutlined
           className={classNames({
             collapsed: collapseMenu,
           })}
+          onClick={() => setCollapseMenu(!collapseMenu)}
         />
-        <div className="h-14 flex items-center justify-center w-full">
-          <StyledDoubleLeftOutlined
-            className={classNames({
-              collapsed: collapseMenu,
-            })}
-            onClick={() => setCollapseMenu(!collapseMenu)}
-          />
-        </div>
-      </Sidebar>
-      <Body>{children}</Body>
+      </div>
     </Container>
   )
 }
 
 const Container = styled.div`
-  ${tw`h-full flex bg-gray-300`}
-`
-
-const Sidebar = styled.div`
-  ${tw`h-full w-[225px] flex flex-col bg-white gap-2`}
+  ${tw`h-full w-[225px] flex flex-col gap-2 bg-dark`}
 
   &.collapsed {
     width: 80px;
@@ -205,12 +168,16 @@ const Sidebar = styled.div`
 `
 
 const StyledMenu = styled(Menu)`
-  ${tw`!flex-1 !border-none`}
+  ${tw`!flex-1 pt-5 !border-none`}
 
   .ant-menu-item,
   .ant-menu-submenu-title {
     ${tw`!mx-2`};
     width: calc(100% - 16px);
+  }
+
+  .ant-menu-sub {
+    ${tw`!bg-dark`}
   }
 
   &.collapsed {
@@ -222,14 +189,10 @@ const StyledMenu = styled(Menu)`
 `
 
 const StyledDoubleLeftOutlined = styled(DoubleLeftOutlined)`
-  ${tw`p-3 w-fit mx-auto hover:text-primary`};
+  ${tw`p-3 w-fit mx-auto text-white hover:text-primary`};
   transition: 0.5s;
 
   &.collapsed {
     transform: rotate(180deg);
   }
-`
-
-const Body = styled.div`
-  ${tw`flex-1`}
 `

@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Roboto";
-  src: local("Roboto"), url(./fonts/Roboto-Regular.ttf) format("ttf");
+  font-family: 'Roboto';
+  src: local('Roboto'), url(./fonts/Roboto-Regular.ttf) format('ttf');
 }
 
 body {
@@ -12,7 +12,9 @@ body {
 }
 
 :root {
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
+    helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
+    segoe ui emoji, segoe ui symbol, noto color emoji;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;

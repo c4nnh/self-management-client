@@ -8,8 +8,8 @@
     "no": "Không",
     "requiredField": "Không được để trống"
   },
-  "profile": {
-    "title": "Hồ sơ"
+  "account": {
+    "title": "Tài khoản"
   },
   "finance": {
     "title": "Tài chính"
