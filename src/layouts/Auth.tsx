@@ -10,17 +10,24 @@ type Props = PropsWithChildren & {
 export const AuthLayout: React.FC<Props> = ({ title, children }) => {
   return (
     <Container>
-      <div className="w-full h-fit flex flex-col bg-white rounded-lg max-w-[500px] px-5 py-10 shadow-md mobile:shadow-none">
+      <div className="z-10 w-full h-fit flex flex-col bg-white rounded-lg max-w-[500px] px-5 py-10 shadow-md mobile:shadow-none">
         <LogoIcon className="text-6xl text-primary mx-auto h-[60px]" />
         <Title>{title}</Title>
         {children}
       </div>
+      <Background />
     </Container>
   )
 }
 
 const Container = styled.div`
-  ${tw`w-full bg-gray-200 mobile:bg-white h-full flex items-center justify-center`}
+  ${tw`w-full bg-slate-600 relative mobile:bg-white h-full flex items-center justify-center`}
+`
+
+const Background = styled.div`
+  ${tw`absolute bg-slate-800 bottom-0 left-0 z-1 w-full h-full`}
+
+  border-radius: 100% 0% 100% 0% / 100% 100% 0% 0%;
 `
 
 const Title = styled.span`

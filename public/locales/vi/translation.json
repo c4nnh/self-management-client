@@ -32,13 +32,28 @@
   "asset": {
     "title": "Tài sản"
   },
-  "setting": {
-    "title": "Cài đặt"
-  },
   "language": {
     "title": "Ngôn ngữ",
     "english": "English",
     "vietnamese": "Tiếng Việt"
+  },
+  "transaction": {
+    "title": "Giao dịch",
+    "column": {
+      "title": "Tiêu đề",
+      "type": "Loại",
+      "amount": "Số tiền",
+      "date": "Ngày"
+    }
+  },
+  "loan": {
+    "title": "Khoản cho vay"
+  },
+  "tontine": {
+    "title": "Góp họ"
+  },
+  "setting": {
+    "title": "Cài đặt"
   },
   "login": {
     "title": "Đăng nhập",

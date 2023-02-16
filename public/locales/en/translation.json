@@ -32,13 +32,28 @@
   "asset": {
     "title": "Asset"
   },
-  "setting": {
-    "title": "Setting"
-  },
   "language": {
     "title": "Language",
     "english": "English",
     "vietnamese": "Tiếng Việt"
+  },
+  "transaction": {
+    "title": "Transaction",
+    "column": {
+      "title": "Title",
+      "type": "Type",
+      "amount": "Amount",
+      "date": "Date"
+    }
+  },
+  "loan": {
+    "title": "Loan"
+  },
+  "tontine": {
+    "title": "Tontine"
+  },
+  "setting": {
+    "title": "Setting"
   },
   "login": {
     "title": "Login",

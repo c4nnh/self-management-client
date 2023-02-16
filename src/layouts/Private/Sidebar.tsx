@@ -4,6 +4,7 @@ import {
   GlobalOutlined,
   ProjectOutlined,
   SettingOutlined,
+  TransactionOutlined,
 } from '@ant-design/icons'
 import { Menu } from 'antd'
 import classNames from 'classnames'
@@ -15,9 +16,11 @@ import tw from 'twin.macro'
 import {
   AssetIcon,
   EventIcon,
+  LoanIcon,
   LogoIcon,
   ResumeIcon,
   SkillIcon,
+  TontineIcon,
   UKFlagIcon,
   VIFlagIcon,
   WorkIcon,
@@ -49,13 +52,31 @@ export const Sidebar: React.FC = () => {
       key: 'finance',
       icon: <DollarCircleOutlined />,
       label: t('finance.title'),
-      onClick: () => goToPage(ROUTES.PRIVATE.FINANCE),
+      children: [
+        {
+          key: 'transaction',
+          icon: <TransactionOutlined />,
+          label: t('transaction.title'),
+          onClick: () => goToPage(ROUTES.PRIVATE.TRANSACTION),
+        },
+        {
+          key: 'loan',
+          icon: <LoanIcon />,
+          label: t('loan.title'),
+          onClick: () => goToPage(ROUTES.PRIVATE.LOAN),
+        },
+        {
+          key: 'tontine',
+          icon: <TontineIcon />,
+          label: t('tontine.title'),
+          onClick: () => goToPage(ROUTES.PRIVATE.TONTINE),
+        },
+      ],
     },
     {
       key: 'work',
       icon: <WorkIcon />,
       label: t('work.title'),
-
       children: [
         {
           key: 'resume',

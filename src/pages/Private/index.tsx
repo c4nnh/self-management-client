@@ -6,7 +6,7 @@ import { useAuthStore } from '../../stores'
 import { Account } from './Account'
 import { Asset } from './Asset'
 import { Event } from './Event'
-import { Finance } from './Finance'
+import { Loan, Tontine, Transaction } from './Finance'
 import { Project, Resume, Skill } from './Work'
 
 export const Private: React.FC = () => {
@@ -19,14 +19,24 @@ export const Private: React.FC = () => {
   return (
     <PrivateLayout>
       <Routes>
+        {/* Profile */}
         <Route path={ROUTES.PRIVATE.ACCOUNT} element={<Account />} />
-        <Route path={ROUTES.PRIVATE.FINANCE} element={<Finance />} />
+        {/* Finance */}
+        <Route path={ROUTES.PRIVATE.TRANSACTION} element={<Transaction />} />
+        <Route path={ROUTES.PRIVATE.LOAN} element={<Loan />} />
+        <Route path={ROUTES.PRIVATE.TONTINE} element={<Tontine />} />
+        {/* Work */}
         <Route path={ROUTES.PRIVATE.RESUME} element={<Resume />} />
         <Route path={ROUTES.PRIVATE.SKILL} element={<Skill />} />
         <Route path={ROUTES.PRIVATE.PROJECT} element={<Project />} />
+        {/* Event */}
         <Route path={ROUTES.PRIVATE.EVENT} element={<Event />} />
+        {/* Asset */}
         <Route path={ROUTES.PRIVATE.ASSET} element={<Asset />} />
-        <Route path="*" element={<Navigate to={ROUTES.PRIVATE.FINANCE} />} />
+        <Route
+          path="*"
+          element={<Navigate to={ROUTES.PRIVATE.TRANSACTION} />}
+        />
       </Routes>
     </PrivateLayout>
   )
