@@ -1,4 +1,5 @@
 export * from './Asset'
+export * from './Column'
 export * from './Event'
 export * from './flag'
 export * from './Loan'

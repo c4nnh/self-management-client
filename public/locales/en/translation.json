@@ -1,12 +1,20 @@
 {
+  "common": {
+    "confirmDelete": "Are you sure to delete this record?",
+    "yes": "Yes",
+    "no": "No",
+    "error": {
+      "deleteFailed": "Can not delete this record. Please try again later"
+    },
+    "title": "Title",
+    "type": "Type",
+    "amount": "Amount",
+    "date": "Date",
+    "requiredField": "Can not be blank"
+  },
   "logout": {
     "confirm": "Do you want to logout?",
     "title": "Logout"
-  },
-  "common": {
-    "yes": "Yes",
-    "no": "No",
-    "requiredField": "Can not be blank"
   },
   "account": {
     "title": "Account"
@@ -39,12 +47,7 @@
   },
   "transaction": {
     "title": "Transaction",
-    "column": {
-      "title": "Title",
-      "type": "Type",
-      "amount": "Amount",
-      "date": "Date"
-    }
+    "pageTitle": "Manage your transactions"
   },
   "loan": {
     "title": "Loan"

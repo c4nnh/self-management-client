@@ -184,7 +184,7 @@ export const Header: React.FC = () => {
 }
 
 const Container = styled.div`
-  ${tw`h-10 py-2 px-3 flex items-center justify-end gap-2`};
+  ${tw`fixed bg-gray-200 w-full right-0 z-[2] h-10 py-2 px-3 flex items-center justify-end gap-2`};
 
   box-shadow: 0 0.125rem 0.25rem rgba(87, 103, 197, 0.1) !important;
 

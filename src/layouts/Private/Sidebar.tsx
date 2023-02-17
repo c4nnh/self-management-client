@@ -180,7 +180,7 @@ export const Sidebar: React.FC = () => {
 }
 
 const Container = styled.div`
-  ${tw`h-full w-[225px] flex flex-col gap-2 bg-dark`}
+  ${tw`h-full w-[225px] flex flex-col gap-2 bg-dark z-10`}
 
   &.collapsed {
     width: 80px;

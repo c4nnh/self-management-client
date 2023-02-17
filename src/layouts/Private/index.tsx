@@ -1,6 +1,8 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, Suspense } from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
+import { AppLoading } from '../../components'
+import { SCREEN_WIDTH } from '../../constants'
 import { useScreen } from '../../hooks'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
@@ -11,20 +13,30 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
   const { isDesktop } = useScreen()
 
   return (
-    <Container>
-      {isDesktop && <Sidebar />}
-      <Body>
-        <Header />
-        <div className="flex-1 p-5">{children}</div>
-      </Body>
-    </Container>
+    <Suspense fallback={<AppLoading />}>
+      <Container maxWidth={SCREEN_WIDTH.DESKTOP}>
+        {isDesktop && <Sidebar />}
+        <Body>
+          <Header />
+          <div className="flex-1 p-5 mt-10">{children}</div>
+        </Body>
+      </Container>
+    </Suspense>
   )
 }
 
-const Container = styled.div`
-  ${tw`h-full flex bg-gray-200`}
+type ContainerProps = {
+  maxWidth: number
+}
+
+const Container = styled.div<ContainerProps>`
+  ${tw`h-full flex bg-gray-200 overflow-x-hidden`}
+
+  @media screen and (max-width: ${p => p.maxWidth}px) {
+    ${tw`block`}
+  }
 `
 
 const Body = styled.div`
-  ${tw`flex-1 flex flex-col`}
+  ${tw`flex-1 flex flex-col overflow-x-hidden relative`}
 `

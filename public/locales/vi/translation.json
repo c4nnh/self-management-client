@@ -1,12 +1,20 @@
 {
+  "common": {
+    "confirmDelete": "Bạn có chắc muốn xóa bản ghi này không?",
+    "yes": "Có",
+    "no": "Không",
+    "error": {
+      "deleteFailed": "Không thể xóa bản ghi này. Xin hãy thử lại sau"
+    },
+    "title": "Tiêu đề",
+    "type": "Loại",
+    "amount": "Số tiền",
+    "date": "Ngày",
+    "requiredField": "Không được để trống"
+  },
   "logout": {
     "confirm": "Bạn có muốn đăng xuất không?",
     "title": "Đăng xuất"
-  },
-  "common": {
-    "yes": "Có",
-    "no": "Không",
-    "requiredField": "Không được để trống"
   },
   "account": {
     "title": "Tài khoản"
@@ -39,12 +47,7 @@
   },
   "transaction": {
     "title": "Giao dịch",
-    "column": {
-      "title": "Tiêu đề",
-      "type": "Loại",
-      "amount": "Số tiền",
-      "date": "Ngày"
-    }
+    "pageTitle": "Quản lý các giao dịch của bạn"
   },
   "loan": {
     "title": "Khoản cho vay"

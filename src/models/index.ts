@@ -86,9 +86,15 @@ export type Transaction = {
   currency: Currency
 }
 
+export type TransactionParams = {
+  title?: string
+  type?: TransactionType
+  dateFrom?: Date
+  dateTo?: Date
+  amountFrom?: number
+  amountTo?: number
+}
+
 export type GetTransactionsParams = PaginationParams &
-  SortParams & {
-    type?: TransactionType
-    from?: Date
-    to?: Date
-  }
+  SortParams &
+  TransactionParams

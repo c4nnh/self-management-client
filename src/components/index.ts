@@ -1,3 +1,6 @@
 export * from './AppLoading'
 export * from './forms'
+export * from './PageContainer'
+export * from './PageTitle'
 export * from './Table'
+export * from './TableActionsContainer'
