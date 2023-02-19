@@ -1,15 +1,15 @@
-import { FormItemProps, Input } from "antd";
-import { TextAreaProps } from "antd/lib/input";
-import React from "react";
-import { ControllerProps } from "react-hook-form";
-import { ControlledFormItem } from "./ControlledFormItem";
+import { FormItemProps, Input } from 'antd'
+import { TextAreaProps } from 'antd/lib/input'
+import React from 'react'
+import { ControllerProps } from 'react-hook-form'
+import { ControlledFormItem } from './ControlledFormItem'
 
 type Props = {
-  name: string;
-  label?: string;
-  formItemProps?: FormItemProps;
-  textAreaProps?: TextAreaProps;
-} & Omit<ControllerProps, "render">;
+  name: string
+  label?: string | null
+  formItemProps?: FormItemProps
+  textAreaProps?: TextAreaProps
+} & Omit<ControllerProps, 'render'>
 
 export const FormTextArea: React.FC<Props> = ({ textAreaProps, ...rest }) => {
   return (
@@ -23,5 +23,5 @@ export const FormTextArea: React.FC<Props> = ({ textAreaProps, ...rest }) => {
         />
       )}
     />
-  );
-};
+  )
+}

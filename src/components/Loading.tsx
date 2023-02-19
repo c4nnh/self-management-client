@@ -2,7 +2,7 @@ import { Spin } from 'antd'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-export const AppLoading: React.FC = () => {
+export const Loading: React.FC = () => {
   return (
     <Container>
       <StyledSpin />
@@ -16,6 +16,6 @@ const Container = styled.div`
 
 const StyledSpin = styled(Spin)`
   .ant-spin-dot-item {
-    ${tw`bg-gray-300`}
+    ${tw`bg-primary`}
   }
 `

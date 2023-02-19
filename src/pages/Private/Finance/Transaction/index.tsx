@@ -2,32 +2,38 @@ import {
   CaretDownOutlined,
   CaretUpOutlined,
   FilterFilled,
-  PlusOutlined,
 } from '@ant-design/icons'
 import { useQueryClient } from '@tanstack/react-query'
-import { Button, Input, notification, Tag } from 'antd'
+import { Input, notification, Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
 import {
   useDeleteTransactionMutation,
   useGetTransactionsQuery,
-} from '../../../apis'
-import { ColumnIcon } from '../../../assets'
+} from '../../../../apis'
+import { ColumnIcon } from '../../../../assets'
 import {
   PageContainer,
+  PageHeader,
   PageTitle,
+  ResponsiveButton,
   Table,
   TableActionsContainer,
-} from '../../../components'
-import { DATE_FORMAT } from '../../../constants'
-import { usePagination, useSorter } from '../../../hooks'
-import { Transaction as TTransaction, TransactionType } from '../../../models'
-import { useTransactionFilter } from '../../../stores'
+} from '../../../../components'
+import { DATE_FORMAT } from '../../../../constants'
+import { usePagination, useScreen, useSorter } from '../../../../hooks'
+import {
+  Transaction as TTransaction,
+  TransactionType,
+} from '../../../../models'
+import { useTransactionFilter } from '../../../../stores'
+import { TransactionDetail } from './Detail'
 
 export const Transaction: React.FC = () => {
-  const queryClient = useQueryClient()
   const { t } = useTranslation()
+  const queryClient = useQueryClient()
+  const { isDesktop } = useScreen()
   const pagination = usePagination()
   const { params, setTransactionParams } = useTransactionFilter()
   const sorter = useSorter<TTransaction>()
@@ -98,33 +104,34 @@ export const Transaction: React.FC = () => {
     {
       title: t('common.date'),
       dataIndex: 'date',
-      render: value => moment(value).format(DATE_FORMAT),
+      render: value => dayjs(value).format(DATE_FORMAT),
       sorter: true,
     },
   ]
 
   return (
     <PageContainer>
-      <PageTitle title={t('transaction.pageTitle')} />
-      <TableActionsContainer
-        leftChildren={
-          <Input.Search
-            size="large"
-            className="max-w-[500px]"
-            enterButton
-            allowClear
-            value={params?.title}
-            onChange={e => setTransactionParams({ title: e.target.value })}
-          />
-        }
-        rightChildren={
-          <>
-            <Button icon={<PlusOutlined />} size="large" type="primary" />
-            <Button icon={<FilterFilled />} size="large" type="primary" />
-            <Button icon={<ColumnIcon />} size="large" type="primary" />
-          </>
-        }
-      />
+      <PageHeader>
+        <PageTitle title={t('transaction.pageTitle')} />
+        <TableActionsContainer
+          leftChildren={
+            <Input.Search
+              size={isDesktop ? 'large' : 'middle'}
+              className="max-w-[500px]"
+              enterButton
+              allowClear
+              onSearch={value => setTransactionParams({ title: value })}
+            />
+          }
+          rightChildren={
+            <>
+              <TransactionDetail />
+              <ResponsiveButton icon={<FilterFilled />} type="primary" />
+              <ResponsiveButton icon={<ColumnIcon />} type="primary" />
+            </>
+          }
+        />
+      </PageHeader>
       <Table
         dataSource={data?.items?.map(item => ({ ...item, key: item.id }))}
         loading={isFetching}

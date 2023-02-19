@@ -1,16 +1,22 @@
 {
   "common": {
+    "selectDate": "Select date",
     "confirmDelete": "Are you sure to delete this record?",
     "yes": "Yes",
     "no": "No",
+    "title": "Title",
     "error": {
+      "system": "Something went wrong. Please try again later",
       "deleteFailed": "Can not delete this record. Please try again later"
     },
-    "title": "Title",
-    "type": "Type",
+    "save": "Save",
+    "create": "Create",
     "amount": "Amount",
     "date": "Date",
-    "requiredField": "Can not be blank"
+    "description": "Description",
+    "currency": "Currency",
+    "type": "Type",
+    "requiredField": "Please fill this field"
   },
   "logout": {
     "confirm": "Do you want to logout?",
@@ -45,10 +51,6 @@
     "english": "English",
     "vietnamese": "Tiếng Việt"
   },
-  "transaction": {
-    "title": "Transaction",
-    "pageTitle": "Manage your transactions"
-  },
   "loan": {
     "title": "Loan"
   },
@@ -64,5 +66,25 @@
   },
   "register": {
     "title": "Register"
+  },
+  "transaction": {
+    "create": {
+      "success": "New transaction is created",
+      "error": "Can not create transaction. Please try again later",
+      "title": "Create transaction"
+    },
+    "update": {
+      "success": "Transaction is updated",
+      "error": "Can not update transaction. Please try again later"
+    },
+    "detail": {
+      "title": "View transaction detail"
+    },
+    "type": {
+      "title": "Transaction type",
+      "expense": "Expense",
+      "income": "Income"
+    },
+    "pageTitle": "Manage your transactions"
   }
 }

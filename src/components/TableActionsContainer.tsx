@@ -1,4 +1,3 @@
-import { Button } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
@@ -17,16 +16,8 @@ export const TableActionsContainer: React.FC<Props> = ({
 
   return (
     <Container>
-      {!isMobile ? (
-        <>
-          <ChildContainer>{leftChildren}</ChildContainer>
-          <ChildContainer className="justify-end">
-            {rightChildren}
-          </ChildContainer>
-        </>
-      ) : (
-        <Button>!!!</Button>
-      )}
+      {!isMobile && <ChildContainer>{leftChildren}</ChildContainer>}
+      <ChildContainer className="justify-end">{rightChildren}</ChildContainer>
     </Container>
   )
 }

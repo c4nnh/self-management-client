@@ -11,4 +11,8 @@ export const PageTitle: React.FC<Props> = ({ title }) => {
 
 const StyledTitle = styled.span`
   ${tw`font-semibold text-2xl`}
+
+  @media screen and (max-width: 550px) {
+    ${tw`text-base`}
+  }
 `

@@ -12,7 +12,7 @@ import tw from 'twin.macro'
 type Props = PropsWithChildren<
   {
     name: string
-    label?: string
+    label?: string | null
     formItemProps?: FormItemProps
     render: (
       props: Pick<ControllerRenderProps, 'value' | 'onChange' | 'onBlur'>
@@ -53,6 +53,14 @@ export const ControlledFormItem: React.FC<Props> = ({
 
 const StyledFormItem = styled(Form.Item)`
   .ant-form-item-label {
-    ${tw`pb-[2px]`}
+    ${tw`pb-[2px] font-semibold`}
+  }
+
+  .ant-form-item-control > div {
+    .ant-form-item-explain {
+      .ant-form-item-explain-error {
+        ${tw`!text-xs`}
+      }
+    }
   }
 `

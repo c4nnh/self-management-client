@@ -1,15 +1,21 @@
 {
   "common": {
+    "selectDate": "",
     "confirmDelete": "Bạn có chắc muốn xóa bản ghi này không?",
     "yes": "Có",
     "no": "Không",
+    "title": "Tiêu đề",
     "error": {
+      "system": "",
       "deleteFailed": "Không thể xóa bản ghi này. Xin hãy thử lại sau"
     },
-    "title": "Tiêu đề",
-    "type": "Loại",
+    "save": "",
+    "create": "",
     "amount": "Số tiền",
     "date": "Ngày",
+    "description": "",
+    "currency": "",
+    "type": "Loại",
     "requiredField": "Không được để trống"
   },
   "logout": {
@@ -45,10 +51,6 @@
     "english": "English",
     "vietnamese": "Tiếng Việt"
   },
-  "transaction": {
-    "title": "Giao dịch",
-    "pageTitle": "Quản lý các giao dịch của bạn"
-  },
   "loan": {
     "title": "Khoản cho vay"
   },
@@ -64,5 +66,25 @@
   },
   "register": {
     "title": "Đăng kí"
+  },
+  "transaction": {
+    "create": {
+      "success": "",
+      "error": "",
+      "title": ""
+    },
+    "update": {
+      "success": "",
+      "error": ""
+    },
+    "detail": {
+      "title": ""
+    },
+    "type": {
+      "title": "",
+      "expense": "",
+      "income": ""
+    },
+    "pageTitle": "Quản lý các giao dịch của bạn"
   }
 }

@@ -56,7 +56,7 @@ export const Sidebar: React.FC = () => {
         {
           key: 'transaction',
           icon: <TransactionOutlined />,
-          label: t('transaction.title'),
+          label: t('common.title'),
           onClick: () => goToPage(ROUTES.PRIVATE.TRANSACTION),
         },
         {

@@ -1,7 +1,7 @@
 import { PropsWithChildren, Suspense } from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { AppLoading } from '../../components'
+import { Loading } from '../../components'
 import { SCREEN_WIDTH } from '../../constants'
 import { useScreen } from '../../hooks'
 import { Header } from './Header'
@@ -13,7 +13,7 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
   const { isDesktop } = useScreen()
 
   return (
-    <Suspense fallback={<AppLoading />}>
+    <Suspense fallback={<Loading />}>
       <Container maxWidth={SCREEN_WIDTH.DESKTOP}>
         {isDesktop && <Sidebar />}
         <Body>

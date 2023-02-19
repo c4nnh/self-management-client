@@ -1,19 +1,19 @@
-import { FormItemProps, Select, SelectProps } from "antd";
-import { ControllerProps } from "react-hook-form";
-import { ControlledFormItem } from "./ControlledFormItem";
+import { FormItemProps, Select, SelectProps } from 'antd'
+import { ControllerProps } from 'react-hook-form'
+import { ControlledFormItem } from './ControlledFormItem'
 
 export type SelectOption = {
-  value: string;
-  label: string | React.ReactNode;
-};
+  value: string
+  label: string | React.ReactNode
+}
 
 type Props = {
-  name: string;
-  options: SelectOption[];
-  label?: string;
-  formItemProps?: FormItemProps;
-  selectProps?: SelectProps;
-} & Omit<ControllerProps, "render">;
+  name: string
+  options: SelectOption[]
+  label?: string | null
+  formItemProps?: FormItemProps
+  selectProps?: SelectProps
+} & Omit<ControllerProps, 'render'>
 
 export const FormSelect: React.FC<Props> = ({
   selectProps,
@@ -28,9 +28,9 @@ export const FormSelect: React.FC<Props> = ({
           {options
             .filter(
               (item, index, self) =>
-                index === self.findIndex((i) => i.value === item.value)
+                index === self.findIndex(i => i.value === item.value)
             )
-            .map((item) => (
+            .map(item => (
               <Select.Option value={item.value} key={item.value}>
                 {item.label}
               </Select.Option>
@@ -38,5 +38,5 @@ export const FormSelect: React.FC<Props> = ({
         </Select>
       )}
     />
-  );
-};
+  )
+}

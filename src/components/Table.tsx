@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 import { useScreen } from '../hooks'
+import { useAppStore } from '../stores'
 
 type Props<T> = PropsWithChildren<TableProps<T>> & {
   onDelete: (id: string) => void
@@ -21,6 +22,7 @@ export const Table = <T extends object>({
 }: Props<T>) => {
   const { t } = useTranslation()
   const { isDesktop } = useScreen()
+  const { setSelectedId, setOpenModal } = useAppStore()
 
   const columnsWithWidth = columns.map((column: any) => {
     return {
@@ -29,7 +31,7 @@ export const Table = <T extends object>({
     }
   })
 
-  dataSource.map((entry: any, idx) => {
+  dataSource.map((entry: any) => {
     columnsWithWidth.map((column, indexColumn) => {
       const columnWidth = column.width
       const cellValue = Object.values(entry)[indexColumn] as string
@@ -73,7 +75,14 @@ export const Table = <T extends object>({
     fixed: 'right',
     render: id => (
       <div className="flex gap-2 justify-center">
-        <Button type="ghost" icon={<EditOutlined className="text-primary" />} />
+        <Button
+          type="ghost"
+          icon={<EditOutlined className="text-primary" />}
+          onClick={() => {
+            setSelectedId(id)
+            setOpenModal(true)
+          }}
+        />
         <Button
           onClick={() => onClickDelete(id)}
           type="ghost"

@@ -8,6 +8,7 @@ export type ErrorResponse = {
 export type PaginationParams = {
   limit?: number
   offset?: number
+  isPaged?: boolean
 }
 
 export type SortParams = {
@@ -61,6 +62,7 @@ export type User = {
   image?: string
   createdAt: Date
   updatedAt: Date
+  currency?: Currency
 }
 
 // FINANCE
@@ -69,6 +71,8 @@ export type Currency = {
   id: string
   name: string
 }
+
+export type GetCurrenciesParams = PaginationParams & SortParams
 
 // Transaction
 export enum TransactionType {
@@ -98,3 +102,16 @@ export type TransactionParams = {
 export type GetTransactionsParams = PaginationParams &
   SortParams &
   TransactionParams
+
+export type CreateTransactionDto = {
+  title: string
+  type: TransactionType
+  amount: number
+  date?: Date
+  description?: string
+  currencyId: string
+}
+
+export type UpdateTransactionDto = Partial<CreateTransactionDto> & {
+  id: string
+}
