@@ -27,11 +27,17 @@ export const Login: React.FC = () => {
   return (
     <FormProvider {...formMethods}>
       <Form layout="vertical" size="middle" className="flex flex-col">
-        <FormInput name="email" label="Email" rules={requiredField(t)} />
+        <FormInput
+          name="email"
+          label="Email"
+          rules={requiredField(t)}
+          inputProps={{ readOnly: isLoading }}
+        />
         <FormPassword
           name="password"
           label="Password"
           rules={requiredField(t)}
+          inputProps={{ readOnly: isLoading }}
         />
         <span
           className="text-blue-500 cursor-pointer text-center underline pb-1"

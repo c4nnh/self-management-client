@@ -121,6 +121,7 @@ export const Transaction: React.FC = () => {
               enterButton
               allowClear
               onSearch={value => setTransactionParams({ title: value })}
+              placeholder={`${t('transaction.search.placeholder')}`}
             />
           }
           rightChildren={

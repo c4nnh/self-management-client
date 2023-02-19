@@ -6,15 +6,15 @@
     "no": "Không",
     "title": "Tiêu đề",
     "error": {
-      "system": "",
+      "system": "Đã có lỗi xảy ra. Vui lòng thử lại sau",
       "deleteFailed": "Không thể xóa bản ghi này. Xin hãy thử lại sau"
     },
-    "save": "",
-    "create": "",
+    "save": "Lưu",
+    "create": "Tạo",
     "amount": "Số tiền",
     "date": "Ngày",
-    "description": "",
-    "currency": "",
+    "description": "Mô tả",
+    "currency": "Tiền tệ",
     "type": "Loại",
     "requiredField": "Không được để trống"
   },
@@ -69,22 +69,25 @@
   },
   "transaction": {
     "create": {
-      "success": "",
-      "error": "",
-      "title": ""
+      "success": "Giao dịch mới đã được tạo",
+      "error": "Không thể tạo giao dịch. Xin hãy thử lại sau",
+      "title": "Tạo giao dịch"
     },
     "update": {
-      "success": "",
-      "error": ""
+      "success": "Giao dịch đã được cập nhật",
+      "error": "Không thể cập nhật giao dịch. Xin hãy thử lại sau"
     },
     "detail": {
-      "title": ""
+      "title": "Xem chi tiết giao dịch"
     },
     "type": {
-      "title": "",
-      "expense": "",
-      "income": ""
+      "title": "Loại giao dịch",
+      "expense": "Chi tiêu",
+      "income": "Thu nhập"
     },
-    "pageTitle": "Quản lý các giao dịch của bạn"
+    "pageTitle": "Quản lý các giao dịch của bạn",
+    "search": {
+      "placeholder": "Tìm kiếm theo tiêu đề"
+    }
   }
 }

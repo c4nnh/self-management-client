@@ -85,6 +85,9 @@
       "expense": "Expense",
       "income": "Income"
     },
-    "pageTitle": "Manage your transactions"
+    "pageTitle": "Manage your transactions",
+    "search": {
+      "placeholder": "Search by title"
+    }
   }
 }
