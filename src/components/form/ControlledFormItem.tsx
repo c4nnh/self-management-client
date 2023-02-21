@@ -52,6 +52,12 @@ export const ControlledFormItem: React.FC<Props> = ({
 }
 
 const StyledFormItem = styled(Form.Item)`
+  ${tw`mb-3`}
+
+  @media screen and (max-width: 550px) {
+    ${tw`mb-1`}
+  }
+
   .ant-form-item-label {
     ${tw`pb-[2px] font-semibold`}
   }

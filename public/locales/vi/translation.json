@@ -1,6 +1,35 @@
 {
+  "transaction": {
+    "search": {
+      "placeholder": "Tìm kiếm theo tiêu đề"
+    },
+    "create": {
+      "success": "Giao dịch mới đã được tạo",
+      "error": "Không thể tạo giao dịch. Xin hãy thử lại sau",
+      "title": "Tạo giao dịch"
+    },
+    "update": {
+      "success": "Giao dịch đã được cập nhật",
+      "error": "Không thể cập nhật giao dịch. Xin hãy thử lại sau"
+    },
+    "detail": {
+      "title": "Xem chi tiết giao dịch"
+    },
+    "type": {
+      "title": "Loại giao dịch",
+      "expense": "Chi tiêu",
+      "income": "Thu nhập"
+    },
+    "filter": {
+      "title": "Bộ lọc giao dịch"
+    },
+    "pageTitle": "Quản lý các giao dịch của bạn"
+  },
   "common": {
-    "selectDate": "",
+    "selectDate": "Chọn ngày",
+    "from": "Từ ngày",
+    "to": "Tới ngày",
+    "apply": "Áp dụng",
     "confirmDelete": "Bạn có chắc muốn xóa bản ghi này không?",
     "yes": "Có",
     "no": "Không",
@@ -69,28 +98,5 @@
   },
   "register": {
     "title": "Đăng kí"
-  },
-  "transaction": {
-    "create": {
-      "success": "Giao dịch mới đã được tạo",
-      "error": "Không thể tạo giao dịch. Xin hãy thử lại sau",
-      "title": "Tạo giao dịch"
-    },
-    "update": {
-      "success": "Giao dịch đã được cập nhật",
-      "error": "Không thể cập nhật giao dịch. Xin hãy thử lại sau"
-    },
-    "detail": {
-      "title": "Xem chi tiết giao dịch"
-    },
-    "type": {
-      "title": "Loại giao dịch",
-      "expense": "Chi tiêu",
-      "income": "Thu nhập"
-    },
-    "pageTitle": "Quản lý các giao dịch của bạn",
-    "search": {
-      "placeholder": "Tìm kiếm theo tiêu đề"
-    }
   }
 }

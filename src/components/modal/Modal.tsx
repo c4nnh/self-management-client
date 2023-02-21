@@ -2,7 +2,7 @@ import { Modal as AModal, ModalProps } from 'antd'
 import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { Loading } from './Loading'
+import { Loading } from '../composites/Loading'
 
 type Props = PropsWithChildren<ModalProps> & {
   isLoading?: boolean

@@ -1,9 +1,14 @@
 import create from 'zustand'
 
+export type ModalKey =
+  | 'transaction-detail'
+  | 'transaction-filter'
+  | 'transaction-columns'
+
 type AppState = {
-  openModal?: boolean
+  openModal?: ModalKey
   selectedId?: string
-  setOpenModal: (openModal?: boolean) => void
+  setOpenModal: (openModal?: ModalKey) => void
   setSelectedId: (id?: string) => void
 }
 

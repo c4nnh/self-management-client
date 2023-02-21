@@ -92,9 +92,9 @@ export type Transaction = {
 
 export type TransactionParams = {
   title?: string
-  type?: TransactionType
-  dateFrom?: Date
-  dateTo?: Date
+  types?: TransactionType
+  dateFrom?: string
+  dateTo?: string
   amountFrom?: number
   amountTo?: number
 }

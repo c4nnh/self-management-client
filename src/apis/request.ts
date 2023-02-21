@@ -1,5 +1,6 @@
 import { notification } from 'antd'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import qs from 'qs'
 import { ROUTES } from '../constants'
 import { externalHooks } from '../hooks'
 import { ErrorResponse, RefreshTokenResponse } from '../models'
@@ -42,6 +43,9 @@ request.interceptors.request.use(
       }
       config.params = {
         ...config.params,
+      }
+      config.paramsSerializer = {
+        serialize: p => qs.stringify(p, { arrayFormat: 'repeat' }),
       }
     }
     return config

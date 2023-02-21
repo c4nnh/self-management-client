@@ -1,4 +1,3 @@
-import { PlusOutlined } from '@ant-design/icons'
 import { useQueryClient } from '@tanstack/react-query'
 import { Form, notification } from 'antd'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -16,7 +15,7 @@ import {
   FormSelect,
   FormTextArea,
   Modal,
-  ResponsiveButton,
+  OpenCreateButton,
 } from '../../../../components'
 import {
   CreateTransactionDto,
@@ -40,7 +39,7 @@ export const TransactionDetail: React.FC = () => {
       onSuccess: () => {
         notification.success({ message: t('transaction.create.success') })
         queryClient.invalidateQueries(['getTransactions'])
-        setOpenModal(false)
+        setOpenModal()
       },
       onError: () => {
         notification.error({ message: t('transaction.create.error') })
@@ -66,7 +65,7 @@ export const TransactionDetail: React.FC = () => {
       },
       onError: () => {
         setSelectedId()
-        setOpenModal(false)
+        setOpenModal()
         notification.error({ message: t('common.error.system') })
       },
     }
@@ -82,14 +81,7 @@ export const TransactionDetail: React.FC = () => {
 
   return (
     <>
-      <ResponsiveButton
-        icon={<PlusOutlined />}
-        type="primary"
-        onClick={() => {
-          setSelectedId()
-          setOpenModal(true)
-        }}
-      />
+      <OpenCreateButton modalKey="transaction-detail" />
       <Modal
         title={
           selectedId
@@ -97,11 +89,11 @@ export const TransactionDetail: React.FC = () => {
             : t('transaction.create.title')
         }
         isLoading={isFetchingDetail}
-        open={openModal}
+        open={openModal === 'transaction-detail'}
         closable={false}
         onCancel={() => {
           setSelectedId()
-          setOpenModal(false)
+          setOpenModal()
           if (selectedId) {
             queryClient.cancelQueries(['getTransactionDetail'])
           }

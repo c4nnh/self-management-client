@@ -1,10 +1,6 @@
-import {
-  CaretDownOutlined,
-  CaretUpOutlined,
-  FilterFilled,
-} from '@ant-design/icons'
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
 import { useQueryClient } from '@tanstack/react-query'
-import { Input, notification, Tag } from 'antd'
+import { notification, Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
@@ -18,6 +14,7 @@ import {
   PageHeader,
   PageTitle,
   ResponsiveButton,
+  SearchInput,
   Table,
   TableActionsContainer,
 } from '../../../../components'
@@ -29,6 +26,7 @@ import {
 } from '../../../../models'
 import { useTransactionFilter } from '../../../../stores'
 import { TransactionDetail } from './Detail'
+import { TransactionFilter } from './Filter'
 
 export const Transaction: React.FC = () => {
   const { t } = useTranslation()
@@ -115,19 +113,15 @@ export const Transaction: React.FC = () => {
         <PageTitle title={t('transaction.pageTitle')} />
         <TableActionsContainer
           leftChildren={
-            <Input.Search
-              size={isDesktop ? 'large' : 'middle'}
-              className="max-w-[500px]"
-              enterButton
-              allowClear
-              onSearch={value => setTransactionParams({ title: value })}
-              placeholder={`${t('transaction.search.placeholder')}`}
+            <SearchInput
+              value={params?.title}
+              setValue={title => setTransactionParams({ title })}
             />
           }
           rightChildren={
             <>
               <TransactionDetail />
-              <ResponsiveButton icon={<FilterFilled />} type="primary" />
+              <TransactionFilter />
               <ResponsiveButton icon={<ColumnIcon />} type="primary" />
             </>
           }
@@ -142,6 +136,7 @@ export const Transaction: React.FC = () => {
           sorter.onSorterChange(sorterValue)
         }}
         onDelete={id => deleteTransactionMutate(id)}
+        modalKey="transaction-detail"
       />
     </PageContainer>
   )

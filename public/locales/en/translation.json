@@ -1,6 +1,35 @@
 {
+  "transaction": {
+    "search": {
+      "placeholder": "Search by title"
+    },
+    "create": {
+      "success": "New transaction is created",
+      "error": "Can not create transaction. Please try again later",
+      "title": "Create transaction"
+    },
+    "update": {
+      "success": "Transaction is updated",
+      "error": "Can not update transaction. Please try again later"
+    },
+    "detail": {
+      "title": "View transaction detail"
+    },
+    "type": {
+      "title": "Transaction type",
+      "expense": "Expense",
+      "income": "Income"
+    },
+    "filter": {
+      "title": "Transaction filter"
+    },
+    "pageTitle": "Manage your transactions"
+  },
   "common": {
     "selectDate": "Select date",
+    "fromDate": "From date",
+    "toDate": "To date",
+    "apply": "Apply",
     "confirmDelete": "Are you sure to delete this record?",
     "yes": "Yes",
     "no": "No",
@@ -69,28 +98,5 @@
   },
   "register": {
     "title": "Register"
-  },
-  "transaction": {
-    "create": {
-      "success": "New transaction is created",
-      "error": "Can not create transaction. Please try again later",
-      "title": "Create transaction"
-    },
-    "update": {
-      "success": "Transaction is updated",
-      "error": "Can not update transaction. Please try again later"
-    },
-    "detail": {
-      "title": "View transaction detail"
-    },
-    "type": {
-      "title": "Transaction type",
-      "expense": "Expense",
-      "income": "Income"
-    },
-    "pageTitle": "Manage your transactions",
-    "search": {
-      "placeholder": "Search by title"
-    }
   }
 }

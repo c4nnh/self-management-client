@@ -5,18 +5,20 @@ import { PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { useScreen } from '../hooks'
-import { useAppStore } from '../stores'
+import { useScreen } from '../../hooks'
+import { ModalKey, useAppStore } from '../../stores'
 
 type Props<T> = PropsWithChildren<TableProps<T>> & {
-  onDelete: (id: string) => void
   maxWidthPerCell?: number
+  modalKey: ModalKey
+  onDelete: (id: string) => void
 }
 
 export const Table = <T extends object>({
   columns = [],
   dataSource = [],
   maxWidthPerCell = 150,
+  modalKey,
   onDelete,
   ...props
 }: Props<T>) => {
@@ -80,7 +82,7 @@ export const Table = <T extends object>({
           icon={<EditOutlined className="text-primary" />}
           onClick={() => {
             setSelectedId(id)
-            setOpenModal(true)
+            setOpenModal(modalKey)
           }}
         />
         <Button

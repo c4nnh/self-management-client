@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from 'antd'
 import React, { PropsWithChildren } from 'react'
-import { useScreen } from '../hooks'
+import { useScreen } from '../../hooks'
 
 type Props = PropsWithChildren<ButtonProps>
 
