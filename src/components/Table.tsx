@@ -98,6 +98,11 @@ export const Table = <T extends object>({
       {...props}
       dataSource={dataSource}
       scroll={{ x: tableWidth }}
+      locale={{
+        triggerAsc: `${t('common.clickToSortAscending')}`,
+        triggerDesc: `${t('common.clickToSortDescending')}`,
+        cancelSort: `${t('common.clickToCancelSort')}`,
+      }}
       columns={[...columnsWithWidth, actionColumn]}
     />
   )

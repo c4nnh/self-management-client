@@ -4,6 +4,9 @@
     "confirmDelete": "Are you sure to delete this record?",
     "yes": "Yes",
     "no": "No",
+    "clickToSortAscending": "Click to sort ascending",
+    "clickToSortDescending": "Click to sort descending",
+    "clickToCancelSort": "Click to cancel sort",
     "title": "Title",
     "error": {
       "system": "Something went wrong. Please try again later",

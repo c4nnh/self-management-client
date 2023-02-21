@@ -4,6 +4,9 @@
     "confirmDelete": "Bạn có chắc muốn xóa bản ghi này không?",
     "yes": "Có",
     "no": "Không",
+    "clickToSortAscending": "Nháy chuột để sắp xếp tăng dần",
+    "clickToSortDescending": "Nháy chuột để sắp xếp giảm dần",
+    "clickToCancelSort": "Nháy chuột để hủy sắp xếp",
     "title": "Tiêu đề",
     "error": {
       "system": "Đã có lỗi xảy ra. Vui lòng thử lại sau",
