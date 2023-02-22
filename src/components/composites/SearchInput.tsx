@@ -1,5 +1,5 @@
 import { Input } from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useScreen } from '../../hooks'
 
@@ -13,6 +13,10 @@ export const SearchInput: React.FC<Props> = ({ value, setValue }) => {
   const { isDesktop } = useScreen()
 
   const [search, setSearch] = useState(value)
+
+  useEffect(() => {
+    setSearch(value)
+  }, [value])
 
   return (
     <Input.Search

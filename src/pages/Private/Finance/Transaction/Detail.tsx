@@ -1,5 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { Form, notification } from 'antd'
+import dayjs from 'dayjs'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import {
@@ -139,7 +140,15 @@ export const TransactionDetail: React.FC = () => {
               }}
               rules={requiredField(t)}
             />
-            <FormDatePicker name="date" label={t('common.date')} />
+            <FormDatePicker
+              name="date"
+              label={t('common.date')}
+              datePickerProps={{
+                disabledDate: currentDate => {
+                  return dayjs(currentDate) > dayjs()
+                },
+              }}
+            />
             <FormTextArea name="description" label={t('common.description')} />
             <FormSelect
               name="currencyId"

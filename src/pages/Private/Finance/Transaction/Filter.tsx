@@ -6,10 +6,9 @@ import {
   FormDateRangePicker,
   FormInput,
 } from '../../../../components'
-import { DATE_FORMAT_FILTER } from '../../../../constants'
-import { useScreen } from '../../../../hooks'
 import { TransactionParams, TransactionType } from '../../../../models'
 import { useTransactionFilter } from '../../../../stores'
+import { convertDateRangeToDateFilter } from '../../../../utils'
 
 type FilterDto = Pick<TransactionParams, 'title' | 'types'> & {
   dateRange: [Dayjs?, Dayjs?]
@@ -18,16 +17,13 @@ type FilterDto = Pick<TransactionParams, 'title' | 'types'> & {
 
 export const TransactionFilter: React.FC = () => {
   const { t } = useTranslation()
-  const { isMobile } = useScreen()
   const { setTransactionParams, params } = useTransactionFilter()
   const onSearch = (dto: FilterDto) => {
     const { dateRange, amountRange, ...params } = dto
-    const [dateFrom, dateTo] = dateRange || [null, null]
 
     setTransactionParams({
       ...params,
-      dateFrom: dateFrom ? dateFrom.format(DATE_FORMAT_FILTER) : undefined,
-      dateTo: dateTo ? dateTo.format(DATE_FORMAT_FILTER) : undefined,
+      ...convertDateRangeToDateFilter(dateRange),
     })
   }
 
@@ -43,7 +39,7 @@ export const TransactionFilter: React.FC = () => {
         title: t('transaction.filter.title'),
       }}
     >
-      {isMobile && <FormInput name="title" label={t('common.title')} />}
+      <FormInput name="title" label={t('common.title')} />
       <FormCheckbox<TransactionType>
         name="types"
         label={t('transaction.type.title')}

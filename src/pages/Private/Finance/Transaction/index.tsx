@@ -19,7 +19,7 @@ import {
   TableActionsContainer,
 } from '../../../../components'
 import { DATE_FORMAT } from '../../../../constants'
-import { usePagination, useScreen, useSorter } from '../../../../hooks'
+import { usePagination, useSorter } from '../../../../hooks'
 import {
   Transaction as TTransaction,
   TransactionType,
@@ -31,7 +31,6 @@ import { TransactionFilter } from './Filter'
 export const Transaction: React.FC = () => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
-  const { isDesktop } = useScreen()
   const pagination = usePagination()
   const { params, setTransactionParams } = useTransactionFilter()
   const sorter = useSorter<TTransaction>()
