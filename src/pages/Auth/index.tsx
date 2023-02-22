@@ -1,9 +1,9 @@
+import { ROUTES } from '@/constants'
+import { AuthLayout } from '@/layouts'
+import { useAuthStore } from '@/stores'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { ROUTES } from '../../constants'
-import { AuthLayout } from '../../layouts'
-import { useAuthStore } from '../../stores'
 import { Login } from './Login'
 import { Register } from './Register'
 

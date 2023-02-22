@@ -1,14 +1,14 @@
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { AuthState, useAuthStore } from "../stores";
+import { AuthState, useAuthStore } from '@/stores'
+import { NavigateFunction, useNavigate } from 'react-router-dom'
 
 export const externalHooks: {
-  navigate?: NavigateFunction;
-  authStore?: AuthState;
-} = {};
+  navigate?: NavigateFunction
+  authStore?: AuthState
+} = {}
 
 export const ExternalHooksSetter = () => {
-  externalHooks.navigate = useNavigate();
-  externalHooks.authStore = useAuthStore();
+  externalHooks.navigate = useNavigate()
+  externalHooks.authStore = useAuthStore()
 
-  return null;
-};
+  return null
+}

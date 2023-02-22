@@ -1,12 +1,12 @@
+import { useLoginMutation } from '@/apis'
+import { FormInput, FormPassword } from '@/components'
+import { LoginPayload } from '@/models'
+import { useAuthStore } from '@/stores'
+import { requiredField } from '@/utils'
 import { Button, Form } from 'antd'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useLoginMutation } from '../../apis'
-import { FormInput, FormPassword } from '../../components'
-import { LoginPayload } from '../../models'
-import { useAuthStore } from '../../stores'
-import { requiredField } from '../../utils'
 
 export const Login: React.FC = () => {
   const navigate = useNavigate()

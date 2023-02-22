@@ -1,16 +1,16 @@
 import {
-  MutationFunction,
-  QueryFunction,
-  useMutation,
-  useQuery,
-} from '@tanstack/react-query'
-import {
   Collection,
   CreateTransactionDto,
   GetTransactionsParams,
   Transaction,
   UpdateTransactionDto,
-} from '../../../models'
+} from '@/models'
+import {
+  MutationFunction,
+  QueryFunction,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query'
 import { request } from '../../request'
 import { MutationOptions, QueryOptions } from '../../type'
 

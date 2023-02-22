@@ -1,5 +1,5 @@
+import { SCREEN_WIDTH } from '@/constants'
 import { useMediaQuery } from 'react-responsive'
-import { SCREEN_WIDTH } from '../constants'
 
 export const useScreen = () => {
   const isDesktop = useMediaQuery({

@@ -1,3 +1,4 @@
+import { DATE_FORMAT } from '@/constants'
 import { DatePicker, DatePickerProps, FormItemProps } from 'antd'
 import dayjs from 'dayjs'
 import React from 'react'
@@ -5,7 +6,6 @@ import { ControllerProps } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { DATE_FORMAT } from '../../constants'
 import { ControlledFormItem } from './ControlledFormItem'
 
 type Props = {

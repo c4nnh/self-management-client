@@ -1,4 +1,18 @@
 import {
+  AssetIcon,
+  EventIcon,
+  LoanIcon,
+  LogoIcon,
+  ResumeIcon,
+  SkillIcon,
+  TontineIcon,
+  UKFlagIcon,
+  VIFlagIcon,
+  WorkIcon,
+} from '@/assets'
+import { ROUTES } from '@/constants'
+import { Language } from '@/models'
+import {
   DollarCircleOutlined,
   DoubleLeftOutlined,
   GlobalOutlined,
@@ -13,20 +27,6 @@ import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import {
-  AssetIcon,
-  EventIcon,
-  LoanIcon,
-  LogoIcon,
-  ResumeIcon,
-  SkillIcon,
-  TontineIcon,
-  UKFlagIcon,
-  VIFlagIcon,
-  WorkIcon,
-} from '../../assets'
-import { ROUTES } from '../../constants'
-import { Language } from '../../models'
 
 export const Sidebar: React.FC = () => {
   const navigate = useNavigate()

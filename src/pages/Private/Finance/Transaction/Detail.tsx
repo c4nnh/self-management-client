@@ -1,13 +1,8 @@
-import { useQueryClient } from '@tanstack/react-query'
-import { Form, notification } from 'antd'
-import dayjs from 'dayjs'
-import { FormProvider, useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import {
   useCreateTransactionMutation,
   useGetTransactiongetDetailQuery,
   useUpdateTransactionMutation,
-} from '../../../../apis'
+} from '@/apis'
 import {
   FormDatePicker,
   FormInput,
@@ -17,14 +12,19 @@ import {
   FormTextArea,
   Modal,
   OpenCreateButton,
-} from '../../../../components'
+} from '@/components'
 import {
   CreateTransactionDto,
   TransactionType,
   UpdateTransactionDto,
-} from '../../../../models'
-import { useAppStore, useAuthStore, useCurrencyStore } from '../../../../stores'
-import { requiredField } from '../../../../utils'
+} from '@/models'
+import { useAppStore, useAuthStore, useCurrencyStore } from '@/stores'
+import { requiredField } from '@/utils'
+import { useQueryClient } from '@tanstack/react-query'
+import { Form, notification } from 'antd'
+import dayjs from 'dayjs'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 export const TransactionDetail: React.FC = () => {
   const { t } = useTranslation()

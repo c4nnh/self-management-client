@@ -1,10 +1,10 @@
+import { ROUTES } from '@/constants'
+import { externalHooks } from '@/hooks'
+import { ErrorResponse, RefreshTokenResponse } from '@/models'
+import { getTokens, setTokens } from '@/utils'
 import { notification } from 'antd'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import qs from 'qs'
-import { ROUTES } from '../constants'
-import { externalHooks } from '../hooks'
-import { ErrorResponse, RefreshTokenResponse } from '../models'
-import { getTokens, setTokens } from '../utils'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 

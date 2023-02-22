@@ -1,7 +1,7 @@
+import { LogoIcon } from '@/assets'
 import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { LogoIcon } from '../assets'
 
 type Props = PropsWithChildren & {
   title: string

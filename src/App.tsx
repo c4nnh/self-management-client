@@ -1,10 +1,10 @@
+import { useGetManyCurrencies, useMeQuery } from '@/apis'
+import { Loading } from '@/components'
+import { ROUTES } from '@/constants'
+import { Auth, Private } from '@/pages'
+import { useAuthStore, useCurrencyStore } from '@/stores'
+import { getTokens } from '@/utils'
 import { Route, Routes } from 'react-router-dom'
-import { useGetManyCurrencies, useMeQuery } from './apis'
-import { Loading } from './components'
-import { ROUTES } from './constants'
-import { Auth, Private } from './pages'
-import { useAuthStore, useCurrencyStore } from './stores'
-import { getTokens } from './utils'
 
 function App() {
   const { me, user } = useAuthStore()

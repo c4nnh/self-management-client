@@ -1,14 +1,5 @@
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
-import { useQueryClient } from '@tanstack/react-query'
-import { notification, Tag } from 'antd'
-import { ColumnsType } from 'antd/es/table'
-import dayjs from 'dayjs'
-import { useTranslation } from 'react-i18next'
-import {
-  useDeleteTransactionMutation,
-  useGetTransactionsQuery,
-} from '../../../../apis'
-import { ColumnIcon } from '../../../../assets'
+import { useDeleteTransactionMutation, useGetTransactionsQuery } from '@/apis'
+import { ColumnIcon } from '@/assets'
 import {
   PageContainer,
   PageHeader,
@@ -17,14 +8,17 @@ import {
   SearchInput,
   Table,
   TableActionsContainer,
-} from '../../../../components'
-import { DATE_FORMAT } from '../../../../constants'
-import { usePagination, useSorter } from '../../../../hooks'
-import {
-  Transaction as TTransaction,
-  TransactionType,
-} from '../../../../models'
-import { useTransactionFilter } from '../../../../stores'
+} from '@/components'
+import { DATE_FORMAT } from '@/constants'
+import { usePagination, useSorter } from '@/hooks'
+import { Transaction as TTransaction, TransactionType } from '@/models'
+import { useTransactionFilter } from '@/stores'
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
+import { useQueryClient } from '@tanstack/react-query'
+import { notification, Tag } from 'antd'
+import { ColumnsType } from 'antd/es/table'
+import dayjs from 'dayjs'
+import { useTranslation } from 'react-i18next'
 import { TransactionDetail } from './Detail'
 import { TransactionFilter } from './Filter'
 

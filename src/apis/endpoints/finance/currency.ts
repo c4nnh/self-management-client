@@ -1,5 +1,5 @@
+import { Collection, Currency, GetCurrenciesParams } from '@/models'
 import { QueryFunction, useQuery } from '@tanstack/react-query'
-import { Collection, Currency, GetCurrenciesParams } from '../../../models'
 import { request } from '../../request'
 import { QueryOptions } from '../../type'
 

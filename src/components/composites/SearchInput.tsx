@@ -1,7 +1,7 @@
+import { useScreen } from '@/hooks'
 import { Input } from 'antd'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useScreen } from '../../hooks'
 
 type Props = {
   value?: string

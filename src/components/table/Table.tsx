@@ -1,3 +1,5 @@
+import { useScreen } from '@/hooks'
+import { ModalKey, useAppStore } from '@/stores'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Table as ATable, TableProps } from 'antd'
 import { ColumnType } from 'antd/es/table'
@@ -5,8 +7,6 @@ import { PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { useScreen } from '../../hooks'
-import { ModalKey, useAppStore } from '../../stores'
 
 type Props<T> = PropsWithChildren<TableProps<T>> & {
   maxWidthPerCell?: number

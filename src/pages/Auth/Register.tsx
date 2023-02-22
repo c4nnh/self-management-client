@@ -1,12 +1,12 @@
+import { useRegisterMutation } from '@/apis'
+import { FormInput, FormPassword } from '@/components'
+import { RegisterPayload } from '@/models'
+import { useAuthStore } from '@/stores'
+import { requiredField } from '@/utils'
 import { Button, Form } from 'antd'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useRegisterMutation } from '../../apis'
-import { FormInput, FormPassword } from '../../components'
-import { RegisterPayload } from '../../models'
-import { useAuthStore } from '../../stores'
-import { requiredField } from '../../utils'
 
 export const Register: React.FC = () => {
   const navigate = useNavigate()

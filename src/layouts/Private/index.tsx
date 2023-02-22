@@ -1,9 +1,9 @@
+import { Loading } from '@/components'
+import { SCREEN_WIDTH } from '@/constants'
+import { useScreen } from '@/hooks'
 import { PropsWithChildren, Suspense } from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { Loading } from '../../components'
-import { SCREEN_WIDTH } from '../../constants'
-import { useScreen } from '../../hooks'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 

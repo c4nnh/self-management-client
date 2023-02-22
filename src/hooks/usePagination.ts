@@ -1,7 +1,7 @@
+import { PAGE_SIZE_DEFAULT } from '@/constants'
+import { useLocalSettingStore } from '@/stores'
 import { TablePaginationConfig } from 'antd'
 import { useEffect, useState } from 'react'
-import { PAGE_SIZE_DEFAULT } from '../constants'
-import { useLocalSettingStore } from '../stores'
 import { useScreen } from './useScreen'
 
 type PaginationInfo = {

@@ -1,5 +1,5 @@
+import { TransactionParams } from '@/models'
 import create from 'zustand'
-import { TransactionParams } from '../models'
 
 type TransactionFilterState = {
   params?: TransactionParams

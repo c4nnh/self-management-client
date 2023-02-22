@@ -1,8 +1,8 @@
+import { ModalKey, useAppStore } from '@/stores'
 import { ButtonProps, Form, ModalProps } from 'antd'
 import { PropsWithChildren, useEffect } from 'react'
 import { DeepPartial, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { ModalKey, useAppStore } from '../../stores'
 import { OpenFilterButton } from '../button'
 import { Modal } from './Modal'
 

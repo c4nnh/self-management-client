@@ -1,4 +1,17 @@
 import {
+  AssetIcon,
+  EventIcon,
+  LogoIcon,
+  ResumeIcon,
+  SkillIcon,
+  UKFlagIcon,
+  VIFlagIcon,
+} from '@/assets'
+import { ROUTES } from '@/constants'
+import { useScreen } from '@/hooks'
+import { Language } from '@/models'
+import { useAuthStore } from '@/stores'
+import {
   DollarCircleOutlined,
   LogoutOutlined,
   MenuOutlined,
@@ -12,19 +25,6 @@ import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import {
-  AssetIcon,
-  EventIcon,
-  LogoIcon,
-  ResumeIcon,
-  SkillIcon,
-  UKFlagIcon,
-  VIFlagIcon,
-} from '../../assets'
-import { ROUTES } from '../../constants'
-import { useScreen } from '../../hooks'
-import { Language } from '../../models'
-import { useAuthStore } from '../../stores'
 
 export const Header: React.FC = () => {
   const {

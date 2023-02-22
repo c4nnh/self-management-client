@@ -1,16 +1,16 @@
 import {
-  MutationFunction,
-  QueryFunction,
-  useMutation,
-  useQuery,
-} from '@tanstack/react-query'
-import {
   LoginPayload,
   LoginResponse,
   RegisterPayload,
   RegisterResponse,
   User,
-} from '../../models'
+} from '@/models'
+import {
+  MutationFunction,
+  QueryFunction,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query'
 import { authRequest, request } from '../request'
 import { MutationOptions, QueryOptions } from '../type'
 
