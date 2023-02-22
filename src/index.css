@@ -29,3 +29,9 @@ body {
     min-width: unset;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .ant-picker-panels {
+    flex-direction: column;
+  }
+}

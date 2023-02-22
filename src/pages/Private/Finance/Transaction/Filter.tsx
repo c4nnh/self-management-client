@@ -3,6 +3,7 @@ import {
   FormCheckbox,
   FormDateRangePicker,
   FormInput,
+  FormNumberRange,
 } from '@/components'
 import { TransactionParams, TransactionType } from '@/models'
 import { useTransactionFilter } from '@/stores'
@@ -55,6 +56,13 @@ export const TransactionFilter: React.FC = () => {
         ]}
       />
       <FormDateRangePicker name="dateRange" label={t('common.date')} />
+      <FormNumberRange
+        label={t('common.amount')}
+        from={{
+          name: 'from',
+        }}
+        to={{ name: 'to' }}
+      />
     </FilterModal>
   )
 }
