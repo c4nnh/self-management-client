@@ -4,7 +4,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Table as ATable, TableProps } from 'antd'
 import { ColumnType } from 'antd/es/table'
 import { TableRowSelection } from 'antd/es/table/interface'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import tw from 'twin.macro'
@@ -12,24 +12,26 @@ import tw from 'twin.macro'
 type Props<T> = PropsWithChildren<TableProps<T>> & {
   maxWidthPerCell?: number
   modalKey: ModalKey
-  selectedIds: string[]
   onDelete: (id: string) => void
-  setSelectedIds: (ids: string[]) => void
 }
 
-export const Table = <T extends object>({
+interface BaseObject extends Object {
+  id: string
+}
+
+export const Table = <T extends BaseObject>({
   columns = [],
   dataSource = [],
   maxWidthPerCell = 150,
   modalKey,
-  selectedIds,
   onDelete,
-  setSelectedIds,
   ...props
 }: Props<T>) => {
   const { t } = useTranslation()
   const { isDesktop } = useScreen()
-  const { setSelectedId, setOpenModal } = useAppStore()
+  const { selectedIds, setSelectedId, setOpenModal, setSelectedIds } =
+    useAppStore()
+  const [data, setData] = useState<readonly T[]>(dataSource)
 
   const columnsWithWidth = columns.map((column: any) => {
     return {
@@ -37,6 +39,21 @@ export const Table = <T extends object>({
       width: column.width || maxWidthPerCell,
     }
   })
+
+  useEffect(() => {
+    setData(dataSource)
+  }, [dataSource])
+
+  useEffect(() => {
+    const dataIds = data.map(item => item.id)
+    setSelectedIds(selectedIds.filter(id => dataIds.includes(id)))
+  }, [data])
+
+  useEffect(() => {
+    return () => {
+      setSelectedIds([])
+    }
+  }, [])
 
   dataSource.map((entry: any) => {
     columnsWithWidth.map((column, indexColumn) => {
@@ -71,7 +88,6 @@ export const Table = <T extends object>({
       okText: t('common.yes'),
       cancelText: t('common.no'),
       onOk: async () => {
-        setSelectedId(id)
         await onDelete(id)
       },
     })
@@ -144,5 +160,20 @@ const getTextWidth = (text?: string, font = '16px -apple-system') => {
 const StyledTable = styled(ATable)`
   .ant-table-thead > tr > th {
     ${tw`font-semibold bg-gray-100`}
+  }
+
+  .ant-table-tbody {
+    tr:not(:last-child) {
+      td {
+        border-radius: 0 !important;
+      }
+    }
+
+    tr:last-child {
+      td {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+      }
+    }
   }
 ` as typeof ATable

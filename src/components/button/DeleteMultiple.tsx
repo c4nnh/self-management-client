@@ -1,19 +1,19 @@
+import { useAppStore } from '@/stores'
 import { DeleteOutlined } from '@ant-design/icons'
 import { ButtonProps, Modal } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { ResponsiveButton } from './ResponsiveButton'
 
 type Props = Omit<ButtonProps, 'onClick'> & {
-  selectedIds: string[]
   onDelete: () => void
 }
 
 export const DeleteMultiple: React.FC<Props> = ({
-  selectedIds,
   onDelete,
   ...buttonProps
 }) => {
   const { t } = useTranslation()
+  const { selectedIds } = useAppStore()
 
   const onOk = () => {
     Modal.confirm({

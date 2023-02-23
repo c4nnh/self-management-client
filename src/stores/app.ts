@@ -8,11 +8,14 @@ export type ModalKey =
 type AppState = {
   openModal?: ModalKey
   selectedId?: string
+  selectedIds: string[]
   setOpenModal: (openModal?: ModalKey) => void
   setSelectedId: (id?: string) => void
+  setSelectedIds: (ids: string[]) => void
 }
 
 export const useAppStore = create<AppState>()(set => ({
+  selectedIds: [],
   setOpenModal: openModal => {
     set({
       openModal,
@@ -21,6 +24,11 @@ export const useAppStore = create<AppState>()(set => ({
   setSelectedId: selectedId => {
     set({
       selectedId,
+    })
+  },
+  setSelectedIds: selectedIds => {
+    set({
+      selectedIds,
     })
   },
 }))
