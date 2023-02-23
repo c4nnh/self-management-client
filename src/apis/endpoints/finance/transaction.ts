@@ -20,6 +20,7 @@ type Response = {
   create: Transaction
   update: Transaction
   delete: boolean
+  deleteMultiple: boolean
 }
 
 type QueryKeys = {
@@ -31,6 +32,7 @@ type Variables = {
   create: CreateTransactionDto
   update: UpdateTransactionDto
   delete: string
+  deleteMultiple: string[]
 }
 
 type API = {
@@ -39,6 +41,10 @@ type API = {
   create: MutationFunction<Response['create'], Variables['create']>
   update: MutationFunction<Response['update'], Variables['update']>
   delete: MutationFunction<Response['delete'], Variables['delete']>
+  deleteMultiple: MutationFunction<
+    Response['deleteMultiple'],
+    Variables['deleteMultiple']
+  >
 }
 
 const PREFIX = 'transactions'
@@ -49,6 +55,10 @@ const transaction: API = {
   create: dto => request.post(PREFIX, dto),
   update: ({ id, ...dto }) => request.put(`${PREFIX}/${id}`, dto),
   delete: id => request.delete(`${PREFIX}/${id}`),
+  deleteMultiple: ids =>
+    request.delete(PREFIX, {
+      data: ids,
+    }),
 }
 
 export const useGetTransactiongetDetailQuery = (
@@ -77,4 +87,17 @@ export const useDeleteTransactionMutation = (
   options?: MutationOptions<Response['delete'], Variables['delete']>
 ) => {
   return useMutation(['deleteTransaction'], transaction.delete, options)
+}
+
+export const useDeleteMultipleTransactionsMutation = (
+  options?: MutationOptions<
+    Response['deleteMultiple'],
+    Variables['deleteMultiple']
+  >
+) => {
+  return useMutation(
+    ['deleteMultipleTransactions'],
+    transaction.deleteMultiple,
+    options
+  )
 }

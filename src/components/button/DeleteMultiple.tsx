@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { ResponsiveButton } from './ResponsiveButton'
 
 type Props = Omit<ButtonProps, 'onClick'> & {
-  onDelete: () => void
+  onDelete: (ids: string[]) => void
 }
 
 export const DeleteMultiple: React.FC<Props> = ({
@@ -22,7 +22,9 @@ export const DeleteMultiple: React.FC<Props> = ({
       }),
       okText: t('common.yes'),
       cancelText: t('common.no'),
-      onOk: onDelete,
+      onOk: async () => {
+        await onDelete(selectedIds)
+      },
     })
   }
 

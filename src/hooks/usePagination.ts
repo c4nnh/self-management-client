@@ -8,7 +8,7 @@ type PaginationInfo = {
   offset: number
   setOffset: (value: number) => void
   setTotal: (value: number) => void
-  handleAfterDeleteLastItemInCurrentPage: () => void
+  handleAfterDeleteLastItemsInCurrentPage: () => void
 } & TablePaginationConfig
 
 export const usePagination = (
@@ -23,7 +23,7 @@ export const usePagination = (
     pageSize || isDesktop ? PAGE_SIZE_DEFAULT.DESKTOP : PAGE_SIZE_DEFAULT.MOBILE
   )
 
-  const handleAfterDeleteLastItemInCurrentPage = () => {
+  const handleAfterDeleteLastItemsInCurrentPage = () => {
     if (offset >= limit) {
       setOffset(pre => pre - limit)
     }
@@ -51,6 +51,6 @@ export const usePagination = (
     onChange: (page, pageSize) => setOffset((page - 1) * pageSize),
     setTotal,
     setOffset,
-    handleAfterDeleteLastItemInCurrentPage,
+    handleAfterDeleteLastItemsInCurrentPage,
   }
 }

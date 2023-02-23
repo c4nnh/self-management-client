@@ -1,4 +1,8 @@
-import { useDeleteTransactionMutation, useGetTransactionsQuery } from '@/apis'
+import {
+  useDeleteMultipleTransactionsMutation,
+  useDeleteTransactionMutation,
+  useGetTransactionsQuery,
+} from '@/apis'
 import { ColumnIcon } from '@/assets'
 import {
   DeleteMultiple,
@@ -27,7 +31,7 @@ import { TransactionFilter } from './Filter'
 export const Transaction: React.FC = () => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
-  const { setSelectedIds } = useAppStore()
+  const { selectedIds, setSelectedIds } = useAppStore()
   const pagination = usePagination()
   const { params, setParams } = useTransactionFilter()
   const sorter = useSorter<TTransaction>()
@@ -55,7 +59,7 @@ export const Transaction: React.FC = () => {
     {
       onSuccess: async () => {
         if (data?.items.length === 1) {
-          pagination.handleAfterDeleteLastItemInCurrentPage()
+          pagination.handleAfterDeleteLastItemsInCurrentPage()
         } else {
           queryClient.invalidateQueries(['getTransactions'])
         }
@@ -65,6 +69,23 @@ export const Transaction: React.FC = () => {
       },
     }
   )
+
+  const { mutateAsync: deleteMultipleTransactionsMutate } =
+    useDeleteMultipleTransactionsMutation({
+      onSuccess: async () => {
+        if (
+          selectedIds.length === data?.items?.length &&
+          (pagination.current || 1) > 1
+        ) {
+          pagination.handleAfterDeleteLastItemsInCurrentPage()
+        } else {
+          queryClient.invalidateQueries(['getManyTransactions'])
+        }
+      },
+      onError: () => {
+        notification.error({ message: t('common.error.deleteFailed') })
+      },
+    })
 
   const columns: ColumnsType<TTransaction> = [
     {
@@ -121,7 +142,7 @@ export const Transaction: React.FC = () => {
           }
           rightChildren={
             <>
-              <DeleteMultiple onDelete={() => {}} />
+              <DeleteMultiple onDelete={deleteMultipleTransactionsMutate} />
               <TransactionDetail />
               <TransactionFilter />
               <ResponsiveButton icon={<ColumnIcon />} type="primary" />
