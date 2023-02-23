@@ -30,6 +30,8 @@
     "fromDate": "From date",
     "toDate": "To date",
     "apply": "Apply",
+    "cancel": "Cancel",
+    "reset": "Reset",
     "confirmDelete": "Are you sure to delete this record?",
     "yes": "Yes",
     "no": "No",

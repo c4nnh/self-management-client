@@ -27,9 +27,11 @@
   },
   "common": {
     "selectDate": "Chọn ngày",
-    "from": "Từ ngày",
-    "to": "Tới ngày",
+    "fromDate": "Từ ngày",
+    "toDate": "Đến ngày",
     "apply": "Áp dụng",
+    "cancel": "Hủy",
+    "reset": "Đặt lại",
     "confirmDelete": "Bạn có chắc muốn xóa bản ghi này không?",
     "yes": "Có",
     "no": "Không",

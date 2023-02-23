@@ -3,18 +3,24 @@ import create from 'zustand'
 
 type TransactionFilterState = {
   params?: TransactionParams
-  setTransactionParams: (params: TransactionParams) => void
+  setParams: (params: TransactionParams) => void
+  resetParams: () => void
 }
 
 export const useTransactionFilter = create<TransactionFilterState>()(
   (set, get) => ({
-    setTransactionParams: params => {
+    setParams: params => {
       const oldParams = get().params
       set({
         params: {
           ...oldParams,
           ...params,
         },
+      })
+    },
+    resetParams: () => {
+      set({
+        params: {},
       })
     },
   })

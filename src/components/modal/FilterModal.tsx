@@ -1,5 +1,5 @@
 import { ModalKey, useAppStore } from '@/stores'
-import { ButtonProps, Form, ModalProps } from 'antd'
+import { Button, ButtonProps, Form, ModalProps } from 'antd'
 import { PropsWithChildren, useEffect } from 'react'
 import { DeepPartial, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -12,6 +12,7 @@ type Props<T> = PropsWithChildren & {
   modalProps?: Omit<ModalProps, 'onOk'>
   buttonProps?: ButtonProps
   onApply: (params: T) => void
+  onReset: () => void
 }
 
 export const FilterModal = <T extends object>({
@@ -19,8 +20,9 @@ export const FilterModal = <T extends object>({
   defaultValues,
   modalProps,
   buttonProps,
-  onApply,
   children,
+  onApply,
+  onReset,
 }: Props<T>) => {
   const { t } = useTranslation()
   const { openModal, setOpenModal } = useAppStore()
@@ -38,17 +40,33 @@ export const FilterModal = <T extends object>({
     setOpenModal()
   }
 
+  const onCancel = () => {
+    setOpenModal()
+  }
+
+  const handleReset = () => {
+    reset({} as T, { keepValues: false })
+    setOpenModal()
+    onReset()
+  }
+
   return (
     <FormProvider {...formMethods}>
       <OpenFilterButton modalKey={modalKey} {...buttonProps} />
       <Modal
         open={openModal === modalKey}
         closable={false}
-        onCancel={() => {
-          setOpenModal()
-        }}
-        okText={t('common.apply')}
-        onOk={onOk}
+        footer={
+          <div className="flex gap-2 justify-end items-center">
+            <Button onClick={onCancel}>{t('common.cancel')}</Button>
+            <Button type="primary" ghost onClick={handleReset}>
+              {t('common.reset')}
+            </Button>
+            <Button onClick={onOk} type="primary">
+              {t('common.apply')}
+            </Button>
+          </div>
+        }
         {...modalProps}
       >
         <Form layout="vertical" size="middle">

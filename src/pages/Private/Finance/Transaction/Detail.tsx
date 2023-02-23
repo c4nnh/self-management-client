@@ -4,13 +4,13 @@ import {
   useUpdateTransactionMutation,
 } from '@/apis'
 import {
+  CreateModal,
   FormDatePicker,
   FormInput,
   FormNumberInput,
   FormRadio,
   FormSelect,
   FormTextArea,
-  Modal,
   OpenCreateButton,
 } from '@/components'
 import {
@@ -23,7 +23,6 @@ import { requiredField } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { Form, notification } from 'antd'
 import dayjs from 'dayjs'
-import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
@@ -84,46 +83,35 @@ export const TransactionDetail: React.FC = () => {
     updateTransactionMutate(dto as UpdateTransactionDto)
   })
 
-  useEffect(() => {
-    if (!openModal) {
-      reset(
-        {},
-        {
-          keepValues: false,
-        }
-      )
-    }
-  }, [openModal])
-
   return (
     <>
       <OpenCreateButton modalKey="transaction-detail" />
-      <Modal
-        title={
-          selectedId
-            ? t('transaction.detail.title')
-            : t('transaction.create.title')
-        }
-        isLoading={isFetchingDetail}
-        open={openModal === 'transaction-detail'}
-        closable={false}
-        onCancel={() => {
-          setSelectedId()
-          setOpenModal()
-          if (selectedId) {
-            queryClient.cancelQueries(['getTransactionDetail'])
+      <FormProvider {...formMethods}>
+        <CreateModal
+          title={
+            selectedId
+              ? t('transaction.detail.title')
+              : t('transaction.create.title')
           }
-        }}
-        okText={selectedId ? t('common.save') : t('common.create')}
-        onOk={() => {
-          selectedId ? handleUpdate() : handleCreate()
-        }}
-        okButtonProps={{
-          disabled: !isDirty || (!!selectedId && isFetchingDetail),
-          loading: isCreating || isUpdating,
-        }}
-      >
-        <FormProvider {...formMethods}>
+          isLoading={isFetchingDetail}
+          open={openModal === 'transaction-detail'}
+          closable={false}
+          onCancel={() => {
+            setSelectedId()
+            setOpenModal()
+            if (selectedId) {
+              queryClient.cancelQueries(['getTransactionDetail'])
+            }
+          }}
+          okText={selectedId ? t('common.save') : t('common.create')}
+          onOk={() => {
+            selectedId ? handleUpdate() : handleCreate()
+          }}
+          okButtonProps={{
+            disabled: !isDirty || (!!selectedId && isFetchingDetail),
+            loading: isCreating || isUpdating,
+          }}
+        >
           <Form layout="vertical" size="middle" className="flex flex-col">
             <FormInput
               name="title"
@@ -172,8 +160,8 @@ export const TransactionDetail: React.FC = () => {
               rules={requiredField(t)}
             />
           </Form>
-        </FormProvider>
-      </Modal>
+        </CreateModal>
+      </FormProvider>
     </>
   )
 }

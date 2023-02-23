@@ -18,11 +18,11 @@ type FilterDto = Pick<TransactionParams, 'title' | 'types'> & {
 
 export const TransactionFilter: React.FC = () => {
   const { t } = useTranslation()
-  const { setTransactionParams, params } = useTransactionFilter()
+  const { params, setParams, resetParams } = useTransactionFilter()
   const onSearch = (dto: FilterDto) => {
     const { dateRange, amountRange, ...params } = dto
 
-    setTransactionParams({
+    setParams({
       ...params,
       ...convertDateRangeToDateFilter(dateRange),
     })
@@ -39,6 +39,7 @@ export const TransactionFilter: React.FC = () => {
       modalProps={{
         title: t('transaction.filter.title'),
       }}
+      onReset={resetParams}
     >
       <FormInput name="title" label={t('common.title')} />
       <FormCheckbox<TransactionType>
