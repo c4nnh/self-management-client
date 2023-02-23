@@ -13,12 +13,13 @@ import {
 import { DATE_FORMAT } from '@/constants'
 import { usePagination, useSorter } from '@/hooks'
 import { Transaction as TTransaction, TransactionType } from '@/models'
-import { useTransactionFilter } from '@/stores'
+import { useAppStore, useTransactionFilter } from '@/stores'
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification, Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import dayjs from 'dayjs'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TransactionDetail } from './Detail'
 import { TransactionFilter } from './Filter'
@@ -26,9 +27,15 @@ import { TransactionFilter } from './Filter'
 export const Transaction: React.FC = () => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
+  const { setSelectedIds } = useAppStore()
   const pagination = usePagination()
   const { params, setParams } = useTransactionFilter()
   const sorter = useSorter<TTransaction>()
+
+  useEffect(() => {
+    setSelectedIds([])
+  }, [params])
+
   const { data, isFetching } = useGetTransactionsQuery(
     {
       limit: pagination.pageSize,

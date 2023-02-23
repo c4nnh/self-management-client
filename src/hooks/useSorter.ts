@@ -1,5 +1,6 @@
+import { useAppStore } from '@/stores'
 import { SorterResult } from 'antd/es/table/interface'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type Sort = 'asc' | 'desc'
 
@@ -10,8 +11,13 @@ type SorterInfo<T> = {
 }
 
 export const useSorter = <T>(): SorterInfo<T> => {
+  const { setSelectedIds } = useAppStore()
   const [orderBy, setOrderBy] = useState<string>()
   const [orderDirection, setOrderDirection] = useState<Sort>()
+
+  useEffect(() => {
+    setSelectedIds([])
+  }, [orderBy, orderDirection])
 
   const onChangeSorter = (sorter: SorterResult<T> | SorterResult<T>[]) => {
     const sorterResult = (sorter as SorterResult<T>[]).length

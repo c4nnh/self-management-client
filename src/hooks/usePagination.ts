@@ -1,5 +1,5 @@
 import { PAGE_SIZE_DEFAULT } from '@/constants'
-import { useLocalSettingStore } from '@/stores'
+import { useAppStore, useLocalSettingStore } from '@/stores'
 import { TablePaginationConfig } from 'antd'
 import { useEffect, useState } from 'react'
 import { useScreen } from './useScreen'
@@ -14,6 +14,7 @@ type PaginationInfo = {
 export const usePagination = (
   options?: TablePaginationConfig
 ): PaginationInfo => {
+  const { setSelectedIds } = useAppStore()
   const { isDesktop } = useScreen()
   const { pageSize, setPageSize } = useLocalSettingStore()
   const [offset, setOffset] = useState(0)
@@ -27,6 +28,10 @@ export const usePagination = (
       setOffset(pre => pre - limit)
     }
   }
+
+  useEffect(() => {
+    setSelectedIds([])
+  }, [offset])
 
   useEffect(() => {
     setPageSize(limit)
