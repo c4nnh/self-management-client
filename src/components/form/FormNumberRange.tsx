@@ -1,3 +1,4 @@
+import { SwapRightOutlined } from '@ant-design/icons'
 import { FormItemProps, Input, InputProps, InputRef } from 'antd'
 import classNames from 'classnames'
 import React, { forwardRef, useState } from 'react'
@@ -39,7 +40,9 @@ export const FormNumberRange: React.FC<Props> = ({
           placeholder: 'From',
           ...fromNumericFormatProps,
           customInput: CustomInput,
-
+          customSuffix: (
+            <SwapRightOutlined className="text-base mr-[-10px] mt-[2px] h-[20px]" />
+          ),
           onFocus: () => {
             setIsFocusing(true)
           },
@@ -68,8 +71,11 @@ export const FormNumberRange: React.FC<Props> = ({
   )
 }
 
-export const CustomInput = forwardRef<InputRef, InputProps>((props, ref) => (
-  <Input ref={ref} {...props} />
+export const CustomInput = forwardRef<
+  InputRef,
+  InputProps & { customSuffix?: React.ReactNode }
+>(({ customSuffix, ...props }, ref) => (
+  <Input ref={ref} {...props} suffix={customSuffix} />
 )) as React.ComponentType<InputAttributes>
 
 const Container = styled.div`
@@ -78,35 +84,38 @@ const Container = styled.div`
   &.is-focusing {
     .ant-form-item {
       div > div > div {
-        .ant-input {
-          border-color: #4096ff;
-          box-shadow: 2px 0 2px 2px rgb(5 145 255 / 10%);
-          outline: 0;
+        .ant-input,
+        span {
+          ${tw`border-primary-hover shadow-none`}
         }
       }
     }
   }
+
   :hover {
     .ant-form-item {
-      div > div > div > .ant-input {
-        border-color: #4096ff;
+      div > div > div {
+        .ant-input,
+        span {
+          ${tw`border-primary-hover`}
+        }
       }
     }
   }
 
   .ant-form-item {
     ${tw`!flex-1`}
-  }
+    div > div > div {
+      .ant-input {
+        ${tw`border-l-0 rounded-l-none pl-2`}
+      }
+      span {
+        ${tw`!border-r-0 !rounded-r-none`}
 
-  .ant-form-item:first-child {
-    div > div > div > .ant-input {
-      ${tw`border-r-0 rounded-r-none`}
-    }
-  }
-
-  .ant-form-item:last-child {
-    div > div > div > .ant-input {
-      ${tw`border-l-0 rounded-l-none pl-0`}
+        .ant-input-suffix > span {
+          color: rgba(0, 0, 0, 0.25);
+        }
+      }
     }
   }
 `

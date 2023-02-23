@@ -34,7 +34,6 @@ export const FormDateRangePicker: React.FC<Props> = ({
             allowEmpty={[true, true]}
             {...{ value: [fromValue, toValue], onChange, onBlur }}
             {...dateRangePickerProps}
-            separator={null}
           />
         )
       }}

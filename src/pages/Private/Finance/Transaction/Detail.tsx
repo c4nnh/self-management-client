@@ -23,6 +23,7 @@ import { requiredField } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { Form, notification } from 'antd'
 import dayjs from 'dayjs'
+import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
@@ -35,6 +36,7 @@ export const TransactionDetail: React.FC = () => {
   const { user } = useAuthStore()
   const { openModal, selectedId, setOpenModal, setSelectedId } = useAppStore()
   const { currencies } = useCurrencyStore()
+
   const { mutate: createTransactionMutate, isLoading: isCreating } =
     useCreateTransactionMutation({
       onSuccess: () => {
@@ -46,6 +48,7 @@ export const TransactionDetail: React.FC = () => {
         notification.error({ message: t('transaction.create.error') })
       },
     })
+
   const { mutate: updateTransactionMutate, isLoading: isUpdating } =
     useUpdateTransactionMutation({
       onSuccess: () => {
@@ -57,6 +60,7 @@ export const TransactionDetail: React.FC = () => {
         notification.error({ message: t('transaction.update.error') })
       },
     })
+
   const { isFetching: isFetchingDetail } = useGetTransactiongetDetailQuery(
     selectedId!,
     {
@@ -79,6 +83,17 @@ export const TransactionDetail: React.FC = () => {
   const handleUpdate = handleSubmit(dto => {
     updateTransactionMutate(dto as UpdateTransactionDto)
   })
+
+  useEffect(() => {
+    if (!openModal) {
+      reset(
+        {},
+        {
+          keepValues: false,
+        }
+      )
+    }
+  }, [openModal])
 
   return (
     <>
@@ -134,10 +149,6 @@ export const TransactionDetail: React.FC = () => {
             <FormNumberInput
               name="amount"
               label={t('common.amount')}
-              numericFormatProps={{
-                decimalScale: 2,
-                thousandSeparator: ',',
-              }}
               rules={requiredField(t)}
             />
             <FormDatePicker

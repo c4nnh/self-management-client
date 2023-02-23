@@ -10,7 +10,7 @@ type Props = PropsWithChildren<ModalProps> & {
 
 export const Modal: React.FC<Props> = ({ isLoading, children, ...props }) => {
   return (
-    <StyledModal {...props}>
+    <StyledModal destroyOnClose {...props}>
       {isLoading ? (
         <div className="h-[300px]">
           <Loading />

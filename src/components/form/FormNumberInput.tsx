@@ -9,7 +9,9 @@ type Props = {
   name: string
   label?: string | null
   formItemProps?: FormItemProps
-  numericFormatProps?: NumericFormatProps
+  numericFormatProps?: NumericFormatProps & {
+    customSuffix?: React.ReactNode
+  }
 } & Omit<ControllerProps, 'render'>
 
 export const FormNumberInput: React.FC<Props> = ({
@@ -45,6 +47,8 @@ export const FormNumberInput: React.FC<Props> = ({
             numericFormatProps?.customInput ||
             (Input as React.ComponentType<InputAttributes>)
           }
+          decimalScale={2}
+          thousandSeparator=","
           {...numericFormatProps}
         />
       )}
