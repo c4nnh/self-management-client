@@ -79,7 +79,7 @@ export const Transaction: React.FC = () => {
         ) {
           pagination.handleAfterDeleteLastItemsInCurrentPage()
         } else {
-          queryClient.invalidateQueries(['getManyTransactions'])
+          queryClient.invalidateQueries(['getTransactions'])
         }
       },
       onError: () => {
