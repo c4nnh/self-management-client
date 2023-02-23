@@ -59,9 +59,17 @@ export const TransactionFilter: React.FC = () => {
       <FormNumberRange
         label={t('common.amount')}
         from={{
-          name: 'from',
+          name: 'amountFrom',
+          numericFormatProps: {
+            allowNegative: false,
+          },
         }}
-        to={{ name: 'to' }}
+        to={{
+          name: 'amountTo',
+          numericFormatProps: {
+            allowNegative: false,
+          },
+        }}
       />
     </FilterModal>
   )

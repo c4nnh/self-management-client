@@ -2,6 +2,7 @@ import { SwapRightOutlined } from '@ant-design/icons'
 import { FormItemProps, Input, InputProps, InputRef } from 'antd'
 import classNames from 'classnames'
 import React, { forwardRef, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { InputAttributes, NumericFormatProps } from 'react-number-format'
 import styled from 'styled-components'
 import tw from 'twin.macro'
@@ -26,7 +27,25 @@ export const FormNumberRange: React.FC<Props> = ({
   from: { numericFormatProps: fromNumericFormatProps, ...fromProps },
   to: { numericFormatProps: toNumericFormatProps, ...toProps },
 }) => {
+  const formContext = useFormContext()
+  const { getValues, setValue } = formContext
   const [isFocusing, setIsFocusing] = useState(false)
+
+  const onFocusInput = () => {
+    setIsFocusing(true)
+  }
+
+  const onBlurInput = () => {
+    setIsFocusing(false)
+    const [fromValue, toValue] = getValues([fromProps.name, toProps.name])
+    if ([fromValue, toValue].some(item => [null, undefined].includes(item))) {
+      return
+    }
+    if (fromValue > toValue) {
+      setValue(fromProps.name, toValue)
+      setValue(toProps.name, fromValue)
+    }
+  }
 
   return (
     <Container
@@ -43,12 +62,8 @@ export const FormNumberRange: React.FC<Props> = ({
           customSuffix: (
             <SwapRightOutlined className="text-base mr-[-10px] mt-[2px] h-[20px]" />
           ),
-          onFocus: () => {
-            setIsFocusing(true)
-          },
-          onBlur: () => {
-            setIsFocusing(false)
-          },
+          onFocus: onFocusInput,
+          onBlur: onBlurInput,
         }}
         label={label}
       />
@@ -58,12 +73,8 @@ export const FormNumberRange: React.FC<Props> = ({
           placeholder: 'To',
           ...toNumericFormatProps,
           customInput: CustomInput,
-          onFocus: () => {
-            setIsFocusing(true)
-          },
-          onBlur: () => {
-            setIsFocusing(false)
-          },
+          onFocus: onFocusInput,
+          onBlur: onBlurInput,
         }}
         label="&nbsp;"
       />
@@ -111,6 +122,10 @@ const Container = styled.div`
       }
       span {
         ${tw`!border-r-0 !rounded-r-none`}
+
+        input {
+          ${tw`!pl-0`}
+        }
 
         .ant-input-suffix > span {
           color: rgba(0, 0, 0, 0.25);
