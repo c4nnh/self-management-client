@@ -1,6 +1,7 @@
-import { FormItemProps } from 'antd'
-import React from 'react'
-import { NumericFormatProps } from 'react-number-format'
+import { FormItemProps, Input, InputProps, InputRef } from 'antd'
+import classNames from 'classnames'
+import React, { forwardRef, useState } from 'react'
+import { InputAttributes, NumericFormatProps } from 'react-number-format'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 import { FormNumberInput } from './FormNumberInput'
@@ -24,13 +25,27 @@ export const FormNumberRange: React.FC<Props> = ({
   from: { numericFormatProps: fromNumericFormatProps, ...fromProps },
   to: { numericFormatProps: toNumericFormatProps, ...toProps },
 }) => {
+  const [isFocusing, setIsFocusing] = useState(false)
+
   return (
-    <Container>
+    <Container
+      className={classNames({
+        'is-focusing': isFocusing,
+      })}
+    >
       <FormNumberInput
         {...fromProps}
         numericFormatProps={{
           placeholder: 'From',
           ...fromNumericFormatProps,
+          customInput: CustomInput,
+
+          onFocus: () => {
+            setIsFocusing(true)
+          },
+          onBlur: () => {
+            setIsFocusing(false)
+          },
         }}
         label={label}
       />
@@ -39,6 +54,13 @@ export const FormNumberRange: React.FC<Props> = ({
         numericFormatProps={{
           placeholder: 'To',
           ...toNumericFormatProps,
+          customInput: CustomInput,
+          onFocus: () => {
+            setIsFocusing(true)
+          },
+          onBlur: () => {
+            setIsFocusing(false)
+          },
         }}
         label="&nbsp;"
       />
@@ -46,19 +68,34 @@ export const FormNumberRange: React.FC<Props> = ({
   )
 }
 
+export const CustomInput = forwardRef<InputRef, InputProps>((props, ref) => (
+  <Input ref={ref} {...props} />
+)) as React.ComponentType<InputAttributes>
+
 const Container = styled.div`
   ${tw`w-full flex`}
 
-  .ant-form-item {
-    ${tw`!flex-1`}
-
-    div > div > div > .ant-input {
-      :hover,
-      :focus {
-        box-shadow: unset;
-        border-color: #d9d9d9;
+  &.is-focusing {
+    .ant-form-item {
+      div > div > div {
+        .ant-input {
+          border-color: #4096ff;
+          box-shadow: 2px 0 2px 2px rgb(5 145 255 / 10%);
+          outline: 0;
+        }
       }
     }
+  }
+  :hover {
+    .ant-form-item {
+      div > div > div > .ant-input {
+        border-color: #4096ff;
+      }
+    }
+  }
+
+  .ant-form-item {
+    ${tw`!flex-1`}
   }
 
   .ant-form-item:first-child {
