@@ -3,6 +3,7 @@ import { ModalKey, useAppStore } from '@/stores'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Table as ATable, TableProps } from 'antd'
 import { ColumnType } from 'antd/es/table'
+import { TableRowSelection } from 'antd/es/table/interface'
 import { PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -11,7 +12,9 @@ import tw from 'twin.macro'
 type Props<T> = PropsWithChildren<TableProps<T>> & {
   maxWidthPerCell?: number
   modalKey: ModalKey
+  selectedIds: string[]
   onDelete: (id: string) => void
+  setSelectedIds: (ids: string[]) => void
 }
 
 export const Table = <T extends object>({
@@ -19,7 +22,9 @@ export const Table = <T extends object>({
   dataSource = [],
   maxWidthPerCell = 150,
   modalKey,
+  selectedIds,
   onDelete,
+  setSelectedIds,
   ...props
 }: Props<T>) => {
   const { t } = useTranslation()
@@ -66,6 +71,7 @@ export const Table = <T extends object>({
       okText: t('common.yes'),
       cancelText: t('common.no'),
       onOk: async () => {
+        setSelectedId(id)
         await onDelete(id)
       },
     })
@@ -94,9 +100,17 @@ export const Table = <T extends object>({
     ),
   }
 
+  const rowSelection: TableRowSelection<T> = {
+    onChange: (selectedRowKeys: React.Key[]) => {
+      setSelectedIds(selectedRowKeys as string[])
+    },
+    selectedRowKeys: selectedIds,
+  }
+
   return (
     <StyledTable<T>
       size={isDesktop ? 'middle' : 'small'}
+      rowSelection={rowSelection}
       {...props}
       dataSource={dataSource}
       scroll={{ x: tableWidth }}

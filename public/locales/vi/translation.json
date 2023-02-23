@@ -1,4 +1,32 @@
 {
+  "common": {
+    "confirmDeleteMultiple": "Bạn có chắc muốn xóa {{numberOfItem}} bản ghi này không?",
+    "yes": "Có",
+    "no": "Không",
+    "selectDate": "Chọn ngày",
+    "fromDate": "Từ ngày",
+    "toDate": "Đến ngày",
+    "cancel": "Hủy",
+    "reset": "Đặt lại",
+    "apply": "Áp dụng",
+    "confirmDelete": "Bạn có chắc muốn xóa bản ghi này không?",
+    "clickToSortAscending": "Nháy chuột để sắp xếp tăng dần",
+    "clickToSortDescending": "Nháy chuột để sắp xếp giảm dần",
+    "clickToCancelSort": "Nháy chuột để hủy sắp xếp",
+    "title": "Tiêu đề",
+    "error": {
+      "system": "Đã có lỗi xảy ra. Vui lòng thử lại sau",
+      "deleteFailed": "Không thể xóa bản ghi này. Xin hãy thử lại sau"
+    },
+    "save": "Lưu",
+    "create": "Tạo",
+    "amount": "Số tiền",
+    "date": "Ngày",
+    "description": "Mô tả",
+    "currency": "Tiền tệ",
+    "type": "Loại",
+    "requiredField": "Không được để trống"
+  },
   "transaction": {
     "search": {
       "placeholder": "Tìm kiếm theo tiêu đề"
@@ -24,33 +52,6 @@
       "title": "Bộ lọc giao dịch"
     },
     "pageTitle": "Quản lý các giao dịch của bạn"
-  },
-  "common": {
-    "selectDate": "Chọn ngày",
-    "fromDate": "Từ ngày",
-    "toDate": "Đến ngày",
-    "apply": "Áp dụng",
-    "cancel": "Hủy",
-    "reset": "Đặt lại",
-    "confirmDelete": "Bạn có chắc muốn xóa bản ghi này không?",
-    "yes": "Có",
-    "no": "Không",
-    "clickToSortAscending": "Nháy chuột để sắp xếp tăng dần",
-    "clickToSortDescending": "Nháy chuột để sắp xếp giảm dần",
-    "clickToCancelSort": "Nháy chuột để hủy sắp xếp",
-    "title": "Tiêu đề",
-    "error": {
-      "system": "Đã có lỗi xảy ra. Vui lòng thử lại sau",
-      "deleteFailed": "Không thể xóa bản ghi này. Xin hãy thử lại sau"
-    },
-    "save": "Lưu",
-    "create": "Tạo",
-    "amount": "Số tiền",
-    "date": "Ngày",
-    "description": "Mô tả",
-    "currency": "Tiền tệ",
-    "type": "Loại",
-    "requiredField": "Không được để trống"
   },
   "logout": {
     "confirm": "Bạn có muốn đăng xuất không?",

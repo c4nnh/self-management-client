@@ -1,4 +1,32 @@
 {
+  "common": {
+    "confirmDeleteMultiple": "Are you sure to delete these {{numberOfItem}} record(s)?",
+    "yes": "Yes",
+    "no": "No",
+    "selectDate": "Select date",
+    "fromDate": "From date",
+    "toDate": "To date",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "apply": "Apply",
+    "confirmDelete": "Are you sure to delete this record?",
+    "clickToSortAscending": "Click to sort ascending",
+    "clickToSortDescending": "Click to sort descending",
+    "clickToCancelSort": "Click to cancel sort",
+    "title": "Title",
+    "error": {
+      "system": "Something went wrong. Please try again later",
+      "deleteFailed": "Can not delete this record. Please try again later"
+    },
+    "save": "Save",
+    "create": "Create",
+    "amount": "Amount",
+    "date": "Date",
+    "description": "Description",
+    "currency": "Currency",
+    "type": "Type",
+    "requiredField": "Please fill this field"
+  },
   "transaction": {
     "search": {
       "placeholder": "Search by title"
@@ -24,33 +52,6 @@
       "title": "Transaction filter"
     },
     "pageTitle": "Manage your transactions"
-  },
-  "common": {
-    "selectDate": "Select date",
-    "fromDate": "From date",
-    "toDate": "To date",
-    "apply": "Apply",
-    "cancel": "Cancel",
-    "reset": "Reset",
-    "confirmDelete": "Are you sure to delete this record?",
-    "yes": "Yes",
-    "no": "No",
-    "clickToSortAscending": "Click to sort ascending",
-    "clickToSortDescending": "Click to sort descending",
-    "clickToCancelSort": "Click to cancel sort",
-    "title": "Title",
-    "error": {
-      "system": "Something went wrong. Please try again later",
-      "deleteFailed": "Can not delete this record. Please try again later"
-    },
-    "save": "Save",
-    "create": "Create",
-    "amount": "Amount",
-    "date": "Date",
-    "description": "Description",
-    "currency": "Currency",
-    "type": "Type",
-    "requiredField": "Please fill this field"
   },
   "logout": {
     "confirm": "Do you want to logout?",

@@ -1,6 +1,7 @@
 import { useDeleteTransactionMutation, useGetTransactionsQuery } from '@/apis'
 import { ColumnIcon } from '@/assets'
 import {
+  DeleteMultiple,
   PageContainer,
   PageHeader,
   PageTitle,
@@ -12,12 +13,13 @@ import {
 import { DATE_FORMAT } from '@/constants'
 import { usePagination, useSorter } from '@/hooks'
 import { Transaction as TTransaction, TransactionType } from '@/models'
-import { useTransactionFilter } from '@/stores'
+import { useAppStore, useTransactionFilter } from '@/stores'
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification, Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import dayjs from 'dayjs'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TransactionDetail } from './Detail'
 import { TransactionFilter } from './Filter'
@@ -25,9 +27,11 @@ import { TransactionFilter } from './Filter'
 export const Transaction: React.FC = () => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
+  const { selectedId, setSelectedId } = useAppStore()
   const pagination = usePagination()
-  const { params, setTransactionParams } = useTransactionFilter()
+  const { params, setParams } = useTransactionFilter()
   const sorter = useSorter<TTransaction>()
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
   const { data, isFetching } = useGetTransactionsQuery(
     {
       limit: pagination.pageSize,
@@ -51,9 +55,12 @@ export const Transaction: React.FC = () => {
         } else {
           queryClient.invalidateQueries(['getTransactions'])
         }
+        setSelectedIds(pre => pre.filter(item => item !== selectedId))
+        setSelectedId()
       },
       onError: () => {
         notification.error({ message: t('common.error.deleteFailed') })
+        setSelectedId()
       },
     }
   )
@@ -108,11 +115,12 @@ export const Transaction: React.FC = () => {
           leftChildren={
             <SearchInput
               value={params?.title}
-              setValue={title => setTransactionParams({ title })}
+              setValue={title => setParams({ title })}
             />
           }
           rightChildren={
             <>
+              <DeleteMultiple selectedIds={selectedIds} onDelete={() => {}} />
               <TransactionDetail />
               <TransactionFilter />
               <ResponsiveButton icon={<ColumnIcon />} type="primary" />
@@ -128,8 +136,10 @@ export const Transaction: React.FC = () => {
         onChange={(_, __, sorterValue) => {
           sorter.onSorterChange(sorterValue)
         }}
-        onDelete={id => deleteTransactionMutate(id)}
+        onDelete={deleteTransactionMutate}
         modalKey="transaction-detail"
+        setSelectedIds={setSelectedIds}
+        selectedIds={selectedIds}
       />
     </PageContainer>
   )
