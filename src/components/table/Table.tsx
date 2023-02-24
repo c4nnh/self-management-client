@@ -1,5 +1,6 @@
 import { useScreen } from '@/hooks'
-import { ModalKey, useAppStore } from '@/stores'
+import { ModalKey, TableConfig } from '@/models'
+import { useAppStore, useLocalSettingStore } from '@/stores'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Table as ATable, TableProps } from 'antd'
 import { ColumnType } from 'antd/es/table'
@@ -10,8 +11,9 @@ import styled from 'styled-components'
 import tw from 'twin.macro'
 
 type Props<T> = PropsWithChildren<TableProps<T>> & {
-  maxWidthPerCell?: number
   modalKey: ModalKey
+  tableConfigKey: keyof TableConfig
+  maxWidthPerCell?: number
   onDelete: (id: string) => void
 }
 
@@ -20,10 +22,11 @@ interface BaseObject extends Object {
 }
 
 export const Table = <T extends BaseObject>({
+  modalKey,
+  tableConfigKey,
   columns = [],
   dataSource = [],
   maxWidthPerCell = 150,
-  modalKey,
   onDelete,
   ...props
 }: Props<T>) => {
@@ -31,6 +34,7 @@ export const Table = <T extends BaseObject>({
   const { isDesktop } = useScreen()
   const { selectedIds, setSelectedId, setOpenModal, setSelectedIds } =
     useAppStore()
+  const { columnConfig } = useLocalSettingStore()
   const [data, setData] = useState<readonly T[]>(dataSource)
 
   const columnsWithWidth = columns.map((column: any) => {
@@ -135,7 +139,13 @@ export const Table = <T extends BaseObject>({
         triggerDesc: `${t('common.clickToSortDescending')}`,
         cancelSort: `${t('common.clickToCancelSort')}`,
       }}
-      columns={[...columnsWithWidth, actionColumn]}
+      columns={[
+        ...columnsWithWidth.filter(
+          // @ts-ignore
+          column => columnConfig[tableConfigKey][column.dataIndex]
+        ),
+        actionColumn,
+      ]}
     />
   )
 }

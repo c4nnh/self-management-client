@@ -2,13 +2,21 @@ import { useGetManyCurrencies, useMeQuery } from '@/apis'
 import { Loading } from '@/components'
 import { ROUTES } from '@/constants'
 import { Auth, Private } from '@/pages'
-import { useAuthStore, useCurrencyStore } from '@/stores'
-import { getTokens } from '@/utils'
+import { useAppStore, useAuthStore, useCurrencyStore } from '@/stores'
+import { getColumnLabel, getTokens } from '@/utils'
+import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Route, Routes } from 'react-router-dom'
 
 function App() {
-  const { me, user } = useAuthStore()
+  const { t } = useTranslation()
+  const { user, me } = useAuthStore()
   const { setCurrencies } = useCurrencyStore()
+  const { setColumnLabel } = useAppStore()
+
+  useEffect(() => {
+    setColumnLabel(getColumnLabel(t))
+  }, [t])
 
   const tokens = getTokens()
 

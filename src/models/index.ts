@@ -25,6 +25,22 @@ export type Collection<T> = {
 
 export type Language = 'en' | 'vi'
 
+export type ModalKey =
+  | 'transaction-detail'
+  | 'transaction-filter'
+  | 'transaction-columns'
+
+export type TableConfig = {
+  transaction: Required<Omit<Transaction, 'currency'>>
+  currency: Currency
+}
+
+export type ColumnConfig<T> = {
+  [key in keyof TableConfig]: {
+    [field in keyof TableConfig[key]]: T
+  }
+}
+
 // Auth
 export type Token = {
   accessToken: string

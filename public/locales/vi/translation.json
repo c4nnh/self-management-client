@@ -3,34 +3,43 @@
     "confirmDeleteMultiple": "Bạn có chắc muốn xóa {{numberOfItem}} bản ghi này không?",
     "yes": "Có",
     "no": "Không",
+    "viewToReadMore": "View to read more",
     "selectDate": "Chọn ngày",
     "fromDate": "Từ ngày",
     "toDate": "Đến ngày",
+    "visibleAtLeastOneColumn": "Bạn phải hiển thị ít nhất 1 cột",
+    "apply": "Áp dụng",
+    "configColumn": {
+      "title": "Cài đặt hiển thị cột"
+    },
     "cancel": "Hủy",
     "reset": "Đặt lại",
-    "apply": "Áp dụng",
+    "ok": "Xác nhận",
     "confirmDelete": "Bạn có chắc muốn xóa bản ghi này không?",
     "clickToSortAscending": "Nháy chuột để sắp xếp tăng dần",
     "clickToSortDescending": "Nháy chuột để sắp xếp giảm dần",
     "clickToCancelSort": "Nháy chuột để hủy sắp xếp",
-    "title": "Tiêu đề",
     "error": {
       "system": "Đã có lỗi xảy ra. Vui lòng thử lại sau",
       "deleteFailed": "Không thể xóa bản ghi này. Xin hãy thử lại sau"
     },
     "save": "Lưu",
     "create": "Tạo",
+    "title": "Tiêu đề",
     "amount": "Số tiền",
     "date": "Ngày",
     "description": "Mô tả",
     "currency": "Tiền tệ",
+    "id": "Id",
     "type": "Loại",
+    "name": "Tên",
     "requiredField": "Không được để trống"
   },
   "transaction": {
     "search": {
       "placeholder": "Tìm kiếm theo tiêu đề"
     },
+    "title": "Giao dịch",
     "create": {
       "success": "Giao dịch mới đã được tạo",
       "error": "Không thể tạo giao dịch. Xin hãy thử lại sau",

@@ -1,4 +1,5 @@
-import { ModalKey, useAppStore } from '@/stores'
+import { ModalKey } from '@/models'
+import { useAppStore } from '@/stores'
 import { Button, ButtonProps, Form, ModalProps } from 'antd'
 import { PropsWithChildren, useEffect } from 'react'
 import { DeepPartial, FormProvider, useForm } from 'react-hook-form'
@@ -9,7 +10,7 @@ import { Modal } from './Modal'
 type Props<T> = PropsWithChildren & {
   modalKey: ModalKey
   defaultValues?: DeepPartial<T>
-  modalProps?: Omit<ModalProps, 'onOk'>
+  modalProps?: ModalProps
   buttonProps?: ButtonProps
   onApply: (params: T) => void
   onReset: () => void
@@ -55,7 +56,7 @@ export const FilterModal = <T extends object>({
       <OpenFilterButton modalKey={modalKey} {...buttonProps} />
       <Modal
         open={openModal === modalKey}
-        closable={false}
+        onCancel={onCancel}
         footer={
           <div className="flex gap-2 justify-end items-center">
             <Button onClick={onCancel}>{t('common.cancel')}</Button>

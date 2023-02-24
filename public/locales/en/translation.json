@@ -3,34 +3,43 @@
     "confirmDeleteMultiple": "Are you sure to delete these {{numberOfItem}} record(s)?",
     "yes": "Yes",
     "no": "No",
+    "viewToReadMore": "View to read more",
     "selectDate": "Select date",
     "fromDate": "From date",
     "toDate": "To date",
+    "visibleAtLeastOneColumn": "You have to show at least 1 column",
+    "apply": "Apply",
+    "configColumn": {
+      "title": "Config visible column"
+    },
     "cancel": "Cancel",
     "reset": "Reset",
-    "apply": "Apply",
+    "ok": "Ok",
     "confirmDelete": "Are you sure to delete this record?",
     "clickToSortAscending": "Click to sort ascending",
     "clickToSortDescending": "Click to sort descending",
     "clickToCancelSort": "Click to cancel sort",
-    "title": "Title",
     "error": {
       "system": "Something went wrong. Please try again later",
       "deleteFailed": "Can not delete this record. Please try again later"
     },
     "save": "Save",
     "create": "Create",
+    "title": "Title",
     "amount": "Amount",
     "date": "Date",
     "description": "Description",
     "currency": "Currency",
+    "id": "Id",
     "type": "Type",
+    "name": "Name",
     "requiredField": "Please fill this field"
   },
   "transaction": {
     "search": {
       "placeholder": "Search by title"
     },
+    "title": "Transaction",
     "create": {
       "success": "New transaction is created",
       "error": "Can not create transaction. Please try again later",

@@ -1,4 +1,5 @@
-import { ModalKey, useAppStore } from '@/stores'
+import { ModalKey } from '@/models'
+import { useAppStore } from '@/stores'
 import { PlusOutlined } from '@ant-design/icons'
 import { ButtonProps } from 'antd'
 import { ResponsiveButton } from './ResponsiveButton'

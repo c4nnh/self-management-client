@@ -3,13 +3,13 @@ import {
   useDeleteTransactionMutation,
   useGetTransactionsQuery,
 } from '@/apis'
-import { ColumnIcon } from '@/assets'
 import {
+  ColumnConfigModal,
   DeleteMultiple,
+  EllipsisText,
   PageContainer,
   PageHeader,
   PageTitle,
-  ResponsiveButton,
   SearchInput,
   Table,
   TableActionsContainer,
@@ -31,7 +31,7 @@ import { TransactionFilter } from './Filter'
 export const Transaction: React.FC = () => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
-  const { selectedIds, setSelectedIds } = useAppStore()
+  const { selectedIds, columnLabel, setSelectedIds } = useAppStore()
   const pagination = usePagination()
   const { params, setParams } = useTransactionFilter()
   const sorter = useSorter<TTransaction>()
@@ -89,12 +89,17 @@ export const Transaction: React.FC = () => {
 
   const columns: ColumnsType<TTransaction> = [
     {
-      title: t('common.title'),
+      title: columnLabel?.transaction.id,
+      dataIndex: 'id',
+      sorter: true,
+    },
+    {
+      title: columnLabel?.transaction.title,
       dataIndex: 'title',
       sorter: true,
     },
     {
-      title: t('common.type'),
+      title: columnLabel?.transaction.type,
       dataIndex: 'type',
       render: value => {
         const isIncome = value === TransactionType.INCOME
@@ -109,7 +114,7 @@ export const Transaction: React.FC = () => {
       },
     },
     {
-      title: t('common.amount'),
+      title: columnLabel?.transaction.amount,
       dataIndex: 'amount',
       sorter: true,
       render: (_, transaction) => (
@@ -122,10 +127,16 @@ export const Transaction: React.FC = () => {
       ),
     },
     {
-      title: t('common.date'),
+      title: columnLabel?.transaction.date,
       dataIndex: 'date',
       render: value => dayjs(value).format(DATE_FORMAT),
       sorter: true,
+    },
+    {
+      title: columnLabel?.transaction.description,
+      dataIndex: 'description',
+      sorter: true,
+      render: value => <EllipsisText text={value} />,
     },
   ]
 
@@ -145,7 +156,10 @@ export const Transaction: React.FC = () => {
               <DeleteMultiple onDelete={deleteMultipleTransactionsMutate} />
               <TransactionDetail />
               <TransactionFilter />
-              <ResponsiveButton icon={<ColumnIcon />} type="primary" />
+              <ColumnConfigModal
+                modalKey="transaction-columns"
+                tableConfigKey="transaction"
+              />
             </>
           }
         />
@@ -160,6 +174,7 @@ export const Transaction: React.FC = () => {
         }}
         onDelete={deleteTransactionMutate}
         modalKey="transaction-detail"
+        tableConfigKey="transaction"
       />
     </PageContainer>
   )

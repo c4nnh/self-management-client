@@ -30,7 +30,7 @@ export const FormCheckbox = <T extends number | string>({
     <ControlledFormItem
       {...rest}
       render={({ value, onChange }) => (
-        <Container>
+        <Container className="form-checkbox-container">
           <Label>{label}</Label>
           <Checkbox.Group {...{ value, onChange }} {...checkboxGroupProps}>
             {options.map(option => (

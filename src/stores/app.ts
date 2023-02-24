@@ -1,17 +1,15 @@
+import { ColumnConfig, ModalKey } from '@/models'
 import create from 'zustand'
-
-export type ModalKey =
-  | 'transaction-detail'
-  | 'transaction-filter'
-  | 'transaction-columns'
 
 type AppState = {
   openModal?: ModalKey
   selectedId?: string
   selectedIds: string[]
+  columnLabel?: ColumnConfig<string>
   setOpenModal: (openModal?: ModalKey) => void
   setSelectedId: (id?: string) => void
   setSelectedIds: (ids: string[]) => void
+  setColumnLabel: (columnLabel: ColumnConfig<string>) => void
 }
 
 export const useAppStore = create<AppState>()(set => ({
@@ -30,5 +28,8 @@ export const useAppStore = create<AppState>()(set => ({
     set({
       selectedIds,
     })
+  },
+  setColumnLabel: columnLabel => {
+    set({ columnLabel })
   },
 }))

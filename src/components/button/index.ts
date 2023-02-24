@@ -1,3 +1,4 @@
+export * from './ColumnConfigButton'
 export * from './DeleteMultiple'
 export * from './OpenCreateButton'
 export * from './OpenFilterButton'
