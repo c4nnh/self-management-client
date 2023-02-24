@@ -38,7 +38,7 @@ const StyledModal = styled(AModal)`
   }
 
   .ant-modal-body {
-    min-height: 300px;
+    min-height: 150px;
   }
 
   .ant-modal-title {

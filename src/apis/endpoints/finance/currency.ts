@@ -66,7 +66,7 @@ export const useGetCurrencyDetailQuery = (
   options?: QueryOptions<Response['getDetail'], QueryKeys['getDetail']>
 ) => useQuery(['getCurrencyDetail', id], currency.getDetail, options)
 
-export const useGetManyCurrencies = (
+export const useGetCurrenciesQuery = (
   params?: GetCurrenciesParams,
   options?: QueryOptions<Response['getMany'], QueryKeys['getMany']>
 ) => useQuery(['getCurrencies', params], currency.getMany, options)

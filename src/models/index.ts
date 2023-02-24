@@ -29,6 +29,9 @@ export type ModalKey =
   | 'transaction-detail'
   | 'transaction-filter'
   | 'transaction-columns'
+  | 'currency-detail'
+  | 'currency-filter'
+  | 'currency-columns'
 
 export type TableConfig = {
   transaction: Required<Omit<Transaction, 'currency'>>
@@ -94,10 +97,11 @@ export type Currency = {
   name: string
 }
 
-export type GetCurrenciesParams = PaginationParams &
-  SortParams & {
-    name?: string
-  }
+export type CurrencyParams = {
+  name?: string
+}
+
+export type GetCurrenciesParams = PaginationParams & SortParams & CurrencyParams
 
 export type CreateCurrencyDto = Pick<Currency, 'name'>
 

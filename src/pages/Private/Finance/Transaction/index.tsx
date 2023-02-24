@@ -149,6 +149,9 @@ export const Transaction: React.FC = () => {
             <SearchInput
               value={params?.title}
               setValue={title => setParams({ title })}
+              searchProps={{
+                placeholder: `${t('transaction.search.placeholder')}`,
+              }}
             />
           }
           rightChildren={

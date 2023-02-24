@@ -1,4 +1,4 @@
-import { useGetManyCurrencies, useMeQuery } from '@/apis'
+import { useGetCurrenciesQuery, useMeQuery } from '@/apis'
 import { Loading } from '@/components'
 import { ROUTES } from '@/constants'
 import { Auth, Private } from '@/pages'
@@ -24,7 +24,7 @@ function App() {
     enabled: !!tokens && !!tokens.accessToken && !user,
     onSuccess: me,
   })
-  const { isFetching: isFetchingCurrencies } = useGetManyCurrencies(
+  const { isFetching: isFetchingCurrencies } = useGetCurrenciesQuery(
     { isPaged: false },
     {
       enabled: !!tokens && !!tokens.accessToken && !user,

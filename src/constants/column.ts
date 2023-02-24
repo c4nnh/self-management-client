@@ -10,7 +10,7 @@ export const DEFAULT_COLUMN_CONFIG: ColumnConfig<boolean> = {
     description: false,
   },
   currency: {
-    id: false,
+    id: true,
     name: true,
   },
 }

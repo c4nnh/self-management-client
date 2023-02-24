@@ -1,4 +1,4 @@
-import { DEFAULT_COLUMN_CONFIG } from '@/constants'
+import { DEFAULT_COLUMN_CONFIG, LOCAL_STORAGE_KEYS } from '@/constants'
 import { ColumnConfig } from '@/models'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
@@ -30,7 +30,7 @@ export const useLocalSettingStore = create<LocalSettingState>()(
       },
     }),
     {
-      name: 'self-management-setting',
+      name: LOCAL_STORAGE_KEYS.SETTING,
     }
   )
 )

@@ -25,6 +25,7 @@
     },
     "save": "Save",
     "create": "Create",
+    "name": "Name",
     "title": "Title",
     "amount": "Amount",
     "date": "Date",
@@ -32,35 +33,7 @@
     "currency": "Currency",
     "id": "Id",
     "type": "Type",
-    "name": "Name",
     "requiredField": "Please fill this field"
-  },
-  "transaction": {
-    "search": {
-      "placeholder": "Search by title"
-    },
-    "title": "Transaction",
-    "create": {
-      "success": "New transaction is created",
-      "error": "Can not create transaction. Please try again later",
-      "title": "Create transaction"
-    },
-    "update": {
-      "success": "Transaction is updated",
-      "error": "Can not update transaction. Please try again later"
-    },
-    "detail": {
-      "title": "View transaction detail"
-    },
-    "type": {
-      "title": "Transaction type",
-      "expense": "Expense",
-      "income": "Income"
-    },
-    "filter": {
-      "title": "Transaction filter"
-    },
-    "pageTitle": "Manage your transactions"
   },
   "logout": {
     "confirm": "Do you want to logout?",
@@ -95,6 +68,33 @@
     "english": "English",
     "vietnamese": "Tiếng Việt"
   },
+  "transaction": {
+    "title": "Transaction",
+    "create": {
+      "success": "New transaction is created",
+      "error": "Can not create transaction. Please try again later",
+      "title": "Create transaction"
+    },
+    "update": {
+      "success": "Transaction is updated",
+      "error": "Can not update transaction. Please try again later"
+    },
+    "detail": {
+      "title": "View transaction detail"
+    },
+    "type": {
+      "title": "Transaction type",
+      "expense": "Expense",
+      "income": "Income"
+    },
+    "filter": {
+      "title": "Transaction filter"
+    },
+    "pageTitle": "Manage your transactions",
+    "search": {
+      "placeholder": "Search by title"
+    }
+  },
   "loan": {
     "title": "Loan"
   },
@@ -102,7 +102,26 @@
     "title": "Tontine"
   },
   "currency": {
-    "title": "Currency"
+    "title": "Currency",
+    "create": {
+      "success": "New currency is created",
+      "error": "Can not create currency. Please try again later",
+      "title": "Create currency"
+    },
+    "update": {
+      "success": "Transaction is updated",
+      "error": "Can not update currency. Please try again later"
+    },
+    "detail": {
+      "title": "View currency detail"
+    },
+    "filter": {
+      "title": "Currency filter"
+    },
+    "pageTitle": "Manage currencies",
+    "search": {
+      "placeholder": "Search by name"
+    }
   },
   "setting": {
     "title": "Setting"

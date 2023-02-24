@@ -25,6 +25,7 @@
     },
     "save": "Lưu",
     "create": "Tạo",
+    "name": "Tên",
     "title": "Tiêu đề",
     "amount": "Số tiền",
     "date": "Ngày",
@@ -32,35 +33,7 @@
     "currency": "Tiền tệ",
     "id": "Id",
     "type": "Loại",
-    "name": "Tên",
     "requiredField": "Không được để trống"
-  },
-  "transaction": {
-    "search": {
-      "placeholder": "Tìm kiếm theo tiêu đề"
-    },
-    "title": "Giao dịch",
-    "create": {
-      "success": "Giao dịch mới đã được tạo",
-      "error": "Không thể tạo giao dịch. Xin hãy thử lại sau",
-      "title": "Tạo giao dịch"
-    },
-    "update": {
-      "success": "Giao dịch đã được cập nhật",
-      "error": "Không thể cập nhật giao dịch. Xin hãy thử lại sau"
-    },
-    "detail": {
-      "title": "Xem chi tiết giao dịch"
-    },
-    "type": {
-      "title": "Loại giao dịch",
-      "expense": "Chi tiêu",
-      "income": "Thu nhập"
-    },
-    "filter": {
-      "title": "Bộ lọc giao dịch"
-    },
-    "pageTitle": "Quản lý các giao dịch của bạn"
   },
   "logout": {
     "confirm": "Bạn có muốn đăng xuất không?",
@@ -95,6 +68,33 @@
     "english": "English",
     "vietnamese": "Tiếng Việt"
   },
+  "transaction": {
+    "title": "Giao dịch",
+    "create": {
+      "success": "Giao dịch mới đã được tạo",
+      "error": "Không thể tạo giao dịch. Xin hãy thử lại sau",
+      "title": "Tạo giao dịch"
+    },
+    "update": {
+      "success": "Giao dịch đã được cập nhật",
+      "error": "Không thể cập nhật giao dịch. Xin hãy thử lại sau"
+    },
+    "detail": {
+      "title": "Xem chi tiết giao dịch"
+    },
+    "type": {
+      "title": "Loại giao dịch",
+      "expense": "Chi tiêu",
+      "income": "Thu nhập"
+    },
+    "filter": {
+      "title": "Bộ lọc giao dịch"
+    },
+    "pageTitle": "Quản lý các giao dịch của bạn",
+    "search": {
+      "placeholder": "Tìm kiếm theo tiêu đề"
+    }
+  },
   "loan": {
     "title": "Khoản cho vay"
   },
@@ -102,7 +102,26 @@
     "title": "Góp họ"
   },
   "currency": {
-    "title": "Tiền tệ"
+    "title": "Tiền tệ",
+    "create": {
+      "success": "Tiền tệ mới đã được tạo",
+      "error": "Không thể tạo tiền tệ. Xin hãy thử lại sau",
+      "title": "Tạo tiền tệ"
+    },
+    "update": {
+      "success": "Tiền tệ đã được cập nhật",
+      "error": "Không thể cập nhật tiền tệ. Xin hãy thử lại sau"
+    },
+    "detail": {
+      "title": "Xem chi tiết tiền tệ"
+    },
+    "filter": {
+      "title": "Bộ lọc tiền tệ"
+    },
+    "pageTitle": "Quản lý tiền tệ",
+    "search": {
+      "placeholder": "Tìm kiếm theo tên"
+    }
   },
   "setting": {
     "title": "Cài đặt"
