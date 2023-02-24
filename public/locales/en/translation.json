@@ -101,6 +101,9 @@
   "tontine": {
     "title": "Tontine"
   },
+  "currency": {
+    "title": "Currency"
+  },
   "setting": {
     "title": "Setting"
   },

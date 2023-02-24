@@ -11,7 +11,8 @@ import {
   WorkIcon,
 } from '@/assets'
 import { ROUTES } from '@/constants'
-import { Language } from '@/models'
+import { Language, Role } from '@/models'
+import { useAuthStore } from '@/stores'
 import {
   DollarCircleOutlined,
   DoubleLeftOutlined,
@@ -21,6 +22,7 @@ import {
   TransactionOutlined,
 } from '@ant-design/icons'
 import { Menu } from 'antd'
+import { ItemType } from 'antd/es/menu/hooks/useItems'
 import classNames from 'classnames'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -35,6 +37,7 @@ export const Sidebar: React.FC = () => {
     t,
     i18n: { changeLanguage, language },
   } = useTranslation()
+  const { user } = useAuthStore()
 
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [collapseMenu, setCollapseMenu] = useState(false)
@@ -47,56 +50,72 @@ export const Sidebar: React.FC = () => {
 
   const goToPage = (path: string) => navigate(`/${path}`)
 
+  const finaceMenuItems: ItemType[] = [
+    {
+      key: 'transaction',
+      icon: <TransactionOutlined />,
+      label: t('transaction.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.TRANSACTION),
+    },
+    {
+      key: 'loan',
+      icon: <LoanIcon />,
+      label: t('loan.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.LOAN),
+    },
+    {
+      key: 'tontine',
+      icon: <TontineIcon />,
+      label: t('tontine.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.TONTINE),
+    },
+  ]
+
+  const financeAdminMenuItems: ItemType[] = [
+    {
+      key: 'currency',
+      icon: <TontineIcon />,
+      label: t('currency.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.CURRENCY),
+    },
+  ]
+
+  const workMenuItems: ItemType[] = [
+    {
+      key: 'resume',
+      icon: <ResumeIcon />,
+      label: t('resume.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.RESUME),
+    },
+    {
+      key: 'skill',
+      icon: <SkillIcon />,
+      label: t('skill.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.SKILL),
+    },
+    {
+      key: 'project',
+      icon: <ProjectOutlined />,
+      label: t('project.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.PROJECT),
+    },
+  ]
+
   const menuItems = [
     {
       key: 'finance',
       icon: <DollarCircleOutlined />,
       label: t('finance.title'),
       children: [
-        {
-          key: 'transaction',
-          icon: <TransactionOutlined />,
-          label: t('transaction.title'),
-          onClick: () => goToPage(ROUTES.PRIVATE.TRANSACTION),
-        },
-        {
-          key: 'loan',
-          icon: <LoanIcon />,
-          label: t('loan.title'),
-          onClick: () => goToPage(ROUTES.PRIVATE.LOAN),
-        },
-        {
-          key: 'tontine',
-          icon: <TontineIcon />,
-          label: t('tontine.title'),
-          onClick: () => goToPage(ROUTES.PRIVATE.TONTINE),
-        },
+        ...finaceMenuItems,
+        ...(user?.role === Role.ADMIN ? financeAdminMenuItems : []),
       ],
     },
     {
       key: 'work',
       icon: <WorkIcon />,
       label: t('work.title'),
-      children: [
-        {
-          key: 'resume',
-          icon: <ResumeIcon />,
-          label: t('resume.title'),
-          onClick: () => goToPage(ROUTES.PRIVATE.RESUME),
-        },
-        {
-          key: 'skill',
-          icon: <SkillIcon />,
-          label: t('skill.title'),
-          onClick: () => goToPage(ROUTES.PRIVATE.SKILL),
-        },
-        {
-          key: 'project',
-          icon: <ProjectOutlined />,
-          label: t('project.title'),
-          onClick: () => goToPage(ROUTES.PRIVATE.PROJECT),
-        },
-      ],
+      children: [...workMenuItems],
     },
     {
       key: 'event',

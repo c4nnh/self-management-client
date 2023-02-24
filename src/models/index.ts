@@ -70,6 +70,11 @@ export type RefreshTokenResponse = {
 }
 
 // User
+export enum Role {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+}
+
 export type User = {
   id: string
   name: string
@@ -79,6 +84,7 @@ export type User = {
   createdAt: Date
   updatedAt: Date
   currency?: Currency
+  role: Role
 }
 
 // FINANCE
