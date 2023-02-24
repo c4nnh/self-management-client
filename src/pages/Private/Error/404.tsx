@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-export const UnauthorizedPage: React.FC = () => {
-  return <Container>403</Container>
+export const NotfoundPage: React.FC = () => {
+  return <Container>404</Container>
 }
 
 const Container = styled.div`

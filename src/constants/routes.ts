@@ -23,5 +23,6 @@ export const ROUTES = {
     ASSET: 'asset',
     // error
     UNAUTHORIZED: '403',
+    NOT_FOUND: '404',
   },
 }

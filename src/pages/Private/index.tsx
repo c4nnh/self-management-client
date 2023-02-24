@@ -7,7 +7,7 @@ import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Account } from './Account'
 import { Asset } from './Asset'
-import { UnauthorizedPage } from './Error'
+import { NotfoundPage, UnauthorizedPage } from './Error'
 import { Event } from './Event'
 import { Currency, Loan, Tontine, Transaction } from './Finance'
 import { Project, Resume, Skill } from './Work'
@@ -44,15 +44,18 @@ export const Private: React.FC = () => {
         <Route path={ROUTES.PRIVATE.EVENT} element={<Event />} />
         {/* Asset */}
         <Route path={ROUTES.PRIVATE.ASSET} element={<Asset />} />
+        {/* Root */}
+        <Route
+          path="/"
+          element={<Navigate to={ROUTES.PRIVATE.TRANSACTION} />}
+        />
         {/* Error */}
         <Route
           path={ROUTES.PRIVATE.UNAUTHORIZED}
           element={<UnauthorizedPage />}
         />
-        <Route
-          path="*"
-          element={<Navigate to={ROUTES.PRIVATE.TRANSACTION} />}
-        />
+        <Route path={ROUTES.PRIVATE.NOT_FOUND} element={<NotfoundPage />} />
+        <Route path="*" element={<Navigate to={ROUTES.PRIVATE.NOT_FOUND} />} />
       </Routes>
     </PrivateLayout>
   )

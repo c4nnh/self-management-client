@@ -94,7 +94,16 @@ export type Currency = {
   name: string
 }
 
-export type GetCurrenciesParams = PaginationParams & SortParams
+export type GetCurrenciesParams = PaginationParams &
+  SortParams & {
+    name?: string
+  }
+
+export type CreateCurrencyDto = Pick<Currency, 'name'>
+
+export type UpdateCurrencyDto = Partial<CreateCurrencyDto> & {
+  id: string
+}
 
 // Transaction
 export enum TransactionType {
@@ -125,12 +134,7 @@ export type GetTransactionsParams = PaginationParams &
   SortParams &
   TransactionParams
 
-export type CreateTransactionDto = {
-  title: string
-  type: TransactionType
-  amount: number
-  date?: Date
-  description?: string
+export type CreateTransactionDto = Omit<Transaction, 'id' | 'currency'> & {
   currencyId: string
 }
 

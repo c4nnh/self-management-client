@@ -61,7 +61,7 @@ const transaction: API = {
     }),
 }
 
-export const useGetTransactiongetDetailQuery = (
+export const useGetTransactionDetailQuery = (
   id: string,
   options?: QueryOptions<Response['getDetail'], QueryKeys['getDetail']>
 ) => useQuery(['getTransactionDetail', id], transaction.getDetail, options)
