@@ -1,6 +1,6 @@
 import {
   useCreateTransactionMutation,
-  useGetTransactiongetDetailQuery,
+  useGetTransactionDetailQuery,
   useUpdateTransactionMutation,
 } from '@/apis'
 import {
@@ -60,7 +60,7 @@ export const TransactionDetail: React.FC = () => {
       },
     })
 
-  const { isFetching: isFetchingDetail } = useGetTransactiongetDetailQuery(
+  const { isFetching: isFetchingDetail } = useGetTransactionDetailQuery(
     selectedId!,
     {
       enabled: !!selectedId,
