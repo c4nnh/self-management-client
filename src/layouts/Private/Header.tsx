@@ -1,24 +1,27 @@
 import {
   AssetIcon,
   EventIcon,
+  LoanIcon,
   LogoIcon,
   ResumeIcon,
   SkillIcon,
+  TontineIcon,
   UKFlagIcon,
   VIFlagIcon,
 } from '@/assets'
 import { ROUTES } from '@/constants'
 import { useScreen } from '@/hooks'
-import { Language } from '@/models'
+import { Language, Role } from '@/models'
 import { useAuthStore } from '@/stores'
 import {
-  DollarCircleOutlined,
   LogoutOutlined,
   MenuOutlined,
   ProjectOutlined,
+  TransactionOutlined,
   UserOutlined,
 } from '@ant-design/icons'
 import { Avatar, Dropdown, Modal } from 'antd'
+import { ItemType } from 'antd/es/menu/hooks/useItems'
 import classNames from 'classnames'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -76,12 +79,45 @@ export const Header: React.FC = () => {
     },
   ]
 
+  const finaceMenuItems: ItemType[] = [
+    {
+      key: 'transaction',
+      icon: <TransactionOutlined />,
+      label: t('transaction.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.TRANSACTION),
+    },
+    {
+      key: 'loan',
+      icon: <LoanIcon />,
+      label: t('loan.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.LOAN),
+    },
+    {
+      key: 'tontine',
+      icon: <TontineIcon />,
+      label: t('tontine.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.TONTINE),
+    },
+  ]
+
+  const financeAdminMenuItems: ItemType[] = [
+    {
+      key: 'currency',
+      icon: <TontineIcon />,
+      label: t('currency.title'),
+      onClick: () => goToPage(ROUTES.PRIVATE.CURRENCY),
+    },
+  ]
+
   const mobileExtraMenuItems = [
     {
       key: 'finance',
-      icon: <DollarCircleOutlined />,
       label: t('finance.title'),
-      onClick: () => goToPage(ROUTES.PRIVATE.FINANCE),
+      type: 'group',
+      children: [
+        ...finaceMenuItems,
+        ...(user?.role === Role.ADMIN ? financeAdminMenuItems : []),
+      ],
     },
     {
       key: 'work',
@@ -184,7 +220,7 @@ export const Header: React.FC = () => {
 }
 
 const Container = styled.div`
-  ${tw`fixed bg-gray-200 w-full right-0 z-[2] h-10 py-2 px-3 flex items-center justify-end gap-2`};
+  ${tw`fixed bg-gray-200 w-full z-[2] h-10 py-2 px-3 flex items-center justify-end gap-2 box-border`};
 
   box-shadow: 0 0.125rem 0.25rem rgba(87, 103, 197, 0.1) !important;
 

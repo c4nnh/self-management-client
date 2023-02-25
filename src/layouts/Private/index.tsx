@@ -18,7 +18,7 @@ export const PrivateLayout: React.FC<Props> = ({ children }) => {
         {isDesktop && <Sidebar />}
         <Body>
           <Header />
-          <div className="flex-1 p-5 mt-10">{children}</div>
+          <ChildrenContainer>{children}</ChildrenContainer>
         </Body>
       </Container>
     </Suspense>
@@ -39,4 +39,12 @@ const Container = styled.div<ContainerProps>`
 
 const Body = styled.div`
   ${tw`flex-1 flex flex-col overflow-x-hidden relative`}
+`
+
+const ChildrenContainer = styled.div`
+  ${tw`flex-1 p-5 mt-10`}
+
+  @media screen and (max-width: 550px) {
+    ${tw`px-3`}
+  }
 `
