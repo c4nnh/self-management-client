@@ -1,5 +1,6 @@
 import {
   AssetIcon,
+  CurrencyIcon,
   EventIcon,
   LoanIcon,
   LogoIcon,
@@ -74,7 +75,7 @@ export const Sidebar: React.FC = () => {
   const financeAdminMenuItems: ItemType[] = [
     {
       key: 'currency',
-      icon: <TontineIcon />,
+      icon: <CurrencyIcon />,
       label: t('currency.title'),
       onClick: () => goToPage(ROUTES.PRIVATE.CURRENCY),
     },

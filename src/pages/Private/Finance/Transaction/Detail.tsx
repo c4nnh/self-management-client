@@ -155,7 +155,7 @@ export const TransactionDetail: React.FC = () => {
               defaultValue={user?.currency?.id}
               options={currencies.map(item => ({
                 value: item.id,
-                label: item.name,
+                label: `${item.symbol} - ${item.code}`,
               }))}
               rules={requiredField(t)}
             />

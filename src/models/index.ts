@@ -95,15 +95,17 @@ export type User = {
 export type Currency = {
   id: string
   name: string
+  symbol: string
+  code: string
 }
 
 export type CurrencyParams = {
-  name?: string
+  search?: string
 }
 
 export type GetCurrenciesParams = PaginationParams & SortParams & CurrencyParams
 
-export type CreateCurrencyDto = Pick<Currency, 'name'>
+export type CreateCurrencyDto = Pick<Currency, 'name' | 'symbol' | 'code'>
 
 export type UpdateCurrencyDto = Partial<CreateCurrencyDto> & {
   id: string

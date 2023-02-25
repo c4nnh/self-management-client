@@ -26,6 +26,9 @@
     "save": "Save",
     "create": "Create",
     "name": "Name",
+    "symbol": "Symbol",
+    "code": "Code",
+    "keyword": "Keyword",
     "title": "Title",
     "amount": "Amount",
     "date": "Date",
@@ -41,32 +44,6 @@
   },
   "account": {
     "title": "Account"
-  },
-  "finance": {
-    "title": "Finance"
-  },
-  "work": {
-    "title": "Work"
-  },
-  "resume": {
-    "title": "Resume"
-  },
-  "skill": {
-    "title": "Skill"
-  },
-  "project": {
-    "title": "Project"
-  },
-  "event": {
-    "title": "Event"
-  },
-  "asset": {
-    "title": "Asset"
-  },
-  "language": {
-    "title": "Language",
-    "english": "English",
-    "vietnamese": "Tiếng Việt"
   },
   "transaction": {
     "title": "Transaction",
@@ -120,8 +97,34 @@
     },
     "pageTitle": "Manage currencies",
     "search": {
-      "placeholder": "Search by name"
+      "placeholder": "Search by name, symbol or code"
     }
+  },
+  "finance": {
+    "title": "Finance"
+  },
+  "work": {
+    "title": "Work"
+  },
+  "resume": {
+    "title": "Resume"
+  },
+  "skill": {
+    "title": "Skill"
+  },
+  "project": {
+    "title": "Project"
+  },
+  "event": {
+    "title": "Event"
+  },
+  "asset": {
+    "title": "Asset"
+  },
+  "language": {
+    "title": "Language",
+    "english": "English",
+    "vietnamese": "Tiếng Việt"
   },
   "setting": {
     "title": "Setting"

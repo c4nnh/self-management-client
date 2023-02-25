@@ -20,7 +20,7 @@ export const CurrencyFilter: React.FC = () => {
       }}
       onReset={resetParams}
     >
-      <FormInput name="name" label={t('common.name')} />
+      <FormInput name="search" label={t('common.keyword')} />
     </FilterModal>
   )
 }

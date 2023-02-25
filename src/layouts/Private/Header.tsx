@@ -1,5 +1,6 @@
 import {
   AssetIcon,
+  CurrencyIcon,
   EventIcon,
   LoanIcon,
   LogoIcon,
@@ -103,7 +104,7 @@ export const Header: React.FC = () => {
   const financeAdminMenuItems: ItemType[] = [
     {
       key: 'currency',
-      icon: <TontineIcon />,
+      icon: <CurrencyIcon />,
       label: t('currency.title'),
       onClick: () => goToPage(ROUTES.PRIVATE.CURRENCY),
     },
@@ -220,11 +221,14 @@ export const Header: React.FC = () => {
 }
 
 const Container = styled.div`
-  ${tw`fixed bg-gray-200 w-full z-[2] h-10 py-2 px-3 flex items-center justify-end gap-2 box-border`};
-
+  ${tw`fixed bg-gray-200 w-full right-0 z-[2] h-14 py-2 px-5 flex items-center justify-end gap-2 box-border`};
   box-shadow: 0 0.125rem 0.25rem rgba(87, 103, 197, 0.1) !important;
 
   :not(&.desktop) {
     ${tw`justify-between`}
+  }
+
+  @media screen and (max-width: 550px) {
+    ${tw`h-12 px-3`}
   }
 `

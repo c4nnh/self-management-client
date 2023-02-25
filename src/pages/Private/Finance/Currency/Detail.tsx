@@ -5,7 +5,7 @@ import {
 } from '@/apis'
 import { CreateModal, FormInput, OpenCreateButton } from '@/components'
 import { CreateCurrencyDto, UpdateCurrencyDto } from '@/models'
-import { useAppStore, useAuthStore, useCurrencyStore } from '@/stores'
+import { useAppStore } from '@/stores'
 import { requiredField } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { Form, notification } from 'antd'
@@ -18,9 +18,7 @@ export const CurrencyDetail: React.FC = () => {
   const formMethods = useForm<CreateCurrencyDto | UpdateCurrencyDto>()
   const { handleSubmit, reset, formState } = formMethods
   const { isDirty } = formState
-  const { user } = useAuthStore()
   const { openModal, selectedId, setOpenModal, setSelectedId } = useAppStore()
-  const { currencies } = useCurrencyStore()
 
   const { mutate: createCurrencyMutate, isLoading: isCreating } =
     useCreateCurrencyMutation({
@@ -100,6 +98,16 @@ export const CurrencyDetail: React.FC = () => {
             <FormInput
               name="name"
               label={t('common.name')}
+              rules={requiredField(t)}
+            />
+            <FormInput
+              name="symbol"
+              label={t('common.symbol')}
+              rules={requiredField(t)}
+            />
+            <FormInput
+              name="code"
+              label={t('common.code')}
               rules={requiredField(t)}
             />
           </Form>

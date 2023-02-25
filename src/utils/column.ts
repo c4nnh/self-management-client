@@ -13,5 +13,7 @@ export const getColumnLabel = (t: TFunction): ColumnConfig<string> => ({
   currency: {
     id: t('common.id'),
     name: t('common.name'),
+    symbol: t('common.symbol'),
+    code: t('common.code'),
   },
 })

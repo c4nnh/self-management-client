@@ -93,6 +93,16 @@ export const Currency: React.FC = () => {
       dataIndex: 'name',
       sorter: true,
     },
+    {
+      title: columnLabel?.currency.symbol,
+      dataIndex: 'symbol',
+      sorter: true,
+    },
+    {
+      title: columnLabel?.currency.code,
+      dataIndex: 'code',
+      sorter: true,
+    },
   ]
 
   return (
@@ -102,8 +112,8 @@ export const Currency: React.FC = () => {
         <TableActionsContainer
           leftChildren={
             <SearchInput
-              value={params?.name}
-              setValue={name => setParams({ name })}
+              value={params?.search}
+              setValue={search => setParams({ search })}
               searchProps={{
                 placeholder: `${t('currency.search.placeholder')}`,
               }}
