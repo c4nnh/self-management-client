@@ -152,7 +152,7 @@ export const TransactionDetail: React.FC = () => {
             <FormSelect
               name="currencyId"
               label={t('common.currency')}
-              defaultValue={user?.currency?.id}
+              defaultValue={currencies.length ? user?.currency?.id : undefined}
               options={currencies.map(item => ({
                 value: item.id,
                 label: `${item.symbol} - ${item.code}`,

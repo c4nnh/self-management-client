@@ -13,6 +13,7 @@ import {
   SearchInput,
   Table,
   TableActionsContainer,
+  TextNumber,
 } from '@/components'
 import { DATE_FORMAT } from '@/constants'
 import { usePagination, useSorter } from '@/hooks'
@@ -119,9 +120,9 @@ export const Transaction: React.FC = () => {
       sorter: true,
       render: (_, transaction) => (
         <div className="flex gap-1 items-center">
-          <span>{transaction.amount}</span>
+          <TextNumber value={transaction.amount} />
           <span className="text-gray-500 font-light">
-            {transaction.currency.name}
+            {`${transaction.currency.symbol} - ${transaction.currency.code}`}
           </span>
         </div>
       ),
