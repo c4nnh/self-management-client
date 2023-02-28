@@ -96,7 +96,26 @@
     "pageTitle": "Manage your loans"
   },
   "tontine": {
-    "title": "Tontine"
+    "title": "Tontine",
+    "create": {
+      "success": "New tontine is created",
+      "error": "Can not create tontine. Please try again later",
+      "title": "Create tontine"
+    },
+    "update": {
+      "success": "Tontine is updated",
+      "error": "Can not update tontine. Please try again later"
+    },
+    "detail": {
+      "title": "View tontine detail"
+    },
+    "filter": {
+      "title": "Tontine filter"
+    },
+    "search": {
+      "placeholder": "Search by description"
+    },
+    "pageTitle": "Manage your tontines"
   },
   "currency": {
     "title": "Currency",

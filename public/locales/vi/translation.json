@@ -75,16 +75,16 @@
   "loan": {
     "title": "Khoản cho vay",
     "create": {
-      "success": "",
-      "error": "",
-      "title": ""
+      "success": "Khoản cho vay mới đã được tạo",
+      "error": "Không thể tạo khoản cho vay. Xin hãy thử lại sau",
+      "title": "Tạo khoản cho vay"
     },
     "update": {
-      "success": "",
-      "error": ""
+      "success": "Khoản cho vay đã được cập nhật",
+      "error": "Không thể cập nhật khoản cho vay. Xin hãy thử lại sau"
     },
     "detail": {
-      "title": ""
+      "title": "Xem chi tiết khoản cho vay"
     },
     "debtor": "Người vay",
     "filter": {
@@ -96,7 +96,26 @@
     "pageTitle": "Quản lý các khoản cho vay của bạn"
   },
   "tontine": {
-    "title": "Góp họ"
+    "title": "Lượt góp họ",
+    "create": {
+      "success": "Lượt góp họ mới đã được tạo",
+      "error": "Không thể tạo lượt góp họ. Xin hãy thử lại sau",
+      "title": "Tạo lượt góp họ"
+    },
+    "update": {
+      "success": "Lượt góp họ đã được cập nhật",
+      "error": "Không thể cập nhật lượt góp họ. Xin hãy thử lại sau"
+    },
+    "detail": {
+      "title": "Xem chi tiết lượt góp họ"
+    },
+    "filter": {
+      "title": "Bộ lọc lượt góp họ"
+    },
+    "pageTitle": "Quản lý lượt góp họ của bạn",
+    "search": {
+      "placeholder": "Tìm kiếm theo mô tả"
+    }
   },
   "currency": {
     "title": "Tiền tệ",
