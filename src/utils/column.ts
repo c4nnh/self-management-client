@@ -29,4 +29,12 @@ export const getColumnLabel = (t: TFunction): ColumnConfig<string> => ({
     date: t('common.date'),
     description: t('common.description'),
   },
+  asset: {
+    id: t('common.id'),
+    name: t('common.name'),
+    price: t('asset.price'),
+    boughtDate: t('asset.boughtDate'),
+    images: t('common.images'),
+    description: t('common.description'),
+  },
 })

@@ -26,16 +26,17 @@
     "save": "Save",
     "create": "Create",
     "name": "Name",
-    "symbol": "Symbol",
-    "code": "Code",
-    "keyword": "Keyword",
-    "amount": "Amount",
-    "date": "Date",
     "description": "Description",
     "currency": "Currency",
+    "keyword": "Keyword",
+    "symbol": "Symbol",
+    "code": "Code",
+    "amount": "Amount",
+    "date": "Date",
     "title": "Title",
     "id": "Id",
     "type": "Type",
+    "images": "Images",
     "requiredField": "Please fill this field"
   },
   "logout": {
@@ -125,7 +126,7 @@
       "title": "Create currency"
     },
     "update": {
-      "success": "Transaction is updated",
+      "success": "Currency is updated",
       "error": "Can not update currency. Please try again later"
     },
     "detail": {
@@ -158,7 +159,28 @@
     "title": "Event"
   },
   "asset": {
-    "title": "Asset"
+    "title": "Asset",
+    "create": {
+      "success": "New asset is created",
+      "error": "Can not create asset. Please try again later",
+      "title": "Create asset"
+    },
+    "update": {
+      "success": "Asset is updated",
+      "error": "Can not update asset. Please try again later"
+    },
+    "detail": {
+      "title": "View asset detail"
+    },
+    "price": "Price",
+    "boughtDate": "Bought date",
+    "filter": {
+      "title": "Asset filter"
+    },
+    "search": {
+      "placeholder": "Search by name or description"
+    },
+    "pageTitle": "Manage your assets"
   },
   "language": {
     "title": "Language",

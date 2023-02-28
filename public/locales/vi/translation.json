@@ -26,16 +26,17 @@
     "save": "Lưu",
     "create": "Tạo",
     "name": "Tên",
-    "symbol": "Ký hiệu",
-    "code": "Mã",
-    "keyword": "Từ khóa",
-    "amount": "Số tiền",
-    "date": "Ngày",
     "description": "Mô tả",
     "currency": "Tiền tệ",
+    "keyword": "Từ khóa",
+    "symbol": "Ký hiệu",
+    "code": "Mã",
+    "amount": "Số tiền",
+    "date": "Ngày",
     "title": "Tiêu đề",
     "id": "Id",
     "type": "Loại",
+    "images": "Ảnh",
     "requiredField": "Không được để trống"
   },
   "logout": {
@@ -112,10 +113,10 @@
     "filter": {
       "title": "Bộ lọc lượt góp họ"
     },
-    "pageTitle": "Quản lý lượt góp họ của bạn",
     "search": {
       "placeholder": "Tìm kiếm theo mô tả"
-    }
+    },
+    "pageTitle": "Quản lý lượt góp họ của bạn"
   },
   "currency": {
     "title": "Tiền tệ",
@@ -158,7 +159,28 @@
     "title": "Sự kiện"
   },
   "asset": {
-    "title": "Tài sản"
+    "title": "Tài sản",
+    "create": {
+      "success": "Tài sản mới đã được tạo",
+      "error": "Không thể tạo tài sản. Xin hãy thử lại sau",
+      "title": "Tạo tài sản"
+    },
+    "update": {
+      "success": "Tài sản đã được cập nhật",
+      "error": "Không thể cập nhật tài sản. Xin hãy thử lại sau"
+    },
+    "detail": {
+      "title": "Xem chi tiết tài sản"
+    },
+    "price": "Giá",
+    "boughtDate": "Ngày mua",
+    "filter": {
+      "title": "Bộ lọc tài sản"
+    },
+    "search": {
+      "placeholder": "Tìm kiếm theo tên hoặc mô tả"
+    },
+    "pageTitle": "Quản lý tài sản của bạn"
   },
   "language": {
     "title": "Ngôn ngữ",

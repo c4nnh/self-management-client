@@ -28,4 +28,12 @@ export const DEFAULT_COLUMN_CONFIG: ColumnConfig<boolean> = {
     date: true,
     description: false,
   },
+  asset: {
+    id: false,
+    name: true,
+    price: true,
+    boughtDate: true,
+    images: false,
+    description: false,
+  },
 }

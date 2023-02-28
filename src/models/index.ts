@@ -38,12 +38,16 @@ export type ModalKey =
   | 'tontine-detail'
   | 'tontine-filter'
   | 'tontine-columns'
+  | 'asset-detail'
+  | 'asset-filter'
+  | 'asset-columns'
 
 export type TableConfig = {
   transaction: Required<Omit<Transaction, 'currency'>>
   currency: Currency
   loan: Required<Omit<Loan, 'currency'>>
   tontine: Required<Omit<Tontine, 'currency'>>
+  asset: Required<Omit<Asset, 'currency'>>
 }
 
 export type ColumnConfig<T> = {
@@ -208,5 +212,34 @@ export type CreateTontineDto = Omit<Tontine, 'id' | 'currency'> & {
 }
 
 export type UpdateTontineDto = Partial<CreateTontineDto> & {
+  id: string
+}
+
+// Asset
+export type Asset = {
+  id: string
+  name: string
+  price: number
+  boughtDate: Date
+  images: string[]
+  description?: string
+  currency: Currency
+}
+
+export type AssetParams = {
+  search?: string
+  boughtDateFrom?: string
+  boughtDateTo?: string
+  priceFrom?: number
+  priceTo?: number
+}
+
+export type GetAssetsParams = PaginationParams & SortParams & AssetParams
+
+export type CreateAssetDto = Omit<Asset, 'id' | 'currency'> & {
+  currencyId: string
+}
+
+export type UpdateAssetDto = Partial<CreateAssetDto> & {
   id: string
 }

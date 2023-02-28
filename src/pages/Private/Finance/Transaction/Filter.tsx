@@ -13,14 +13,13 @@ import { useTranslation } from 'react-i18next'
 
 type FilterDto = Pick<TransactionParams, 'title' | 'types'> & {
   dateRange: [Dayjs?, Dayjs?]
-  amountRange: [number?, number?]
 }
 
 export const TransactionFilter: React.FC = () => {
   const { t } = useTranslation()
   const { params, setParams, resetParams } = useTransactionFilter()
   const onSearch = (dto: FilterDto) => {
-    const { dateRange, amountRange, ...params } = dto
+    const { dateRange, ...params } = dto
 
     setParams({
       ...params,
