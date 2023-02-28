@@ -1,3 +1,4 @@
+import { DEFAULT_COLUMN_CONFIG } from '@/constants'
 import { useScreen } from '@/hooks'
 import { ModalKey, TableConfig } from '@/models'
 import { useAppStore, useLocalSettingStore } from '@/stores'
@@ -141,8 +142,12 @@ export const Table = <T extends BaseObject>({
       }}
       columns={[
         ...columnsWithWidth.filter(
-          // @ts-ignore
-          column => columnConfig[tableConfigKey][column.dataIndex]
+          column =>
+            // @ts-ignore
+            (
+              (columnConfig[tableConfigKey] ||
+                DEFAULT_COLUMN_CONFIG[tableConfigKey]) as unknown as T
+            )[column.dataIndex]
         ),
         actionColumn,
       ]}

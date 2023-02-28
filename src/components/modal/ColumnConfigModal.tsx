@@ -30,7 +30,9 @@ export const ColumnConfigModal: React.FC<Props> = ({
 
   useEffect(() => {
     reset({
-      types: Object.entries(columnConfig[tableConfigKey])
+      types: Object.entries(
+        columnConfig[tableConfigKey] || DEFAULT_COLUMN_CONFIG[tableConfigKey]
+      )
         .filter(([_, value]) => value)
         .map(([key]) => key),
     })
