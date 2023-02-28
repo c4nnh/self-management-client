@@ -6,7 +6,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Table as ATable, TableProps } from 'antd'
 import { ColumnType } from 'antd/es/table'
 import { TableRowSelection } from 'antd/es/table/interface'
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import tw from 'twin.macro'
@@ -36,7 +36,6 @@ export const Table = <T extends BaseObject>({
   const { selectedIds, setSelectedId, setOpenModal, setSelectedIds } =
     useAppStore()
   const { columnConfig } = useLocalSettingStore()
-  const [data, setData] = useState<readonly T[]>(dataSource)
 
   const columnsWithWidth = columns.map((column: any) => {
     return {
@@ -44,15 +43,6 @@ export const Table = <T extends BaseObject>({
       width: column.width || maxWidthPerCell,
     }
   })
-
-  useEffect(() => {
-    setData(dataSource)
-  }, [dataSource])
-
-  useEffect(() => {
-    const dataIds = data.map(item => item.id)
-    setSelectedIds(selectedIds.filter(id => dataIds.includes(id)))
-  }, [data])
 
   useEffect(() => {
     return () => {
