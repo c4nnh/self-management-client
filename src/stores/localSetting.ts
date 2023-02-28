@@ -16,6 +16,8 @@ export const useLocalSettingStore = create<LocalSettingState>()(
       columnConfig: {
         transaction: DEFAULT_COLUMN_CONFIG.transaction,
         currency: DEFAULT_COLUMN_CONFIG.currency,
+        loan: DEFAULT_COLUMN_CONFIG.loan,
+        tontine: DEFAULT_COLUMN_CONFIG.tontine,
       },
       setColumnConfig: columnConfig => {
         set({

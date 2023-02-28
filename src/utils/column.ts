@@ -16,4 +16,17 @@ export const getColumnLabel = (t: TFunction): ColumnConfig<string> => ({
     symbol: t('common.symbol'),
     code: t('common.code'),
   },
+  loan: {
+    id: t('common.id'),
+    debtor: t('loan.debtor'),
+    amount: t('common.amount'),
+    date: t('common.date'),
+    description: t('common.description'),
+  },
+  tontine: {
+    id: t('common.id'),
+    amount: t('common.amount'),
+    date: t('common.date'),
+    description: t('common.description'),
+  },
 })

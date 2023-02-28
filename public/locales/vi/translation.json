@@ -29,11 +29,11 @@
     "symbol": "Ký hiệu",
     "code": "Mã",
     "keyword": "Từ khóa",
-    "title": "Tiêu đề",
     "amount": "Số tiền",
     "date": "Ngày",
     "description": "Mô tả",
     "currency": "Tiền tệ",
+    "title": "Tiêu đề",
     "id": "Id",
     "type": "Loại",
     "requiredField": "Không được để trống"
@@ -73,7 +73,27 @@
     }
   },
   "loan": {
-    "title": "Khoản cho vay"
+    "title": "Khoản cho vay",
+    "create": {
+      "success": "",
+      "error": "",
+      "title": ""
+    },
+    "update": {
+      "success": "",
+      "error": ""
+    },
+    "detail": {
+      "title": ""
+    },
+    "debtor": "Người vay",
+    "filter": {
+      "title": "Bộ lọc khoản vay"
+    },
+    "search": {
+      "placeholder": "Tìm kiếm theo người vay hoặc mô tả"
+    },
+    "pageTitle": "Quản lý các khoản cho vay của bạn"
   },
   "tontine": {
     "title": "Góp họ"

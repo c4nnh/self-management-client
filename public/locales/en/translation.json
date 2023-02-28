@@ -29,11 +29,11 @@
     "symbol": "Symbol",
     "code": "Code",
     "keyword": "Keyword",
-    "title": "Title",
     "amount": "Amount",
     "date": "Date",
     "description": "Description",
     "currency": "Currency",
+    "title": "Title",
     "id": "Id",
     "type": "Type",
     "requiredField": "Please fill this field"
@@ -73,7 +73,27 @@
     }
   },
   "loan": {
-    "title": "Loan"
+    "title": "Loan",
+    "create": {
+      "success": "New loan is created",
+      "error": "Can not create loan. Please try again later",
+      "title": "Create loan"
+    },
+    "update": {
+      "success": "Loan is updated",
+      "error": "Can not update loan. Please try again later"
+    },
+    "detail": {
+      "title": "View loan detail"
+    },
+    "debtor": "Debtor",
+    "filter": {
+      "title": "Loan filter"
+    },
+    "search": {
+      "placeholder": "Search by debtor or description"
+    },
+    "pageTitle": "Manage your loans"
   },
   "tontine": {
     "title": "Tontine"

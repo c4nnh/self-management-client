@@ -1,5 +1,7 @@
 export * from './app'
 export * from './auth'
 export * from './currency'
+export * from './loan'
 export * from './localSetting'
+export * from './tontine'
 export * from './transaction'

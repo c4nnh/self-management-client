@@ -32,10 +32,18 @@ export type ModalKey =
   | 'currency-detail'
   | 'currency-filter'
   | 'currency-columns'
+  | 'loan-detail'
+  | 'loan-filter'
+  | 'loan-columns'
+  | 'tontine-detail'
+  | 'tontine-filter'
+  | 'tontine-columns'
 
 export type TableConfig = {
   transaction: Required<Omit<Transaction, 'currency'>>
   currency: Currency
+  loan: Required<Omit<Loan, 'currency'>>
+  tontine: Required<Omit<Tontine, 'currency'>>
 }
 
 export type ColumnConfig<T> = {
@@ -145,5 +153,60 @@ export type CreateTransactionDto = Omit<Transaction, 'id' | 'currency'> & {
 }
 
 export type UpdateTransactionDto = Partial<CreateTransactionDto> & {
+  id: string
+}
+
+// Loan
+export type Loan = {
+  id: string
+  debtor: string
+  amount: number
+  date: Date
+  description?: string
+  currency: Currency
+}
+
+export type LoanParams = {
+  search?: string
+  dateFrom?: string
+  dateTo?: string
+  amountFrom?: number
+  amountTo?: number
+}
+
+export type GetLoansParams = PaginationParams & SortParams & LoanParams
+
+export type CreateLoanDto = Omit<Loan, 'id' | 'currency'> & {
+  currencyId: string
+}
+
+export type UpdateLoanDto = Partial<CreateLoanDto> & {
+  id: string
+}
+
+// Tontine
+export type Tontine = {
+  id: string
+  amount: number
+  date: Date
+  description?: string
+  currency: Currency
+}
+
+export type TontineParams = {
+  description?: string
+  dateFrom?: string
+  dateTo?: string
+  amountFrom?: number
+  amountTo?: number
+}
+
+export type GetTontinesParams = PaginationParams & SortParams & TontineParams
+
+export type CreateTontineDto = Omit<Tontine, 'id' | 'currency'> & {
+  currencyId: string
+}
+
+export type UpdateTontineDto = Partial<CreateTontineDto> & {
   id: string
 }
