@@ -33,7 +33,6 @@ export const CurrencyDetail: React.FC = () => {
       onSuccess: () => {
         notification.success({ message: t('currency.update.success') })
         queryClient.invalidateQueries(['getCurrencies'])
-        queryClient.invalidateQueries(['getCurrencyDetail'])
       },
       onError: () => {
         notification.error({ message: t('currency.update.error') })

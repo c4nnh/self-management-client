@@ -43,7 +43,6 @@ export const LoanDetail: React.FC = () => {
       onSuccess: () => {
         notification.success({ message: t('loan.update.success') })
         queryClient.invalidateQueries(['getLoans'])
-        queryClient.invalidateQueries(['getLoanDetail'])
       },
       onError: () => {
         notification.error({ message: t('loan.update.error') })
