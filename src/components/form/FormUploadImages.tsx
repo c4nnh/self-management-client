@@ -3,7 +3,9 @@ import { FormItemProps, Upload, UploadFile } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import { RcFile, UploadProps } from 'antd/es/upload'
 import React, { useEffect, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { ControllerProps, useFormContext } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { v4 as uuidv4 } from 'uuid'
 import { ControlledFormItem } from './ControlledFormItem'
 
@@ -14,44 +16,47 @@ type Props = {
 } & Omit<ControllerProps, 'render'>
 
 export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
+  const { t } = useTranslation()
   const formContext = useFormContext()
-  const { watch } = formContext
-  const urlsValue: string[] | undefined = watch(name)
+  const { watch, setValue, getValues } = formContext
   const { mutateAsync: createSignedUrlMutateAsync } =
-    useCreateSignedUrlMutation({
-      onSuccess: signedUrl => {
-        setPublicUrl(signedUrl.publicUrl)
-      },
-    })
+    useCreateSignedUrlMutation()
   const uploadImageMutation = useUploadImageMutation()
 
   const [fileList, setFileList] = useState<UploadFile[]>([])
   const [publicUrl, setPublicUrl] = useState<string>()
+  const [aspect, setAspect] = useState(1)
 
   useEffect(() => {
+    const initialUrls = getValues(name) as string[]
     setFileList(
-      (urlsValue || []).map(url => ({
+      (initialUrls || []).map(url => ({
         uid: uuidv4(),
         name: url,
         url,
         status: 'done',
       }))
     )
-  }, [urlsValue])
+  }, [])
+
+  // useEffect(() => {
+  //   console.log(fileList)
+
+  //   setValue(
+  //     name,
+  //     fileList.map(item => item.url)
+  //   )
+  // }, [fileList])
 
   const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
     setFileList(
       newFileList.map(item => {
-        if (item.status === 'done') {
-          const {
-            uid,
-            name,
-            response: { url },
-          } = item
+        if (item.status === 'done' && !item.url) {
+          const { uid, name, response } = item
           return {
             uid,
             name,
-            url,
+            url: response?.response?.url,
             status: 'done',
           }
         }
@@ -83,6 +88,8 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
       fileType,
     })
 
+    flushSync(() => setPublicUrl(data.publicUrl))
+
     return data?.uploadUrl
   }
 
@@ -111,12 +118,40 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
     onError({} as Error)
   }
 
+  const getImageAspect = (file: RcFile): Promise<number> => {
+    return new Promise(resolve => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.addEventListener('load', event => {
+        const _loadedImageUrl = event.target?.result
+        const image = document.createElement('img')
+        image.src = _loadedImageUrl as string
+        image.addEventListener('load', () => {
+          const { width, height } = image
+          resolve(width / height)
+        })
+      })
+    })
+  }
+
+  const beforeCrop = async (file: RcFile, []) => {
+    const imageAspect = await getImageAspect(file)
+    setAspect(imageAspect)
+    return true
+  }
+
   return (
     <ControlledFormItem
       name={name}
       {...rest}
       render={() => (
-        <ImgCrop rotate>
+        <ImgCrop
+          rotate
+          modalTitle={`${t('common.cropImage')}`}
+          quality={1}
+          beforeCrop={beforeCrop}
+          aspect={aspect}
+        >
           <Upload
             action={onUpload}
             listType="picture-card"

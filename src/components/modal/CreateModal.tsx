@@ -1,38 +1,74 @@
+import { ModalKey } from '@/models'
 import { useAppStore } from '@/stores'
-import { ModalProps } from 'antd'
+import { ButtonProps, Form, ModalProps } from 'antd'
 import { PropsWithChildren, useEffect } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { DeepPartial, FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
+import { OpenCreateButton } from '../button'
 import { Modal } from './Modal'
 
-type Props = PropsWithChildren<ModalProps> & {
-  isLoading?: boolean
+type Props<C, U> = PropsWithChildren & {
+  modalKey: ModalKey
+  defaultValues?: DeepPartial<C | U>
+  modalProps?: ModalProps & { isLoading?: boolean }
+  buttonProps?: ButtonProps
+  onCreate: (dto: C) => void
+  onUpdate: (dto: U) => void
 }
 
-export const CreateModal: React.FC<Props> = ({
-  isLoading,
+export const CreateModal = <C extends object, U extends object>({
+  modalKey,
+  defaultValues,
+  modalProps,
+  buttonProps,
+  onCreate,
+  onUpdate,
   children,
-  ...props
-}) => {
-  const { openModal } = useAppStore()
-  const { reset, getValues } = useFormContext()
+}: Props<C, U>) => {
+  const { t } = useTranslation()
+  const { openModal, selectedId, setOpenModal, setSelectedId } = useAppStore()
+  const formMethods = useForm<C | U>()
+  const { handleSubmit, reset, formState } = formMethods
+  const { isDirty } = formState
 
   useEffect(() => {
-    if (!openModal) {
-      reset(
-        Object.keys(getValues()).reduce(
-          (pre, curr) => ({ ...pre, [curr]: '' }),
-          {}
-        ),
-        {
-          keepValues: false,
-        }
-      )
+    if (openModal) {
+      reset(selectedId ? defaultValues : ({} as DeepPartial<C | U>))
     }
-  }, [openModal])
+  }, [openModal, defaultValues])
+
+  const onSave = handleSubmit(dto => {
+    if (!selectedId) {
+      onCreate(dto as C)
+      setOpenModal()
+    } else {
+      onUpdate(dto as U)
+    }
+  })
+
+  const onCancel = () => {
+    setOpenModal()
+    setSelectedId()
+  }
 
   return (
-    <Modal isLoading={isLoading} {...props}>
-      {children}
-    </Modal>
+    <FormProvider {...formMethods}>
+      <OpenCreateButton modalKey={modalKey} {...buttonProps} />
+      <Modal
+        open={openModal === modalKey}
+        onCancel={onCancel}
+        onOk={onSave}
+        okText={selectedId ? t('common.save') : t('common.create')}
+        {...modalProps}
+        okButtonProps={{
+          ...modalProps?.okButtonProps,
+          disabled: !isDirty || modalProps?.okButtonProps?.disabled,
+        }}
+      >
+        <Form layout="vertical" size="middle">
+          {children}
+        </Form>
+      </Modal>
+    </FormProvider>
   )
 }
