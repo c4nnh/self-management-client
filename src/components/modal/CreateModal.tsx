@@ -1,6 +1,6 @@
 import { ModalKey } from '@/models'
-import { useAppStore } from '@/stores'
-import { ButtonProps, Form, ModalProps } from 'antd'
+import { useAppStore, useImageStore } from '@/stores'
+import { ButtonProps, Form, ModalProps, notification } from 'antd'
 import { PropsWithChildren, useEffect } from 'react'
 import { DeepPartial, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -27,9 +27,10 @@ export const CreateModal = <C extends object, U extends object>({
 }: Props<C, U>) => {
   const { t } = useTranslation()
   const { openModal, selectedId, setOpenModal, setSelectedId } = useAppStore()
+  const { hasError } = useImageStore()
   const formMethods = useForm<C | U>()
   const { handleSubmit, reset, formState } = formMethods
-  const { isDirty } = formState
+  const { dirtyFields } = formState
 
   useEffect(() => {
     if (openModal) {
@@ -38,12 +39,16 @@ export const CreateModal = <C extends object, U extends object>({
   }, [openModal, defaultValues])
 
   const onSave = handleSubmit(dto => {
+    if (hasError) {
+      notification.warning({ message: t('common.invalidImage') })
+      return
+    }
     if (!selectedId) {
       onCreate(dto as C)
       setOpenModal()
-    } else {
-      onUpdate(dto as U)
+      return
     }
+    onUpdate(dto as U)
   })
 
   const onCancel = () => {
@@ -62,7 +67,9 @@ export const CreateModal = <C extends object, U extends object>({
         {...modalProps}
         okButtonProps={{
           ...modalProps?.okButtonProps,
-          disabled: !isDirty || modalProps?.okButtonProps?.disabled,
+          disabled:
+            !Object.keys(dirtyFields).length ||
+            modalProps?.okButtonProps?.disabled,
         }}
       >
         <Form layout="vertical" size="middle">

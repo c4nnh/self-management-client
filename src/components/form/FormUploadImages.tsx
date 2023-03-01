@@ -1,4 +1,5 @@
 import { useCreateSignedUrlMutation, useUploadImageMutation } from '@/apis'
+import { useImageStore } from '@/stores'
 import { FormItemProps, Upload, UploadFile } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import { RcFile, UploadProps } from 'antd/es/upload'
@@ -10,15 +11,24 @@ import { v4 as uuidv4 } from 'uuid'
 import { ControlledFormItem } from './ControlledFormItem'
 
 type Props = {
+  initialUrls?: string[]
   name: string
+  max?: number
   label?: string | null
   formItemProps?: FormItemProps
 } & Omit<ControllerProps, 'render'>
 
-export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
+export const FormUploadImages: React.FC<Props> = ({
+  initialUrls = [],
+  name,
+  max = 5,
+  label,
+  ...rest
+}) => {
   const { t } = useTranslation()
+  const { setHasError } = useImageStore()
   const formContext = useFormContext()
-  const { watch, setValue, getValues } = formContext
+  const { setValue } = formContext
   const { mutateAsync: createSignedUrlMutateAsync } =
     useCreateSignedUrlMutation()
   const uploadImageMutation = useUploadImageMutation()
@@ -28,9 +38,8 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
   const [aspect, setAspect] = useState(1)
 
   useEffect(() => {
-    const initialUrls = getValues(name) as string[]
     setFileList(
-      (initialUrls || []).map(url => ({
+      initialUrls.map(url => ({
         uid: uuidv4(),
         name: url,
         url,
@@ -39,14 +48,13 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
     )
   }, [])
 
-  // useEffect(() => {
-  //   console.log(fileList)
-
-  //   setValue(
-  //     name,
-  //     fileList.map(item => item.url)
-  //   )
-  // }, [fileList])
+  useEffect(() => {
+    setValue(
+      name,
+      fileList.map(item => item.url)
+    )
+    setHasError(fileList.some(item => item.status === 'done'))
+  }, [fileList])
 
   const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
     setFileList(
@@ -151,6 +159,8 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
           quality={1}
           beforeCrop={beforeCrop}
           aspect={aspect}
+          modalOk={`${t('common.ok')}`}
+          modalCancel={`${t('common.cancel')}`}
         >
           <Upload
             action={onUpload}
@@ -160,7 +170,7 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
             onPreview={onPreview}
             customRequest={customRequest}
           >
-            {fileList.length < 5 && '+ Upload'}
+            {fileList.length < max && t('common.selectImage')}
           </Upload>
         </ImgCrop>
       )}

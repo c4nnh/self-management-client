@@ -105,7 +105,7 @@ export const AssetDetail: React.FC = () => {
         }))}
         rules={requiredField(t)}
       />
-      <FormUploadImages name="images" />
+      <FormUploadImages name="images" initialUrls={assetDetail?.images} />
     </CreateModal>
   )
 }
