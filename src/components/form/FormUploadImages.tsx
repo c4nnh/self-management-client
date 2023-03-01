@@ -53,7 +53,7 @@ export const FormUploadImages: React.FC<Props> = ({
       name,
       fileList.map(item => item.url)
     )
-    setHasError(fileList.some(item => item.status === 'done'))
+    setHasError(fileList.some(item => item.status !== 'done'))
   }, [fileList])
 
   const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
