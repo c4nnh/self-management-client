@@ -8,7 +8,7 @@ import { CreateCurrencyDto, UpdateCurrencyDto } from '@/models'
 import { useAppStore } from '@/stores'
 import { requiredField } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
-import { Form, notification } from 'antd'
+import { notification } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 export const CurrencyDetail: React.FC = () => {
@@ -67,23 +67,21 @@ export const CurrencyDetail: React.FC = () => {
       onCreate={createCurrencyMutate}
       onUpdate={updateCurrencyMutate}
     >
-      <Form layout="vertical" size="middle" className="flex flex-col">
-        <FormInput
-          name="name"
-          label={t('common.name')}
-          rules={requiredField(t)}
-        />
-        <FormInput
-          name="symbol"
-          label={t('common.symbol')}
-          rules={requiredField(t)}
-        />
-        <FormInput
-          name="code"
-          label={t('common.code')}
-          rules={requiredField(t)}
-        />
-      </Form>
+      <FormInput
+        name="name"
+        label={t('common.name')}
+        rules={requiredField(t)}
+      />
+      <FormInput
+        name="symbol"
+        label={t('common.symbol')}
+        rules={requiredField(t)}
+      />
+      <FormInput
+        name="code"
+        label={t('common.code')}
+        rules={requiredField(t)}
+      />
     </CreateModal>
   )
 }
