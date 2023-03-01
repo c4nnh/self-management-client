@@ -1,3 +1,4 @@
+import { useCreateSignedUrlMutation, useUploadImageMutation } from '@/apis'
 import { FormItemProps, Upload, UploadFile } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import { RcFile, UploadProps } from 'antd/es/upload'
@@ -16,8 +17,16 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
   const formContext = useFormContext()
   const { watch } = formContext
   const urlsValue: string[] | undefined = watch(name)
+  const { mutateAsync: createSignedUrlMutateAsync } =
+    useCreateSignedUrlMutation({
+      onSuccess: signedUrl => {
+        setPublicUrl(signedUrl.publicUrl)
+      },
+    })
+  const uploadImageMutation = useUploadImageMutation()
 
   const [fileList, setFileList] = useState<UploadFile[]>([])
+  const [publicUrl, setPublicUrl] = useState<string>()
 
   useEffect(() => {
     setFileList(
@@ -31,8 +40,24 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
   }, [urlsValue])
 
   const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    console.log(newFileList)
-    setFileList(newFileList)
+    setFileList(
+      newFileList.map(item => {
+        if (item.status === 'done') {
+          const {
+            uid,
+            name,
+            response: { url },
+          } = item
+          return {
+            uid,
+            name,
+            url,
+            status: 'done',
+          }
+        }
+        return item
+      })
+    )
   }
 
   const onPreview = async (file: UploadFile) => {
@@ -50,10 +75,40 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
     imgWindow?.document.write(image.outerHTML)
   }
 
-  const onUpload: UploadProps['action'] = (file: File) => {
-    console.log(file)
+  const onUpload: UploadProps['action'] = async (file: File) => {
+    const { name: fileName, type: fileType } = file
 
-    return 'https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg'
+    const data = await createSignedUrlMutateAsync({
+      fileName,
+      fileType,
+    })
+
+    return data?.uploadUrl
+  }
+
+  const customRequest: UploadProps['customRequest'] = async ({
+    file,
+    action,
+    onSuccess = () => {},
+    onError = () => {},
+  }) => {
+    const isSuccess = await uploadImageMutation.mutateAsync({
+      file: file as File,
+      url: action,
+    })
+    const uploadFile = file as UploadFile
+
+    if (isSuccess) {
+      onSuccess({
+        ...uploadFile,
+        response: {
+          ...uploadFile,
+          url: publicUrl,
+        },
+      })
+      return
+    }
+    onError({} as Error)
   }
 
   return (
@@ -68,6 +123,7 @@ export const FormUploadImages: React.FC<Props> = ({ name, ...rest }) => {
             fileList={fileList}
             onChange={onChange}
             onPreview={onPreview}
+            customRequest={customRequest}
           >
             {fileList.length < 5 && '+ Upload'}
           </Upload>

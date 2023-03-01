@@ -102,6 +102,22 @@ export type User = {
   role: Role
 }
 
+// Image
+export type CreateSignedUrlResponsee = {
+  uploadUrl: string
+  publicUrl: string
+}
+
+export type CreateSignedUrlDto = {
+  fileName: string
+  fileType: string
+}
+
+export type UploadImageToSignedUrlDto = {
+  file: File
+  url: string
+}
+
 // FINANCE
 // Currency
 export type Currency = {
