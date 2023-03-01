@@ -27,6 +27,7 @@ export const CreateModal = <C extends object, U extends object>({
 }: Props<C, U>) => {
   const { t } = useTranslation()
   const { openModal, selectedId, setOpenModal, setSelectedId } = useAppStore()
+  const { isChanged, setIsChanged } = useImageStore()
   const { hasError } = useImageStore()
   const formMethods = useForm<C | U>()
   const { handleSubmit, reset, formState } = formMethods
@@ -54,6 +55,7 @@ export const CreateModal = <C extends object, U extends object>({
   const onCancel = () => {
     setOpenModal()
     setSelectedId()
+    setIsChanged(false)
   }
 
   return (
@@ -68,8 +70,9 @@ export const CreateModal = <C extends object, U extends object>({
         okButtonProps={{
           ...modalProps?.okButtonProps,
           disabled:
-            !Object.keys(dirtyFields).length ||
-            modalProps?.okButtonProps?.disabled,
+            !isChanged &&
+            (!Object.keys(dirtyFields).length ||
+              modalProps?.okButtonProps?.disabled),
         }}
       >
         <Form layout="vertical" size="middle">

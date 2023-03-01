@@ -26,13 +26,12 @@ export const FormUploadImages: React.FC<Props> = ({
   ...rest
 }) => {
   const { t } = useTranslation()
-  const { setHasError } = useImageStore()
+  const { setHasError, setIsChanged } = useImageStore()
   const formContext = useFormContext()
   const { setValue } = formContext
   const { mutateAsync: createSignedUrlMutateAsync } =
     useCreateSignedUrlMutation()
   const uploadImageMutation = useUploadImageMutation()
-
   const [fileList, setFileList] = useState<UploadFile[]>([])
   const [publicUrl, setPublicUrl] = useState<string>()
   const [aspect, setAspect] = useState(1)
@@ -49,11 +48,12 @@ export const FormUploadImages: React.FC<Props> = ({
   }, [])
 
   useEffect(() => {
-    setValue(
-      name,
-      fileList.map(item => item.url)
-    )
+    const newUrls = fileList.map(item => item.url)
+    setValue(name, newUrls)
     setHasError(fileList.some(item => item.status !== 'done'))
+    setIsChanged(
+      JSON.stringify(initialUrls.sort()) !== JSON.stringify(newUrls.sort())
+    )
   }, [fileList])
 
   const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
