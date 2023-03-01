@@ -18,6 +18,7 @@ export const Modal: React.FC<Props> = ({ isLoading, children, ...props }) => {
       closable={false}
       okText={t('common.ok')}
       cancelText={t('common.cancel')}
+      maskClosable={false}
       {...props}
     >
       {isLoading ? (

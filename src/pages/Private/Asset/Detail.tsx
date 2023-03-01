@@ -10,6 +10,7 @@ import {
   FormNumberInput,
   FormSelect,
   FormTextArea,
+  FormUploadImages,
   OpenCreateButton,
 } from '@/components'
 import { CreateAssetDto, UpdateAssetDto } from '@/models'
@@ -58,7 +59,12 @@ export const AssetDetail: React.FC = () => {
   const { isFetching: isFetchingDetail } = useGetAssetDetailQuery(selectedId!, {
     enabled: !!selectedId,
     onSuccess: data => {
-      reset(data)
+      reset({
+        ...data,
+        images: [
+          'https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w=',
+        ],
+      })
     },
     onError: () => {
       setSelectedId()
@@ -131,6 +137,7 @@ export const AssetDetail: React.FC = () => {
               }))}
               rules={requiredField(t)}
             />
+            <FormUploadImages name="images" />
           </Form>
         </CreateModal>
       </FormProvider>

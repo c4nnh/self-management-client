@@ -14,12 +14,15 @@ export const CreateModal: React.FC<Props> = ({
   ...props
 }) => {
   const { openModal } = useAppStore()
-  const { reset } = useFormContext()
+  const { reset, getValues } = useFormContext()
 
   useEffect(() => {
     if (!openModal) {
       reset(
-        {},
+        Object.keys(getValues()).reduce(
+          (pre, curr) => ({ ...pre, [curr]: '' }),
+          {}
+        ),
         {
           keepValues: false,
         }
