@@ -18,6 +18,7 @@ export const useLocalSettingStore = create<LocalSettingState>()(
         currency: DEFAULT_COLUMN_CONFIG.currency,
         loan: DEFAULT_COLUMN_CONFIG.loan,
         tontine: DEFAULT_COLUMN_CONFIG.tontine,
+        asset: DEFAULT_COLUMN_CONFIG.asset,
       },
       setColumnConfig: columnConfig => {
         set({
