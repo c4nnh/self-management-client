@@ -5,7 +5,7 @@ import {
 } from '@/apis'
 import { CreateModal, FormInput } from '@/components'
 import { CreateCurrencyDto, UpdateCurrencyDto } from '@/models'
-import { useAppStore } from '@/stores'
+import { useAppStore, useFormStore } from '@/stores'
 import { requiredField } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification } from 'antd'
@@ -15,6 +15,7 @@ export const CurrencyDetail: React.FC = () => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
   const { selectedId, setOpenModal, setSelectedId } = useAppStore()
+  const { setDefaultValues } = useFormStore()
 
   const { mutate: createCurrencyMutate, isLoading: isCreating } =
     useCreateCurrencyMutation({
@@ -30,25 +31,28 @@ export const CurrencyDetail: React.FC = () => {
 
   const { mutate: updateCurrencyMutate, isLoading: isUpdating } =
     useUpdateCurrencyMutation({
-      onSuccess: () => {
+      onSuccess: (_, dto) => {
         notification.success({ message: t('currency.update.success') })
         queryClient.invalidateQueries(['getCurrencies'])
-        setOpenModal()
+        setDefaultValues(dto)
       },
       onError: () => {
         notification.error({ message: t('currency.update.error') })
       },
     })
 
-  const { data: currencyDetail, isFetching: isFetchingDetail } =
-    useGetCurrencyDetailQuery(selectedId!, {
+  const { isFetching: isFetchingDetail } = useGetCurrencyDetailQuery(
+    selectedId!,
+    {
       enabled: !!selectedId,
+      onSuccess: setDefaultValues,
       onError: () => {
         setSelectedId()
         setOpenModal()
         notification.error({ message: t('common.error.system') })
       },
-    })
+    }
+  )
 
   return (
     <CreateModal<CreateCurrencyDto, UpdateCurrencyDto>
@@ -63,7 +67,6 @@ export const CurrencyDetail: React.FC = () => {
           loading: isCreating || isUpdating,
         },
       }}
-      defaultValues={currencyDetail}
       onCreate={createCurrencyMutate}
       onUpdate={updateCurrencyMutate}
     >

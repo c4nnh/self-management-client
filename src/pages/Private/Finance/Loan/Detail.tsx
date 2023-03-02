@@ -12,7 +12,12 @@ import {
   FormTextArea,
 } from '@/components'
 import { CreateLoanDto, UpdateLoanDto } from '@/models'
-import { useAppStore, useAuthStore, useCurrencyStore } from '@/stores'
+import {
+  useAppStore,
+  useAuthStore,
+  useCurrencyStore,
+  useFormStore,
+} from '@/stores'
 import { requiredField } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification } from 'antd'
@@ -25,6 +30,7 @@ export const LoanDetail: React.FC = () => {
   const { user } = useAuthStore()
   const { selectedId, setOpenModal, setSelectedId } = useAppStore()
   const { currencies } = useCurrencyStore()
+  const { setDefaultValues } = useFormStore()
 
   const { mutate: createLoanMutate, isLoading: isCreating } =
     useCreateLoanMutation({
@@ -40,25 +46,25 @@ export const LoanDetail: React.FC = () => {
 
   const { mutate: updateLoanMutate, isLoading: isUpdating } =
     useUpdateLoanMutation({
-      onSuccess: () => {
+      onSuccess: (_, dto) => {
         notification.success({ message: t('loan.update.success') })
         queryClient.invalidateQueries(['getLoans'])
-        setOpenModal()
+        setDefaultValues(dto)
       },
       onError: () => {
         notification.error({ message: t('loan.update.error') })
       },
     })
 
-  const { data: loanDetail, isFetching: isFetchingDetail } =
-    useGetLoanDetailQuery(selectedId!, {
-      enabled: !!selectedId,
-      onError: () => {
-        setSelectedId()
-        setOpenModal()
-        notification.error({ message: t('common.error.system') })
-      },
-    })
+  const { isFetching: isFetchingDetail } = useGetLoanDetailQuery(selectedId!, {
+    enabled: !!selectedId,
+    onSuccess: setDefaultValues,
+    onError: () => {
+      setSelectedId()
+      setOpenModal()
+      notification.error({ message: t('common.error.system') })
+    },
+  })
 
   return (
     <CreateModal<CreateLoanDto, UpdateLoanDto>
@@ -71,7 +77,6 @@ export const LoanDetail: React.FC = () => {
           loading: isCreating || isUpdating,
         },
       }}
-      defaultValues={loanDetail}
       onCreate={createLoanMutate}
       onUpdate={updateLoanMutate}
     >

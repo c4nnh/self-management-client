@@ -10,7 +10,12 @@ import {
   FormSelect,
   FormTextArea,
 } from '@/components'
-import { useAppStore, useAuthStore, useCurrencyStore } from '@/stores'
+import {
+  useAppStore,
+  useAuthStore,
+  useCurrencyStore,
+  useFormStore,
+} from '@/stores'
 import { requiredField } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification } from 'antd'
@@ -23,6 +28,7 @@ export const TontineDetail: React.FC = () => {
   const { user } = useAuthStore()
   const { selectedId, setOpenModal, setSelectedId } = useAppStore()
   const { currencies } = useCurrencyStore()
+  const { setDefaultValues } = useFormStore()
 
   const { mutate: createTontineMutate, isLoading: isCreating } =
     useCreateTontineMutation({
@@ -38,25 +44,28 @@ export const TontineDetail: React.FC = () => {
 
   const { mutate: updateTontineMutate, isLoading: isUpdating } =
     useUpdateTontineMutation({
-      onSuccess: () => {
+      onSuccess: (_, dto) => {
         notification.success({ message: t('tontine.update.success') })
         queryClient.invalidateQueries(['getTontines'])
-        setOpenModal()
+        setDefaultValues(dto)
       },
       onError: () => {
         notification.error({ message: t('tontine.update.error') })
       },
     })
 
-  const { data: tontineDetail, isFetching: isFetchingDetail } =
-    useGetTontineDetailQuery(selectedId!, {
+  const { isFetching: isFetchingDetail } = useGetTontineDetailQuery(
+    selectedId!,
+    {
       enabled: !!selectedId,
+      onSuccess: setDefaultValues,
       onError: () => {
         setSelectedId()
         setOpenModal()
         notification.error({ message: t('common.error.system') })
       },
-    })
+    }
+  )
 
   return (
     <CreateModal
@@ -71,7 +80,6 @@ export const TontineDetail: React.FC = () => {
           loading: isCreating || isUpdating,
         },
       }}
-      defaultValues={tontineDetail}
       onCreate={createTontineMutate}
       onUpdate={updateTontineMutate}
     >

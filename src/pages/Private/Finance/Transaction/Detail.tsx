@@ -13,7 +13,12 @@ import {
   FormTextArea,
 } from '@/components'
 import { TransactionType } from '@/models'
-import { useAppStore, useAuthStore, useCurrencyStore } from '@/stores'
+import {
+  useAppStore,
+  useAuthStore,
+  useCurrencyStore,
+  useFormStore,
+} from '@/stores'
 import { requiredField } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification } from 'antd'
@@ -26,6 +31,7 @@ export const TransactionDetail: React.FC = () => {
   const { user } = useAuthStore()
   const { selectedId, setOpenModal, setSelectedId } = useAppStore()
   const { currencies } = useCurrencyStore()
+  const { setDefaultValues } = useFormStore()
 
   const { mutate: createTransactionMutate, isLoading: isCreating } =
     useCreateTransactionMutation({
@@ -41,25 +47,28 @@ export const TransactionDetail: React.FC = () => {
 
   const { mutate: updateTransactionMutate, isLoading: isUpdating } =
     useUpdateTransactionMutation({
-      onSuccess: () => {
+      onSuccess: (_, dto) => {
         notification.success({ message: t('transaction.update.success') })
         queryClient.invalidateQueries(['getTransactions'])
-        setOpenModal()
+        setDefaultValues(dto)
       },
       onError: () => {
         notification.error({ message: t('transaction.update.error') })
       },
     })
 
-  const { data: transactionDetail, isFetching: isFetchingDetail } =
-    useGetTransactionDetailQuery(selectedId!, {
+  const { isFetching: isFetchingDetail } = useGetTransactionDetailQuery(
+    selectedId!,
+    {
       enabled: !!selectedId,
+      onSuccess: setDefaultValues,
       onError: () => {
         setSelectedId()
         setOpenModal()
         notification.error({ message: t('common.error.system') })
       },
-    })
+    }
+  )
 
   return (
     <CreateModal
@@ -74,7 +83,6 @@ export const TransactionDetail: React.FC = () => {
           loading: isCreating || isUpdating,
         },
       }}
-      defaultValues={transactionDetail}
       onCreate={createTransactionMutate}
       onUpdate={updateTransactionMutate}
     >
