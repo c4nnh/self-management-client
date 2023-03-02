@@ -1,7 +1,7 @@
 import { DEFAULT_COLUMN_CONFIG } from '@/constants'
 import { useScreen } from '@/hooks'
 import { ModalKey, TableConfig } from '@/models'
-import { useAppStore, useLocalSettingStore } from '@/stores'
+import { useAppStore, useFormStore, useLocalSettingStore } from '@/stores'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Table as ATable, TableProps } from 'antd'
 import { ColumnType } from 'antd/es/table'
@@ -35,6 +35,7 @@ export const Table = <T extends BaseObject>({
   const { isDesktop } = useScreen()
   const { selectedIds, setSelectedId, setOpenModal, setSelectedIds } =
     useAppStore()
+  const { setDefaultValues } = useFormStore()
   const { columnConfig } = useLocalSettingStore()
 
   const columnsWithWidth = columns.map((column: any) => {

@@ -13,7 +13,12 @@ import {
   FormUploadImages,
 } from '@/components'
 import { CreateAssetDto, UpdateAssetDto } from '@/models'
-import { useAppStore, useAuthStore, useCurrencyStore } from '@/stores'
+import {
+  useAppStore,
+  useAuthStore,
+  useCurrencyStore,
+  useFormStore,
+} from '@/stores'
 import { requiredField } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification } from 'antd'
@@ -25,6 +30,7 @@ export const AssetDetail: React.FC = () => {
   const queryClient = useQueryClient()
   const { user } = useAuthStore()
   const { selectedId, setOpenModal, setSelectedId } = useAppStore()
+  const { defaultValues, setDefaultValues, setIsChanged } = useFormStore()
   const { currencies } = useCurrencyStore()
 
   const { mutate: createAssetMutate, isLoading: isCreating } =
@@ -41,10 +47,11 @@ export const AssetDetail: React.FC = () => {
 
   const { mutate: updateAssetMutate, isLoading: isUpdating } =
     useUpdateAssetMutation({
-      onSuccess: () => {
+      onSuccess: (_, dto) => {
         notification.success({ message: t('asset.update.success') })
         queryClient.invalidateQueries(['getAssets'])
-        setOpenModal()
+        setDefaultValues(dto)
+        setIsChanged(false)
       },
       onError: () => {
         notification.error({ message: t('asset.update.error') })
@@ -53,6 +60,7 @@ export const AssetDetail: React.FC = () => {
 
   const { data: assetDetail, isFetching: isFetchingDetail } =
     useGetAssetDetailQuery(selectedId!, {
+      onSuccess: setDefaultValues,
       enabled: !!selectedId,
       onError: () => {
         setSelectedId()
@@ -72,7 +80,6 @@ export const AssetDetail: React.FC = () => {
           loading: isCreating || isUpdating,
         },
       }}
-      defaultValues={assetDetail}
       onCreate={createAssetMutate}
       onUpdate={updateAssetMutate}
     >

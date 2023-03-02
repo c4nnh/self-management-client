@@ -1,5 +1,5 @@
 import { ModalKey } from '@/models'
-import { useAppStore, useImageStore } from '@/stores'
+import { useAppStore, useFormStore } from '@/stores'
 import { ButtonProps, Form, ModalProps, notification } from 'antd'
 import { PropsWithChildren, useEffect } from 'react'
 import { DeepPartial, FormProvider, useForm } from 'react-hook-form'
@@ -9,7 +9,6 @@ import { Modal } from './Modal'
 
 type Props<C, U> = PropsWithChildren & {
   modalKey: ModalKey
-  defaultValues?: DeepPartial<C | U>
   modalProps?: ModalProps & { isLoading?: boolean }
   buttonProps?: ButtonProps
   onCreate: (dto: C) => void
@@ -18,7 +17,6 @@ type Props<C, U> = PropsWithChildren & {
 
 export const CreateModal = <C extends object, U extends object>({
   modalKey,
-  defaultValues,
   modalProps,
   buttonProps,
   onCreate,
@@ -27,20 +25,29 @@ export const CreateModal = <C extends object, U extends object>({
 }: Props<C, U>) => {
   const { t } = useTranslation()
   const { openModal, selectedId, setOpenModal, setSelectedId } = useAppStore()
-  const { isChanged, setIsChanged } = useImageStore()
-  const { hasError } = useImageStore()
+  const {
+    isChanged,
+    hasImageError,
+    defaultValues,
+    setIsChanged,
+    setDefaultValues,
+  } = useFormStore()
   const formMethods = useForm<C | U>()
   const { handleSubmit, reset, formState } = formMethods
-  const { dirtyFields } = formState
+  const { isDirty } = formState
 
   useEffect(() => {
     if (openModal) {
-      reset(selectedId ? defaultValues : ({} as DeepPartial<C | U>))
+      reset((selectedId ? defaultValues : {}) as DeepPartial<C | U>)
     }
   }, [openModal, defaultValues])
 
+  useEffect(() => {
+    setIsChanged(isDirty)
+  }, [isDirty])
+
   const onSave = handleSubmit(dto => {
-    if (hasError) {
+    if (hasImageError) {
       notification.warning({ message: t('common.invalidImage') })
       return
     }
@@ -69,9 +76,7 @@ export const CreateModal = <C extends object, U extends object>({
         okButtonProps={{
           ...modalProps?.okButtonProps,
           disabled:
-            !isChanged &&
-            (!Object.keys(dirtyFields).length ||
-              modalProps?.okButtonProps?.disabled),
+            !!selectedId && (!isChanged || modalProps?.okButtonProps?.disabled),
         }}
       >
         <Form layout="vertical" size="middle">

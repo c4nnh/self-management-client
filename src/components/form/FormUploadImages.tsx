@@ -1,5 +1,5 @@
 import { useCreateSignedUrlMutation, useUploadImageMutation } from '@/apis'
-import { useImageStore } from '@/stores'
+import { useAppStore, useFormStore } from '@/stores'
 import { FormItemProps, Upload, UploadFile } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import { RcFile, UploadProps } from 'antd/es/upload'
@@ -28,7 +28,8 @@ export const FormUploadImages: React.FC<Props> = ({
   ...rest
 }) => {
   const { t } = useTranslation()
-  const { setHasError, setIsChanged } = useImageStore()
+  const { selectedId } = useAppStore()
+  const { setHasImageError, setIsChanged } = useFormStore()
   const formContext = useFormContext()
   const { setValue } = formContext
   const { mutateAsync: createSignedUrlMutateAsync } =
@@ -40,19 +41,21 @@ export const FormUploadImages: React.FC<Props> = ({
 
   useEffect(() => {
     setFileList(
-      initialUrls.map(url => ({
-        uid: uuidv4(),
-        name: url,
-        url,
-        status: 'done',
-      }))
+      selectedId
+        ? initialUrls.map(url => ({
+            uid: uuidv4(),
+            name: url,
+            url,
+            status: 'done',
+          }))
+        : []
     )
   }, [])
 
   useEffect(() => {
     const newUrls = fileList.map(item => item.url)
     setValue(name, newUrls)
-    setHasError(fileList.some(item => item.status !== 'done'))
+    setHasImageError(fileList.some(item => item.status !== 'done'))
     setIsChanged(
       JSON.stringify(initialUrls.sort()) !== JSON.stringify(newUrls.sort())
     )
