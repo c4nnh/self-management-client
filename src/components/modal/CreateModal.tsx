@@ -46,7 +46,6 @@ export const CreateModal = <C extends object, U extends object>({
     }
     if (!selectedId) {
       onCreate(dto as C)
-      setOpenModal()
       return
     }
     onUpdate(dto as U)

@@ -44,6 +44,7 @@ export const AssetDetail: React.FC = () => {
       onSuccess: () => {
         notification.success({ message: t('asset.update.success') })
         queryClient.invalidateQueries(['getAssets'])
+        setOpenModal()
       },
       onError: () => {
         notification.error({ message: t('asset.update.error') })
@@ -105,7 +106,11 @@ export const AssetDetail: React.FC = () => {
         }))}
         rules={requiredField(t)}
       />
-      <FormUploadImages name="images" initialUrls={assetDetail?.images} />
+      <FormUploadImages
+        name="images"
+        initialUrls={assetDetail?.images}
+        label={t('common.images')}
+      />
     </CreateModal>
   )
 }

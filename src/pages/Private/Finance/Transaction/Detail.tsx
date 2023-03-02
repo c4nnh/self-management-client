@@ -44,6 +44,7 @@ export const TransactionDetail: React.FC = () => {
       onSuccess: () => {
         notification.success({ message: t('transaction.update.success') })
         queryClient.invalidateQueries(['getTransactions'])
+        setOpenModal()
       },
       onError: () => {
         notification.error({ message: t('transaction.update.error') })

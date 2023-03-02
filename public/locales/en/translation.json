@@ -10,7 +10,7 @@
     "cropImage": "Crop image",
     "ok": "Ok",
     "cancel": "Cancel",
-    "selectImage": "Select file",
+    "selectImage": "Select image",
     "visibleAtLeastOneColumn": "You have to show at least 1 column",
     "apply": "Apply",
     "configColumn": {
@@ -31,6 +31,7 @@
     "name": "Name",
     "description": "Description",
     "currency": "Currency",
+    "images": "Images",
     "keyword": "Keyword",
     "symbol": "Symbol",
     "code": "Code",
@@ -39,7 +40,6 @@
     "title": "Title",
     "id": "Id",
     "type": "Type",
-    "images": "Images",
     "requiredField": "Please fill this field"
   },
   "logout": {

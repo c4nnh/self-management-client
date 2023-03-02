@@ -31,6 +31,7 @@
     "name": "Tên",
     "description": "Mô tả",
     "currency": "Tiền tệ",
+    "images": "Ảnh",
     "keyword": "Từ khóa",
     "symbol": "Ký hiệu",
     "code": "Mã",
@@ -39,7 +40,6 @@
     "title": "Tiêu đề",
     "id": "Id",
     "type": "Loại",
-    "images": "Ảnh",
     "requiredField": "Không được để trống"
   },
   "logout": {

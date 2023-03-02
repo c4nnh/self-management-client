@@ -43,6 +43,7 @@ export const LoanDetail: React.FC = () => {
       onSuccess: () => {
         notification.success({ message: t('loan.update.success') })
         queryClient.invalidateQueries(['getLoans'])
+        setOpenModal()
       },
       onError: () => {
         notification.error({ message: t('loan.update.error') })

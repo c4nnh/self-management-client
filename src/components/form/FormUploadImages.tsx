@@ -7,6 +7,8 @@ import React, { useEffect, useState } from 'react'
 import { flushSync } from 'react-dom'
 import { ControllerProps, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import styled from 'styled-components'
+import tw from 'twin.macro'
 import { v4 as uuidv4 } from 'uuid'
 import { ControlledFormItem } from './ControlledFormItem'
 
@@ -153,27 +155,38 @@ export const FormUploadImages: React.FC<Props> = ({
       name={name}
       {...rest}
       render={() => (
-        <ImgCrop
-          rotate
-          modalTitle={`${t('common.cropImage')}`}
-          quality={1}
-          beforeCrop={beforeCrop}
-          aspect={aspect}
-          modalOk={`${t('common.ok')}`}
-          modalCancel={`${t('common.cancel')}`}
-        >
-          <Upload
-            action={onUpload}
-            listType="picture-card"
-            fileList={fileList}
-            onChange={onChange}
-            onPreview={onPreview}
-            customRequest={customRequest}
+        <Container>
+          <Label>{label}</Label>
+          <ImgCrop
+            rotate
+            modalTitle={`${t('common.cropImage')}`}
+            quality={1}
+            beforeCrop={beforeCrop}
+            aspect={aspect}
+            modalOk={`${t('common.ok')}`}
+            modalCancel={`${t('common.cancel')}`}
           >
-            {fileList.length < max && t('common.selectImage')}
-          </Upload>
-        </ImgCrop>
+            <Upload
+              action={onUpload}
+              listType="picture-card"
+              fileList={fileList}
+              onChange={onChange}
+              onPreview={onPreview}
+              customRequest={customRequest}
+            >
+              {fileList.length < max && t('common.selectImage')}
+            </Upload>
+          </ImgCrop>
+        </Container>
       )}
     />
   )
 }
+
+const Container = styled.div`
+  ${tw`flex flex-col`}
+`
+
+const Label = styled.span`
+  ${tw`mb-[2px] font-semibold`}
+`

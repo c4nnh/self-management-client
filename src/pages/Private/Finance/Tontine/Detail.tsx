@@ -41,6 +41,7 @@ export const TontineDetail: React.FC = () => {
       onSuccess: () => {
         notification.success({ message: t('tontine.update.success') })
         queryClient.invalidateQueries(['getTontines'])
+        setOpenModal()
       },
       onError: () => {
         notification.error({ message: t('tontine.update.error') })
