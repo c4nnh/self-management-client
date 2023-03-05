@@ -24,7 +24,7 @@ export const Event: React.FC = () => {
       id: '1',
       title: 'aha2',
       start: '2023-03-03T10:45:00',
-      end: '2023-03-03T23:00:00',
+      end: '2023-03-06T23:00:00',
       // add more props here
       priotiry: 2,
       extendedProps: {
@@ -87,14 +87,14 @@ export const Event: React.FC = () => {
         initialView="dayGridMonth"
         events={events}
         eventClick={eventClick}
-        allDaySlot={false}
+        // allDaySlot={false}
         {...toolbar}
         // set duration
         slotDuration={{
           minutes: 15, // default is 30
         }}
-        slotMinTime="06:00"
-        slotMaxTime="24:00"
+        // slotMinTime="06:00"
+        // slotMaxTime="24:00"
         // show indicator
         nowIndicator
         // show week number
