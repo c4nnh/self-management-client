@@ -99,7 +99,6 @@ authRequest.interceptors.response.use(
       message: err,
       description: Array.isArray(message) ? message[0] : message,
     })
-
     return Promise.reject(error.response.data)
   }
 )

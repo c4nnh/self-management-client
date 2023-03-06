@@ -3,7 +3,7 @@ import { Loading } from '@/components'
 import { ROUTES } from '@/constants'
 import { Auth, Private } from '@/pages'
 import { useAppStore, useAuthStore, useCurrencyStore } from '@/stores'
-import { getColumnLabel, getTokens } from '@/utils'
+import { clearTokens, getColumnLabel, getTokens } from '@/utils'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Route, Routes } from 'react-router-dom'
@@ -23,11 +23,14 @@ function App() {
   const { isFetching: isFetchingUser } = useMeQuery({
     enabled: !!tokens && !!tokens.accessToken && !user,
     onSuccess: me,
+    onError: () => {
+      clearTokens()
+    },
   })
   const { isFetching: isFetchingCurrencies } = useGetCurrenciesQuery(
     { isPaged: false },
     {
-      enabled: !!tokens && !!tokens.accessToken && !user,
+      enabled: !!user,
       onSuccess: data => {
         setCurrencies(data.items)
       },
