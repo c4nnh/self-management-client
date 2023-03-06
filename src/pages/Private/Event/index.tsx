@@ -1,3 +1,7 @@
+import { useGetEventsQuery } from '@/apis'
+import { PageContainer } from '@/components'
+import { DATE_FORMAT_FILTER } from '@/constants'
+import { useEventStore } from '@/stores'
 import {
   EventClickArg,
   EventDropArg,
@@ -8,49 +12,88 @@ import interactionPlugin from '@fullcalendar/interaction'
 import FullCalendar from '@fullcalendar/react'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import { Button } from 'antd'
-import React, { useState } from 'react'
+import dayjs from 'dayjs'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 import { toolbar } from './config'
 
 export const Event: React.FC = () => {
+  const calendarRef = React.createRef<FullCalendar>()
+
+  const { params } = useEventStore()
+  const { data: events, isLoading } = useGetEventsQuery(params)
+
+  const formattedEvents: EventSourceInput = useMemo(
+    () =>
+      (events || []).map(event => {
+        const {
+          id,
+          title,
+          startDate,
+          endDate,
+          startTime,
+          endTime,
+          priority,
+          ...rest
+        } = event
+
+        const start = `${dayjs(startDate).format(DATE_FORMAT_FILTER)}${
+          startTime ? `T${startTime}` : ''
+        }`
+
+        const end = `${dayjs(endDate).format(DATE_FORMAT_FILTER)}${
+          endTime ? `T${endTime}` : ''
+        }`
+
+        return {
+          id,
+          title,
+          start,
+          end,
+          priority,
+          extendedProps: rest,
+        }
+      }),
+    [events]
+  )
+
+  // const [events, setEvents] = useState<EventSourceInput>([
+  //   {
+  //     id: '1',
+  //     title: 'aha2',
+  //     start: '2023-03-03T10:45:00',
+  //     end: '2023-03-06T23:00:00',
+  //     // add more props here
+  //     priotiry: 2,
+  //     extendedProps: {
+  //       abcd: 'zzz',
+  //     },
+  //   },
+  //   {
+  //     id: '3',
+  //     title: 'aha1',
+  //     start: '2023-03-03T10:45:00',
+  //     end: '2023-03-03T23:00:00',
+  //     // add more props here
+  //     priotiry: 1,
+  //     abcd: 'zzz',
+  //     extendedProps: {},
+  //   },
+  //   {
+  //     id: '2',
+  //     title: 'aha',
+  //     start: '2023-03-04T10:45:00',
+  //     end: '2023-03-04T23:00:00',
+  //     extendedProps: {
+  //       abcd: 'zzz',
+  //     },
+  //   },
+  // ])
+
   const eventClick = (e: EventClickArg) => {
     console.log(e.event)
   }
-  const calendarRef = React.createRef<FullCalendar>()
-
-  const [events, setEvents] = useState<EventSourceInput>([
-    {
-      id: '1',
-      title: 'aha2',
-      start: '2023-03-03T10:45:00',
-      end: '2023-03-06T23:00:00',
-      // add more props here
-      priotiry: 2,
-      extendedProps: {
-        abcd: 'zzz',
-      },
-    },
-    {
-      id: '3',
-      title: 'aha1',
-      start: '2023-03-03T10:45:00',
-      end: '2023-03-03T23:00:00',
-      // add more props here
-      priotiry: 1,
-      abcd: 'zzz',
-      extendedProps: {},
-    },
-    {
-      id: '2',
-      title: 'aha',
-      start: '2023-03-04T10:45:00',
-      end: '2023-03-04T23:00:00',
-      extendedProps: {
-        abcd: 'zzz',
-      },
-    },
-  ])
 
   const onChangeView = () => {
     if (calendarRef && calendarRef.current) {
@@ -59,18 +102,18 @@ export const Event: React.FC = () => {
   }
 
   const changeData = () => {
-    setEvents([
-      {
-        id: '1',
-        title: 'aha',
-        start: '2023-04-07T10:45:00',
-        end: '2023-04-07T23:00:00',
-        // add more props here
-        extendedProps: {
-          abcd: 'zzz',
-        },
-      },
-    ])
+    // setEvents([
+    //   {
+    //     id: '1',
+    //     title: 'aha',
+    //     start: '2023-04-07T10:45:00',
+    //     end: '2023-04-07T23:00:00',
+    //     // add more props here
+    //     extendedProps: {
+    //       abcd: 'zzz',
+    //     },
+    //   },
+    // ])
   }
 
   const onDrop = (info: EventDropArg) => {
@@ -78,14 +121,14 @@ export const Event: React.FC = () => {
   }
 
   return (
-    <Container>
+    <StyledPageContainer>
       <Button onClick={onChangeView}>asd</Button>
       <Button onClick={changeData}>change</Button>
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        events={events}
+        events={formattedEvents}
         eventClick={eventClick}
         // allDaySlot={false}
         {...toolbar}
@@ -127,10 +170,10 @@ export const Event: React.FC = () => {
         dragScroll
         eventDrop={onDrop}
       />
-    </Container>
+    </StyledPageContainer>
   )
 }
 
-const Container = styled.div`
-  ${tw`p-5`}
+const StyledPageContainer = styled(PageContainer)`
+  ${tw`py-0`}
 `

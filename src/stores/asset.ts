@@ -1,13 +1,13 @@
 import { AssetParams } from '@/models'
 import create from 'zustand'
 
-type AssetFilterState = {
+type AssetState = {
   params?: AssetParams
   setParams: (params: AssetParams) => void
   resetParams: () => void
 }
 
-export const useAssetFilter = create<AssetFilterState>()((set, get) => ({
+export const useAssetStore = create<AssetState>()((set, get) => ({
   setParams: params => {
     const oldParams = get().params
     set({

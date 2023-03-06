@@ -18,7 +18,7 @@ import {
 import { DATE_FORMAT } from '@/constants'
 import { usePagination, useSorter } from '@/hooks'
 import { Transaction as TTransaction, TransactionType } from '@/models'
-import { useAppStore, useTransactionFilter } from '@/stores'
+import { useAppStore, useTransactionStore } from '@/stores'
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification, Tag } from 'antd'
@@ -34,7 +34,7 @@ export const Transaction: React.FC = () => {
   const queryClient = useQueryClient()
   const { selectedIds, columnLabel, setSelectedIds } = useAppStore()
   const pagination = usePagination()
-  const { params, setParams } = useTransactionFilter()
+  const { params, setParams } = useTransactionStore()
   const sorter = useSorter<TTransaction>()
 
   useEffect(() => {

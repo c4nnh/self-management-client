@@ -5,7 +5,7 @@ import {
   FormNumberRange,
 } from '@/components'
 import { AssetParams } from '@/models'
-import { useAssetFilter } from '@/stores'
+import { useAssetStore } from '@/stores'
 import { convertDateRangeToDateFilter } from '@/utils'
 import { Dayjs } from 'dayjs'
 import { useTranslation } from 'react-i18next'
@@ -16,7 +16,7 @@ type FilterDto = Pick<AssetParams, 'search'> & {
 
 export const AssetFilter: React.FC = () => {
   const { t } = useTranslation()
-  const { params, setParams, resetParams } = useAssetFilter()
+  const { params, setParams, resetParams } = useAssetStore()
   const onSearch = (dto: FilterDto) => {
     const { dateRange, ...params } = dto
 

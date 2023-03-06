@@ -18,7 +18,7 @@ import {
 import { DATE_FORMAT } from '@/constants'
 import { usePagination, useSorter } from '@/hooks'
 import { Asset as TAsset } from '@/models'
-import { useAppStore, useAssetFilter } from '@/stores'
+import { useAppStore, useAssetStore } from '@/stores'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification } from 'antd'
 import { ColumnsType } from 'antd/es/table'
@@ -33,7 +33,7 @@ export const Asset: React.FC = () => {
   const queryClient = useQueryClient()
   const { selectedIds, columnLabel, setSelectedIds } = useAppStore()
   const pagination = usePagination()
-  const { params, setParams } = useAssetFilter()
+  const { params, setParams } = useAssetStore()
   const sorter = useSorter<TAsset>()
 
   useEffect(() => {

@@ -18,7 +18,7 @@ import {
 import { DATE_FORMAT } from '@/constants'
 import { usePagination, useSorter } from '@/hooks'
 import { Loan as TLoan } from '@/models'
-import { useAppStore, useLoanFilter } from '@/stores'
+import { useAppStore, useLoanStore } from '@/stores'
 import { useQueryClient } from '@tanstack/react-query'
 import { notification } from 'antd'
 import { ColumnsType } from 'antd/es/table'
@@ -33,7 +33,7 @@ export const Loan: React.FC = () => {
   const queryClient = useQueryClient()
   const { selectedIds, columnLabel, setSelectedIds } = useAppStore()
   const pagination = usePagination()
-  const { params, setParams } = useLoanFilter()
+  const { params, setParams } = useLoanStore()
   const sorter = useSorter<TLoan>()
 
   useEffect(() => {

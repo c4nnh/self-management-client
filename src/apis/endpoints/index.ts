@@ -1,4 +1,5 @@
 export * from './asset'
 export * from './auth'
+export * from './event'
 export * from './finance'
 export * from './image'

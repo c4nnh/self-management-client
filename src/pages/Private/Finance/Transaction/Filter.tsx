@@ -6,7 +6,7 @@ import {
   FormNumberRange,
 } from '@/components'
 import { TransactionParams, TransactionType } from '@/models'
-import { useTransactionFilter } from '@/stores'
+import { useTransactionStore } from '@/stores'
 import { convertDateRangeToDateFilter } from '@/utils'
 import { Dayjs } from 'dayjs'
 import { useTranslation } from 'react-i18next'
@@ -17,7 +17,7 @@ type FilterDto = Pick<TransactionParams, 'title' | 'types'> & {
 
 export const TransactionFilter: React.FC = () => {
   const { t } = useTranslation()
-  const { params, setParams, resetParams } = useTransactionFilter()
+  const { params, setParams, resetParams } = useTransactionStore()
   const onSearch = (dto: FilterDto) => {
     const { dateRange, ...params } = dto
 

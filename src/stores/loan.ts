@@ -1,13 +1,13 @@
 import { LoanParams } from '@/models'
 import create from 'zustand'
 
-type LoanFilterState = {
+type LoanState = {
   params?: LoanParams
   setParams: (params: LoanParams) => void
   resetParams: () => void
 }
 
-export const useLoanFilter = create<LoanFilterState>()((set, get) => ({
+export const useLoanStore = create<LoanState>()((set, get) => ({
   setParams: params => {
     const oldParams = get().params
     set({

@@ -5,7 +5,7 @@ import {
   FormNumberRange,
 } from '@/components'
 import { TontineParams } from '@/models'
-import { useTontineFilter } from '@/stores'
+import { useTontineStore } from '@/stores'
 import { convertDateRangeToDateFilter } from '@/utils'
 import { Dayjs } from 'dayjs'
 import { useTranslation } from 'react-i18next'
@@ -17,7 +17,7 @@ type FilterDto = Pick<TontineParams, 'description'> & {
 
 export const TontineFilter: React.FC = () => {
   const { t } = useTranslation()
-  const { params, setParams, resetParams } = useTontineFilter()
+  const { params, setParams, resetParams } = useTontineStore()
   const onSearch = (dto: FilterDto) => {
     const { dateRange, amountRange, ...params } = dto
 

@@ -1,13 +1,13 @@
 import { TontineParams } from '@/models'
 import create from 'zustand'
 
-type TontineFilterState = {
+type TontineState = {
   params?: TontineParams
   setParams: (params: TontineParams) => void
   resetParams: () => void
 }
 
-export const useTontineFilter = create<TontineFilterState>()((set, get) => ({
+export const useTontineStore = create<TontineState>()((set, get) => ({
   setParams: params => {
     const oldParams = get().params
     set({

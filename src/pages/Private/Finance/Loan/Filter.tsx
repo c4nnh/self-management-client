@@ -5,7 +5,7 @@ import {
   FormNumberRange,
 } from '@/components'
 import { LoanParams } from '@/models'
-import { useLoanFilter } from '@/stores'
+import { useLoanStore } from '@/stores'
 import { convertDateRangeToDateFilter } from '@/utils'
 import { Dayjs } from 'dayjs'
 import { useTranslation } from 'react-i18next'
@@ -17,7 +17,7 @@ type FilterDto = Pick<LoanParams, 'search'> & {
 
 export const LoanFilter: React.FC = () => {
   const { t } = useTranslation()
-  const { params, setParams, resetParams } = useLoanFilter()
+  const { params, setParams, resetParams } = useLoanStore()
   const onSearch = (dto: FilterDto) => {
     const { dateRange, amountRange, ...params } = dto
 

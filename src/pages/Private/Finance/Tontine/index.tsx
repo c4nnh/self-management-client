@@ -25,7 +25,6 @@ import { ColumnsType } from 'antd/es/table'
 import dayjs from 'dayjs'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import styled from 'styled-components'
 import { TontineDetail } from './Detail'
 import { TontineFilter } from './Filter'
 
@@ -161,5 +160,3 @@ export const Tontine: React.FC = () => {
     </PageContainer>
   )
 }
-
-const Container = styled.div``

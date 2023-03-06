@@ -259,3 +259,46 @@ export type CreateAssetDto = Omit<Asset, 'id' | 'currency'> & {
 export type UpdateAssetDto = Partial<CreateAssetDto> & {
   id: string
 }
+
+// Event
+export enum EventPriority {
+  SUPER_LOW = 'SUPER_LOW',
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+  SUPER_HIGH = 'SUPER_HIGH',
+}
+
+export enum EventStatus {
+  UPCOMING = 'UPCOMING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE',
+  CANCELED = 'CANCELED',
+}
+
+export type Event = {
+  id: string
+  title: string
+  description?: string
+  startDate: Date
+  endDate: Date
+  startTime?: string
+  endTime?: string
+  priority: EventPriority
+  status: EventStatus
+}
+
+export type EventsParams = {
+  startDate?: Date
+  endDate?: Date
+}
+
+export type CreateEventDto = {
+  title: string
+  description?: string
+  startDate: Date
+  endDate: Date
+  startTime?: string
+  endTime?: string
+  priority?: EventPriority
+}
