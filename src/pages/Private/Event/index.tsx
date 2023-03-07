@@ -121,59 +121,81 @@ export const Event: React.FC = () => {
   }
 
   return (
-    <StyledPageContainer>
+    <PageContainer>
       <Button onClick={onChangeView}>asd</Button>
       <Button onClick={changeData}>change</Button>
-      <FullCalendar
-        ref={calendarRef}
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        events={formattedEvents}
-        eventClick={eventClick}
-        // allDaySlot={false}
-        {...toolbar}
-        // set duration
-        slotDuration={{
-          minutes: 15, // default is 30
-        }}
-        // slotMinTime="06:00"
-        // slotMaxTime="24:00"
-        // show indicator
-        nowIndicator
-        // show week number
-        weekNumbers
-        // weekText=''
-        // custom day headers
-        dayHeaderContent={args => {
-          return <span>{args.date.getDay()}</span>
-        }}
-        // interaction
-        // select
-        selectable
-        // select={infor => {
-        //   console.log(infor)
-        // }}
-        // display
-        eventTimeFormat={{
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
-        }}
-        // order event in same day
-        eventOrderStrict
-        eventOrder="priotiry"
-        // event popover when there is many events in same day
-        eventMaxStack={3}
-        // dnd
-        editable
-        droppable
-        dragScroll
-        eventDrop={onDrop}
-      />
-    </StyledPageContainer>
+      <FullCalendarWrapper>
+        <FullCalendar
+          ref={calendarRef}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          events={formattedEvents}
+          eventClick={eventClick}
+          // allDaySlot={false}
+          {...toolbar}
+          // set duration
+          slotDuration={{
+            minutes: 15, // default is 30
+          }}
+          // slotMinTime="06:00"
+          // slotMaxTime="24:00"
+          // show indicator
+          nowIndicator
+          // show week number
+          weekNumbers
+          // weekText=''
+          // custom day headers
+          dayHeaderContent={args => {
+            return <span>{args.date.getDay()}</span>
+          }}
+          // interaction
+          // select
+          selectable
+          // select={infor => {
+          //   console.log(infor)
+          // }}
+          // display
+          eventTimeFormat={{
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+          }}
+          // order event in same day
+          eventOrderStrict
+          eventOrder="priotiry"
+          // event popover when there is many events in same day
+          eventMaxStack={3}
+          // dnd
+          editable
+          droppable
+          dragScroll
+          eventDrop={onDrop}
+        />
+      </FullCalendarWrapper>
+    </PageContainer>
   )
 }
 
-const StyledPageContainer = styled(PageContainer)`
-  ${tw`py-0`}
+const FullCalendarWrapper = styled.div`
+  .fc {
+    ${tw`max-h-[750px]`}
+
+    .fc-view-harness {
+      .fc-view {
+        table {
+          thead > tr > th > .fc-scroller-harness > .fc-scroller {
+            overflow: unset !important;
+          }
+
+          tbody {
+            tr:first-child {
+              td > .fc-scroller-harness > .fc-scroller {
+                overflow: unset !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 `
