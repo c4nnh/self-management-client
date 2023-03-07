@@ -42,7 +42,7 @@ const Body = styled.div`
 `
 
 const ChildrenContainer = styled.div`
-  ${tw`flex-1 p-5 mt-10`}
+  ${tw`flex-1 flex flex-col p-5 mt-10`}
 
   @media screen and (max-width: 550px) {
     ${tw`px-3`}

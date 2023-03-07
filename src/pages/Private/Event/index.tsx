@@ -177,10 +177,14 @@ export const Event: React.FC = () => {
 }
 
 const FullCalendarWrapper = styled.div`
+  ${tw`h-full`}
+
   .fc {
-    ${tw`max-h-[750px]`}
+    ${tw`h-full`}
 
     .fc-view-harness {
+      ${tw`!h-full`}
+
       .fc-view {
         table {
           thead > tr > th > .fc-scroller-harness > .fc-scroller {
