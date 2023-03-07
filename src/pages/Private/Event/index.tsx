@@ -170,6 +170,19 @@ export const Event: React.FC = () => {
           droppable
           dragScroll
           eventDrop={onDrop}
+          allDayContent="ca ngay"
+          // slotLabelFormat={({ date }) => `${date.hour}:${date.minute}`}
+          slotLabelFormat={{
+            hour: '2-digit',
+            minute: '2-digit',
+            // omitZeroMinute: true,
+            // meridiem: 'short',
+            hour12: false,
+          }}
+          scrollTime="09:00:00"
+          firstDay={1}
+          weekText="tuan"
+          locale="en-GB"
         />
       </FullCalendarWrapper>
     </PageContainer>
