@@ -1,7 +1,9 @@
 import { useGetEventsQuery } from '@/apis'
 import { PageContainer } from '@/components'
 import { DATE_FORMAT_FILTER } from '@/constants'
+import { DayOfWeek } from '@/models'
 import { useEventStore } from '@/stores'
+import { getDayOfWeekLabel } from '@/utils'
 import {
   EventClickArg,
   EventDropArg,
@@ -11,14 +13,15 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import FullCalendar from '@fullcalendar/react'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import { Button } from 'antd'
 import dayjs from 'dayjs'
 import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 import { toolbar } from './config'
 
 export const Event: React.FC = () => {
+  const { t } = useTranslation()
   const calendarRef = React.createRef<FullCalendar>()
 
   const { params } = useEventStore()
@@ -122,8 +125,6 @@ export const Event: React.FC = () => {
 
   return (
     <PageContainer>
-      <Button onClick={onChangeView}>asd</Button>
-      <Button onClick={changeData}>change</Button>
       <FullCalendarWrapper>
         <FullCalendar
           ref={calendarRef}
@@ -146,7 +147,11 @@ export const Event: React.FC = () => {
           // weekText=''
           // custom day headers
           dayHeaderContent={args => {
-            return <span>{args.date.getDay()}</span>
+            return (
+              <span>
+                {getDayOfWeekLabel(t)[args.date.getDay() as DayOfWeek]}
+              </span>
+            )
           }}
           // interaction
           // select
@@ -170,7 +175,9 @@ export const Event: React.FC = () => {
           droppable
           dragScroll
           eventDrop={onDrop}
-          allDayContent="ca ngay"
+          allDayContent={() => (
+            <span className="text-xs">{t('calendar.allDay')}</span>
+          )}
           // slotLabelFormat={({ date }) => `${date.hour}:${date.minute}`}
           slotLabelFormat={{
             hour: '2-digit',
@@ -181,7 +188,9 @@ export const Event: React.FC = () => {
           }}
           scrollTime="09:00:00"
           firstDay={1}
-          weekText="tuan"
+          weekNumberContent={({ num }) => (
+            <span>{`${t('calendar.week.title')} ${num}`}</span>
+          )}
           locale="en-GB"
         />
       </FullCalendarWrapper>
@@ -196,8 +205,6 @@ const FullCalendarWrapper = styled.div`
     ${tw`h-full`}
 
     .fc-view-harness {
-      ${tw`!h-full`}
-
       .fc-view {
         table {
           thead > tr > th > .fc-scroller-harness > .fc-scroller {
@@ -214,5 +221,48 @@ const FullCalendarWrapper = styled.div`
         }
       }
     }
+  }
+  .fc-view-harness {
+    ${tw`!h-full`}
+  }
+
+  .fc-daygrid-week-number {
+    ${tw`bg-gray-200 p-0`}
+  }
+
+  .fc-timegrid-axis-frame {
+    ${tw`justify-center`}
+  }
+
+  .fc-timegrid-slot-label-frame {
+    ${tw`flex items-center justify-center text-xs`}
+  }
+
+  .fc-daygrid-day-top {
+    ${tw`text-xs text-primary`}
+  }
+
+  .fc-day-other {
+    .fc-daygrid-day-top {
+      ${tw`text-black`}
+    }
+  }
+
+  .fc-day-today {
+    ${tw`!bg-gray-300`}
+  }
+
+  .fc-col-header-cell-cushion,
+  .fc-daygrid-week-number {
+    ${tw`text-gray-500 font-light`}
+  }
+
+  .fc-col-header-cell-cushion,
+  .fc-timegrid-axis-cushion {
+    ${tw`text-xs text-center`}
+  }
+
+  .fc-daygrid-week-number {
+    ${tw`!text-[10px]`}
   }
 `

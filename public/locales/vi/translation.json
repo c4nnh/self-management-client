@@ -199,5 +199,18 @@
   },
   "register": {
     "title": "Đăng kí"
+  },
+  "calendar": {
+    "allDay": "Cả ngày",
+    "week": {
+      "title": "Tuần",
+      "sunday": "Chủ nhật",
+      "monday": "Thứ hai",
+      "tuesday": "Thứ ba",
+      "wednesday": "Thứ tư",
+      "thursday": "Thứ năm",
+      "friday": "Thứ sáu",
+      "saturday": "Thứ bảy"
+    }
   }
 }

@@ -199,5 +199,18 @@
   },
   "register": {
     "title": "Register"
+  },
+  "calendar": {
+    "allDay": "All day",
+    "week": {
+      "title": "Week",
+      "sunday": "Sun",
+      "monday": "Mon",
+      "tuesday": "Tue",
+      "wednesday": "Wed",
+      "thursday": "Thu",
+      "friday": "Fri",
+      "saturday": "Sat"
+    }
   }
 }
